@@ -33,10 +33,10 @@ GIF_RITMO      = "https://i.pinimg.com/originals/4f/67/6e/4f676ee6c7f543d92a2ea2
 GIF_ERROR      = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
 
 sesión = {}            # Ahorcado
-esperando_palabra = {} # Moderador 
+esperando_palabra = {} # Ahorcado (Privado)
 
 sesión_bomba = {
-    "jugadores": [], "bomba_en": None, "activa": False, "tarea_bomba": None
+    "jugadores": [], "bomba_en": None, "bomba_emoji": None, "activa": False, "tarea_bomba": None, "mensaje_id": None
 }
 
 sesión_ratones = {
@@ -55,16 +55,16 @@ sesión_stop = {
 }
 
 CATEGORIAS_STOP = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
-EMOJIS_BOMBA = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
-EMOJIS_BOMBA = ["☃️", "👾", "🌞", "🌟", "🌹", "🌺", "🌷", "🪷", "🌸", "🪻", "🌻", "🌼", "🍂", "🌾"]
+
+# Lista de emojis disponibles para el modo incógnito de la bomba 🎭
+EMOJIS_BOMBA = ["🦊", "🥑", "🐱", "🐸", "🐼", "🌶️", "👻", "👽", "🤖", "🦄", "👑", "🍕", "🎈", "🔮", "🦈", "🐥", "🐻", "🦖"]
 
 # --- 3. AUXILIARES (AHORCADO) ---
 def dibujar_pantalla_ahorcado(chat_id):
     datos = sesión[chat_id]
     palabra = datos["palabra_secreta"]
     adivinadas = datos["letras_adivinadas"]
-    # Comparamos temporalmente en minúsculas para que dibuje la letra correcta sin importar cómo la escriban ✨
-    return "".join([letra + " " if letra in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
+    return "".join([letra + " " if letra.lower() in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
 async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -96,10 +96,13 @@ async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- 5. JUEGO 1: AHORCADO ---
 async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    # Nos aseguramos de crear la sesión del grupo desde que ponen el comando
+    sesión[chat_id] = {"jugadores": [], "activa": False}
     boton = InlineKeyboardButton("UNIRSE", callback_data="unirme_click")
     await update.message.reply_animation(
         animation = GIF_AHORCADO,
-        caption = "¡Juguemos al Ahorcado! Por favor, presiona el boton para unirte:", 
+        caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -114,7 +117,7 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     moderador = random.choice(sesión[chat_id]["jugadores"])
     sesión[chat_id].update({"moderador_id": moderador["id"], "activa": True})
     esperando_palabra[moderador["id"]] = chat_id
-    await update.message.reply_text(f"¡Listo! Moderador elegido. {moderador['name']} Pásame la palabra al privado para poder iniciar el juego .")
+    await update.message.reply_text(f"¡Iniciado! Moderador elegido. {moderador['name']} Pásame la palabra al privado para poder iniciar el juego .")
 
 # --- 6. JUEGO 2: LA BOMBA ---
 async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -123,7 +126,7 @@ async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("ENTRAR AL CAMPO", callback_data="unirme_bomba_click")
     await update.message.reply_animation(
         animation = GIF_BOMBA,
-        caption = "¡Juguemos a la Bomba! Por favor, presiona el boton para unirte:", 
+        caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -132,55 +135,46 @@ async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(sesión_bomba["jugadores"]) < 2:
         await update.message.reply_animation(
             animation = GIF_ERROR,
-            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error, por favor, vuelve a iniciar el juego"
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego"
         )
         return
     
     sesión_bomba["activa"] = True
     primer_jugador = random.choice(sesión_bomba["jugadores"])
     sesión_bomba["bomba_en"] = primer_jugador["id"]
-    await update.message.reply_text(f"¡LA BOMBA ESTÁ ENCENDIDA! \nHa sido pasada a {primer_jugador['name']}")
+    sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
+    
+    await update.message.reply_text(f"¡LA BOMBA ESTÁ ENCENDIDA! 💣\n\nHa caído en manos de un jugador incógnito: {primer_jugador['emoji']}")
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
-    tiempo_explotar = random.randint(10, 25) 
+    tiempo_explotar = random.randint(5, 15) 
     
-    # 1. Ver quién tiene la bomba al iniciar
-    actual_id = sesión_bomba["bomba_en"]
-    actual_emoji = next(j['emoji'] for j in sesión_bomba["jugadores"] if j['id'] == actual_id)
-    
-    # 2. Generar la lista de botones para TODOS los jugadores unidos
     botones = []
     for jugador in sesión_bomba["jugadores"]:
-        if jugador["id"] != actual_id: 
+        if jugador["id"] != sesión_bomba["bomba_en"]: 
             botones.append([InlineKeyboardButton(f"Lanzar a {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
     
-    # 3. Mandar el mensaje al grupo con la lista completa de objetivos
     mensaje_bomba = await context.bot.send_message(
         chat_id=chat_id, 
-        text=f"¡La mecha fue encendida!\n\nLa tiene: {actual_name}\n¡Elige a cualquiera de la lista para pasársela!", 
+        text=f"¡La mecha fue encendida!\n\nLa tiene el jugador: {sesión_bomba['bomba_emoji']}\n¡Nadie sabe quién es! Elige un emoji para deshacerte de ella rápido:", 
         reply_markup=InlineKeyboardMarkup(botones),
     )
     
     sesión_bomba["mensaje_id"] = mensaje_bomba.message_id
-    
-    # 4. El reloj corre...
     await asyncio.sleep(tiempo_explotar)
     
-    # 5. ¡BOOM! Al que le cayó, le cayó
     if sesión_bomba["activa"]:
         sesión_bomba["activa"] = False
         perdedor_id = sesión_bomba["bomba_en"]
-        perdedor_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
+        perdedor = next(j for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
+        
+        texto_final = f"¡¡¡¡BOOOOOOM!!!! 💥\n\nLa bomba explotó en manos de {perdedor['emoji']}.\n¡Se le cayó la máscara! Era **{perdedor['name']}** y quedó hecho cenizas. 💀"
         
         try:
-            await context.bot.edit_message_text(
-                chat_id=chat_id, 
-                message_id=mensaje_bomba.message_id,
-                text=f"¡¡¡¡BOOOOOOM!!!! \n\nLa bomba explotó y dejó a {perdedor_name} hecho cenizas.",
-            )
+            await context.bot.edit_message_text(chat_id=chat_id, message_id=sesión_bomba["mensaje_id"], text=texto_final)
         except:
-            await context.bot.send_message(chat_id=chat_id, text=f"¡¡¡¡BOOOOOOM!!!!\n\nLa bomba le explotó en la cara a {perdedor_name}.")
+            await context.bot.send_message(chat_id=chat_id, text=texto_final)
 
 # --- 7. JUEGO 3: RATONES BATTLE ROYALE (3x3) ---
 async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -324,14 +318,18 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sesión[chat_id]["jugadores"].append({"id": user.id, "name": user.first_name})
             await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
 
-    # Callbacks Bomba (¡Arreglado aquí! Se agregó el registro de clicks de entrada)
+    # Callbacks Bomba 🕶️
     elif query.data == "unirme_bomba_click":
         if sesión_bomba["activa"]: 
             await query.message.reply_text(f"❌ {user.first_name}, ¡la partida ya empezó! Espera la otra ronda.")
             return
         if not any(j['id'] == user.id for j in sesión_bomba["jugadores"]):
-            sesión_bomba["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"💣 {user.first_name} entró al campo de juego.")
+            emojis_usados = [j["emoji"] for j in sesión_bomba["jugadores"]]
+            emojis_disponibles = [e for e in EMOJIS_BOMBA if e not in emojis_usados]
+            emoji_asignado = random.choice(emojis_disponibles) if emojis_disponibles else random.choice(EMOJIS_BOMBA)
+            
+            sesión_bomba["jugadores"].append({"id": user.id, "name": user.first_name, "emoji": emoji_asignado})
+            await query.message.reply_text(f"💣 {user.first_name} entró de incógnito al campo.")
 
     elif query.data.startswith("pasar_a_"):
         if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: 
@@ -339,16 +337,19 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         nuevo_id = int(query.data.replace("pasar_a_", ""))
         sesión_bomba["bomba_en"] = nuevo_id
-        nuevo_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == nuevo_id)
         
-        # Volvemos a armar la lista de botones con TODOS los demás jugadores
+        nuevo_jugador = next(j for j in sesión_bomba["jugadores"] if j['id'] == nuevo_id)
+        user_jugador = next(j for j in sesión_bomba["jugadores"] if j['id'] == user.id)
+        
+        sesión_bomba["bomba_emoji"] = nuevo_jugador["emoji"]
+        
         nuevos_botones = []
         for jugador in sesión_bomba["jugadores"]:
             if jugador["id"] != nuevo_id:
-                nuevos_botones.append([InlineKeyboardButton(f"Lanzar a {jugador['name']}", callback_data=f"pasar_a_{jugador['id']}")])
+                nuevos_botones.append([InlineKeyboardButton(f"Lanzar a {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
         
         await query.message.edit_text(
-            text=f"¡{user.first_name} se salvó de milagro!\n\n💣 ¡Ahora la tiene {nuevo_name}!\n¡Rápido, elige a quién mandársela!",
+            text=f"¡{user_jugador['emoji']} se salvó de milagro!\n\n💣 ¡Ahora la tiene {nuevo_jugador['emoji']}!\n¡Rápido, elige a qué emoji mandársela!",
             reply_markup=InlineKeyboardMarkup(nuevos_botones)
         )
 
@@ -377,7 +378,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name
     chat_type = update.effective_chat.type
     chat_id = update.effective_chat.id
-    texto = update.message.text if update.message.text else ""  # El texto se queda tal cual el usuario lo manda 💖
+    texto = update.message.text.strip() if update.message.text else ""
     
     # Setup Ahorcado por privado
     if chat_type == "private" and user_id in esperando_palabra:
@@ -396,17 +397,17 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if sesión_stop["timer_task"]: 
                 sesión_stop["timer_task"].cancel()
 
-            palabra_limpia = update.message.text.strip().lower()
+            palabra_limpia = texto.lower()
 
             if palabra_limpia in sesión_stop["palabras_dichas"]:
                 sesión_stop["sobrevivientes"].remove(user_id)
-                await update.message.reply_text(f"¡YA LA DIJERON! '{update.message.text}' se repitió. {user_name} ELIMINADO")
-            elif not texto.upper().startswith(sesión_stop["letra_actual"].upper()): # Aseguramos mayúsculas solo aquí para STOP
+                await update.message.reply_text(f"¡YA LA DIJERON! '{texto}' se repitió. {user_name} ELIMINADO")
+            elif not texto.upper().startswith(sesión_stop["letra_actual"].upper()):
                 sesión_stop["sobrevivientes"].remove(user_id)
                 await update.message.reply_text(f"Tenía que empezar con {sesión_stop['letra_actual']}. {user_name} ELIMINADO")
             else:
                 sesión_stop["palabras_dichas"].append(palabra_limpia)
-                await update.message.reply_text(f"¡Bien! '{update.message.text}' anotada.")
+                await update.message.reply_text(f"¡Bien! '{texto}' anotada.")
                 sesión_stop["turno_index"] += 1
 
             if sesión_stop["turno_index"] >= len(sesión_stop["sobrevivientes"]):
@@ -415,24 +416,29 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await lanzar_turno_stop(chat_id, context)
             return
 
-    # Escucha del juego Ahorcado
+    # Escucha del juego Ahorcado 🎯 (¡Ya lee perfectamente las letras!)
     if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
-        if len(texto) != 1 or not texto.isalpha() or user_id == sesión[chat_id]["moderador_id"]: return
+        if len(texto) != 1 or not texto.isalpha() or user_id == sesión[chat_id]["moderador_id"]: 
+            return
+            
         datos = sesión[chat_id]
-        if user_id not in datos["jugadores_vidas"]: datos["jugadores_vidas"][user_id] = 6
-        if datos["jugadores_vidas"][user_id] <= 0: return
+        if user_id not in datos["jugadores_vidas"]: 
+            datos["jugadores_vidas"][user_id] = 6
+            
+        if datos["jugadores_vidas"][user_id] <= 0: 
+            return
 
-        # Evaluamos la letra en minúscula contra la palabra secreta en minúscula al vuelo 🪄
-        if texto.lower() in datos["palabra_secreta"].lower():
-            if texto.lower() not in datos["letras_adivinadas"]: 
-                datos["letras_adivinadas"].append(texto.lower())
+        letra_ingresada = texto.lower()
+
+        if letra_ingresada in datos["palabra_secreta"].lower():
+            if letra_ingresada not in datos["letras_adivinadas"]: 
+                datos["letras_adivinadas"].append(letra_ingresada)
         else:
             datos["jugadores_vidas"][user_id] -= 1
 
         tablero = dibujar_pantalla_ahorcado(chat_id)
-        await update.message.reply_text(f"Palabra: '{tablero}'\nIntentos restantes: {datos['jugadores_vidas'][user_id]}", parse_mode="Markdown")
+        await update.message.reply_text(f"Palabra: '{tablero}'\nIntentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}", parse_mode="Markdown")
         
-        # El tablero se dibuja en base a coincidencias minúsculas, por lo que quitamos los guiones sin importar el case original
         if "_" not in tablero:
             await update.message.reply_text(f"¡VICTORIA DE {user_name}! La palabra era {datos['palabra_secreta']}")
             datos["activa"] = False
