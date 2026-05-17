@@ -11,7 +11,7 @@ app_web = Flask('')
 
 @app_web.route('/')
 def home():
-    return "🥭 Sistema MANGO - Juegos Activos"
+    return "Juegos Activos"
 
 def run_web():
     port = int(os.environ.get('PORT', 10000))
@@ -54,66 +54,89 @@ def dibujar_pantalla_ahorcado(chat_id):
     adivinadas = datos["letras_adivinadas"]
     return "".join([letra + " " if letra in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
 
+# ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
+
+async def start_bienvenida(update: Update, context:ContextTypes.DEFAULT_TYPE):
+
+    gif_bienvenida = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
+    await update.message.reply_animation(
+        animation = gif_bienvenida,
+        caption = "── .✦ Muchas gracias por ayudarme a testear mis codigos hechos con las patas, lo aprecio mucho, muack"
+    )
+
 # --- 4. COMANDO MENÚ PRINCIPAL ---
-async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    mensaje_menu = (
-        "🥭 **¡BIENVENIDO AL SISTEMA MANGO JUEGOS!** 🎮✨\n\n"
-        "Aquí tienes el catálogo completo de diversión extrema para el grupo, chiki. "
-        "Usa los comandos para unirse y empezar la masacre:\n\n"
-        "🪵 **1. EL AHORCADO** (Pensar y chisme)\n"
-        "➡️ `/ahorcado` - Unirse a la lista\n"
-        "➡️ `/start_ahorcado` - Elegir moderador e iniciar\n\n"
-        "🧨 **2. LA BOMBA EXPLOSIVA** (Puro pánico)\n"
-        "➡️ `/bomba` - Entrar al búnker\n"
-        "➡️ `/start_bomba` - Encender la mecha\n\n"
-        "🐭 **3. RATONES BATTLE ROYALE** (Velocidad 3x3)\n"
-        "➡️ `/ratones` - Entrar a la madriguera\n"
-        "➡️ `/start_ratones` - Lanzar el tablero\n\n"
+async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    gif_info = "https://i.pinimg.com/originals/af/e2/32/afe23206bc53e3e2858430a5a57976b8.gif"
+    await update.message.reply_animation(
+        animation = gif_info,
+        caption = " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗"
+        "1. EL AHORCADO \n"
+        "⤷ `/ahorcado` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
+        "⤷ `/start_ahorcado` - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
+        "2. LA BOMBA \n"
+        "⤷ `/bomba` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
+        "⤷ `/start_bomba` - Encender la mecha\n\n"
+        "3. RATONES \n"
+        "➡️ `/ratones` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
+        "➡️ `/start_ratones` ⇢ Se crea el tablero \n\n"
         "🥁 **4. RITMO A GO-GO** (Eliminación por turnos)\n"
         "➡️ `/stop` - Alistarse para el ritmo\n"
         "➡️ `/start_stop` - Lanzar letra, categoría e iniciar turnos\n\n"
         "💡 _Tip: Para los juegos de velocidad y turnos, diles a todos los causas que se unan antes de darle start o no los dejará jugar._ 💅"
     )
-    await update.message.reply_text(mensaje_menu, parse_mode="Markdown")
 
 # --- 5. JUEGO 1: AHORCADO ---
 async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    boton = InlineKeyboardButton("꒦꒷ UNIRME ꒦꒷", callback_data="unirme_click")
-    await update.message.reply_text("¡Ahorcado! Presiona para unirte:", reply_markup=InlineKeyboardMarkup([[boton]]))
+    boton = InlineKeyboardButton("• • • UNIRSE • • •", callback_data="unirme_click")
+    gif_ahorcado = "https://i.pinimg.com/originals/5a/69/09/5a6909832b566bbf9c338c6bb99f253d.gif"
+    await update.message.reply_animation(
+        animation = gif_ahorcado,
+        caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
+        reply_markup=InlineKeyboardMarkup([[boton]]))
 
 async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     if chat_id not in sesión or len(sesión[chat_id]["jugadores"]) < 2:
-        await update.message.reply_text("Se necesitan mínimo 2 personas, causa.")
-        return 
+        gif_error = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
+        await update.message.reply_animation(
+            animation = gif_error,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
+            return 
     moderador = random.choice(sesión[chat_id]["jugadores"])
     sesión[chat_id].update({"moderador_id": moderator["id"], "activa": True})
     esperando_palabra[moderador["id"]] = chat_id
-    await update.message.reply_text(f"¡Iniciado! Moderador: {moderador['name']}. Pásame la palabra al privado.")
+    await update.message.reply_text(f"¡Iniciado! Moderador elegido. {moderador['name']} Pásame la palabra al privado para poder iniciar el juego .")
 
 # --- 6. JUEGO 2: LA BOMBA ---
 async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
     sesión_bomba["activa"] = False
-    boton = InlineKeyboardButton("💣 ENTRAR AL BÚNKER 💣", callback_data="unirme_bomba_click")
-    await update.message.reply_text("🚨 **¡JUEGO DE LA BOMBA!** 🚨\nEntren rápido antes de encender la mecha.", reply_markup=InlineKeyboardMarkup([[boton]]))
+    boton = InlineKeyboardButton("• • • ENTRAR AL CAMPO • • •", callback_data="unirme_bomba_click")
+    gif_bomba = "https://i.pinimg.com/originals/12/56/3d/12563dd1c28fe4b1d5fb77f763e257f5.gif"
+    await update.message.reply_animation(
+    animation = gif_ahorcado,
+    caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
+    reply_markup=InlineKeyboardMarkup([[boton]]))
 
 async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     if len(sesión_bomba["jugadores"]) < 2:
-        await update.message.reply_text("⚠️ Necesitamos mínimo 2 causas para pasar la bomba.")
-        return
+        await update.message.reply_animation(
+            animation = gif_error,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
+            return
+    
     sesión_bomba["activa"] = True
     primer_jugador = random.choice(sesión_bomba["jugadores"])
     sesión_bomba["bomba_en"] = primer_jugador["id"]
-    await update.message.reply_text(f"🧨 ¡LA BOMBA ESTÁ ENCENDIDA! 🧨\nSe la pasé a: **{primer_jugador['name']}**")
+    await update.message.reply_text(f"¡LA BOMBA ESTÁ ENCENDIDA! \nHa sido pasada a {primer_jugador['name']}")
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
     tiempo_explotar = random.randint(10, 20)
-    boton_pasar = InlineKeyboardButton("💥 ¡PASAR BOMBA! 💥", callback_data="pasar_bomba_click")
+    boton_pasar = InlineKeyboardButton("¡PASAR BOMBA!", callback_data="pasar_bomba_click")
     mensaje_bomba = await context.bot.send_message(
-        chat_id=chat_id, text="🔴 Tienes la bomba. ¡Presiona el botón rápido para pasarla!", reply_markup=InlineKeyboardMarkup([[boton_pasar]])
+        chat_id=chat_id, text="Tienes la bomba. ¡Presiona el botón rápido para pasarla antes de que explote!", reply_markup=InlineKeyboardMarkup([[boton_pasar]])
     )
     await asyncio.sleep(tiempo_explotar)
     if sesión_bomba["activa"]:
@@ -122,7 +145,7 @@ async def cuenta_regresiva_bomba(chat_id, context):
         perdedor_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
         await context.bot.edit_message_text(
             chat_id=chat_id, message_id=mensaje_bomba.message_id,
-            text=f"💥💥 **¡¡¡¡BOOOOOOM!!!!** 💥💥\n\nLa bomba le explotó en la cara a **{perdedor_name}**. ¡Quedaste hecho cenizas, chiki! 💀💨"
+            text=f"¡¡¡¡BOOOOOOM!!!!\n\nLa bomba le explotó en la cara a {perdedor_name}. ¡Que pena, quedaste hecho cenizas!"
         )
 
 # --- 7. JUEGO 3: RATONES BATTLE ROYALE (3x3) ---
@@ -131,28 +154,36 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_ratones["sobrevivientes"] = []
     sesión_ratones["activa"] = False
     boton = InlineKeyboardButton("🐭 ENTRAR A LA MADRIGUERA 🕳️", callback_data="unirme_ratones_click")
-    await update.message.reply_text("🚨 **BATTLE ROYALE: APLASTA AL RATÓN** 🚨\n¡El último en aplastarlo en cada ronda queda fuera!", reply_markup=InlineKeyboardMarkup([[boton]]))
+    gif_ratones = "https://i.pinimg.com/originals/57/60/4c/57604c65e4f4a55bb185e1be1e4c0116.gif"
+        await update.message.repky_animation(
+            animation = gif_ratones,
+            caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
+            reply_markup=InlineKeyboardMarkup([[boton]]))
 
 async def iniciar_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    if len(sesión_ratones["jugadores"]) < 2:
-        await update.message.reply_text("⚠️ Mínimo necesitamos 2 causas para la cacería.")
-        return
+
+    if len(sesión_bomba["jugadores"]) < 2:
+        await update.message.reply_animation(
+            animation = gif_error,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
+            return
+
     sesión_ratones["activa"] = True
     sesión_ratones["sobrevivientes"] = [j["id"] for j in sesión_ratones["jugadores"]]
-    await update.message.reply_text("🎬 ¡Apareciendo tablero en 3x3! Atentos...")
+    await update.message.reply_text("¡Apareciendo tablero en 3x3! Atentos...")
     asyncio.create_task(rondas_battle_royale(chat_id, context))
 
 async def rondas_battle_royale(chat_id, context):
     ronda = 1
     while sesión_ratones["activa"] and len(sesión_ratones["sobrevivientes"]) > 1:
-        await asyncio.sleep(random.randint(2, 5))
+        await asyncio.sleep(random.randint(3, 15))
         vivos = [next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == uid) for uid in sesión_ratones["sobrevivientes"]]
-        await context.bot.send_message(chat_id=chat_id, text=f"🏁 **RONDA {ronda}**\nVivos: {', '.join(vivos)}")
-        await asyncio.sleep(1.5)
+        await context.bot.send_message(chat_id=chat_id, text=f" RONDA {ronda}\nVivos: {', '.join(vivos)}")
+        await asyncio.sleep(4)
 
         botones = [[InlineKeyboardButton("🕳️", callback_data="raton_fallo") for _ in range(3)] for _ in range(3)]
-        botones[random.randint(0, 2)][random.randint(0, 2)] = InlineKeyboardButton("🐭 ¡APLASTA!", callback_data="raton_salvado")
+        botones[random.randint(0, 2)][random.randint(0, 2)] = InlineKeyboardButton("¡APLASTA!", callback_data="raton_salvado")
         sesión_ratones["esperando_click"] = list(sesión_ratones["sobrevivientes"])
         
         sesión_ratones["mensaje_id"] = await context.bot.send_message(
