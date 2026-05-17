@@ -76,14 +76,14 @@ async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
         caption = (
             " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
             "1. EL AHORCADO \n"
-            "⤷ `/ahorcado` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
-            "⤷ `/start_ahorcado` - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
+            "⤷ /ahorcado ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
+            "⤷ /start_ahorcado - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
             "2. LA BOMBA \n"
             "⤷ `/bomba` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
             "⤷ `/start_bomba` - Encender la mecha\n\n"
             "3. RATONES \n"
-            "➡️ `/ratones` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
-            "➡️ `/start_ratones` ⇢ Se crea el tablero \n\n"
+            "➡️ /ratones ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
+            "➡️ /start_ratones ⇢ Se crea el tablero \n\n"
             "🥁 **4. RITMO A GO-GO** (Eliminación por turnos)\n"
             "➡️ `/stop` - Alistarse para el ritmo\n"
             "➡️ `/start_stop` - Lanzar letra, categoría e iniciar turnos\n\n"
@@ -160,7 +160,7 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_ratones["jugadores"] = []
     sesión_ratones["sobrevivientes"] = []
     sesión_ratones["activa"] = False
-    boton = InlineKeyboardButton("🐭 ENTRAR A LA MADRIGUERA 🕳️", callback_data="unirme_ratones_click")
+    boton = InlineKeyboardButton(" ENTRAR A LA MADRIGUERA ", callback_data="unirme_ratones_click")
     await update.message.reply_animation(
         animation = GIF_RATONES,
         caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
@@ -210,13 +210,13 @@ async def rondas_battle_royale(chat_id, context):
             lento_id = sesión_ratones["esperando_click"][-1]
             lento_name = next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == lento_id)
             sesión_ratones["sobrevivientes"].remove(lento_id)
-            await context.bot.send_message(chat_id=chat_id, text=f"💀 ¡{lento_name} fue muy lento! El ratón escapó. ELIMINADO.")
+            await context.bot.send_message(chat_id=chat_id, text=f" ¡{lento_name} fue muy lento! El ratón escapó. ELIMINADO.")
         ronda += 1
 
     sesión_ratones["activa"] = False
     if len(sesión_ratones["sobrevivientes"]) == 1:
         ganador_name = next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == sesión_ratones["sobrevivientes"][0])
-        await context.bot.send_message(chat_id=chat_id, text=f"👑 🎉 **¡TENEMOS UN CAMPEÓN DE LA MADRIGUERA!** 🎉 👑\n\nFelicidades **{ganador_name.upper()}**.")
+        await context.bot.send_message(chat_id=chat_id, text=f"¡Termino la plaga de ratones!\n\nFelicidades {ganador_name}.")
 
 # --- 8. JUEGO 4: RITMO A GO-GO ---
 async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -292,33 +292,33 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if chat_id not in sesión: sesión[chat_id] = {"jugadores": [], "activa": False}
         if not any(j['id'] == user.id for j in sesión[chat_id]["jugadores"]):
             sesión[chat_id]["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"✅ {user.first_name} se unió al ahorcado.")
+            await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
 
     # Callbacks Bomba
     elif query.data == "unirme_bomba_click":
         if not any(j['id'] == user.id for j in sesión_bomba["jugadores"]):
             sesión_bomba["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"💣 {user.first_name} entró al búnker.")
+            await query.message.reply_text(f"{user.first_name} entró al campo.")
     elif query.data == "pasar_bomba_click":
         if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: return
         otros = [j for j in sesión_bomba["jugadores"] if j["id"] != user.id]
         if otros:
             nuevo = random.choice(otros)
             sesión_bomba["bomba_en"] = nuevo["id"]
-            await query.message.reply_text(f"💨 ¡Uff! {user.first_name} le pasó la bomba a **{nuevo['name']}**.")
+            await query.message.reply_text(f"¡Casi! {user.first_name} le pasó la bomba a {nuevo['name']}.")
 
     # Callbacks Ratones
     elif query.data == "unirme_ratones_click":
         if not any(j['id'] == user.id for j in sesión_ratones["jugadores"]):
             sesión_ratones["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"🐹 {user.first_name} entró a la madriguera.")
+            await query.message.reply_text(f"{user.first_name} entró a la caceria.")
     elif query.data == "raton_salvado":
         if sesión_ratones["activa"] and user.id in sesión_ratones["esperando_click"]:
             sesión_ratones["esperando_click"].remove(user.id)
-            await query.message.reply_text(f"🛡️ ¡{user.first_name} aplastó al ratón y se salvó!")
+            await query.message.reply_text(f"¡{user.first_name} logró aplastar al ratón!")
     elif query.data == "raton_fallo":
         if user.id in sesión_ratones["esperando_click"]:
-            await query.message.reply_text(f"🤡 ¡{user.first_name} le dio al hueco vacío! Lento.")
+            await query.message.reply_text(f"¡{user.first_name} le dio a un hueco vacío y el ratón escapo!.")
 
     # Callbacks STOP
     elif query.data == "unirme_stop_click":
