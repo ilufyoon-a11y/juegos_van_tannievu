@@ -22,7 +22,15 @@ def keep_alive():
     t.daemon = True
     t.start()
 
-# --- 2. VARIABLES GLOBALES Y DICCIONARIOS ---
+# --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
+# 📸 BANCO DE GIFS GLOBALES (¡Reusables en cualquier función! 💅)
+GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
+GIF_INFO       = "https://i.pinimg.com/originals/af/e2/32/afe23206bc53e3e2858430a5a57976b8.gif"
+GIF_AHORCADO   = "https://i.pinimg.com/originals/5a/69/09/5a6909832b566bbf9c338c6bb99f253d.gif"
+GIF_BOMBA      = "https://i.pinimg.com/originals/12/56/3d/12563dd1c28fe4b1d5fb77f763e257f5.gif"
+GIF_RATONES    = "https://i.pinimg.com/originals/57/60/4c/57604c65e4f4a55bb185e1be1e4c0116.gif"
+GIF_ERROR      = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
+
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
 
@@ -55,53 +63,51 @@ def dibujar_pantalla_ahorcado(chat_id):
     return "".join([letra + " " if letra in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
-
-async def start_bienvenida(update: Update, context:ContextTypes.DEFAULT_TYPE):
-
-    gif_bienvenida = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
+async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_animation(
-        animation = gif_bienvenida,
+        animation = GIF_BIENVENIDA,
         caption = "── .✦ Muchas gracias por ayudarme a testear mis codigos hechos con las patas, lo aprecio mucho, muack"
     )
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    gif_info = "https://i.pinimg.com/originals/af/e2/32/afe23206bc53e3e2858430a5a57976b8.gif"
     await update.message.reply_animation(
-        animation = gif_info,
-        caption = " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗"
-        "1. EL AHORCADO \n"
-        "⤷ `/ahorcado` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
-        "⤷ `/start_ahorcado` - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
-        "2. LA BOMBA \n"
-        "⤷ `/bomba` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
-        "⤷ `/start_bomba` - Encender la mecha\n\n"
-        "3. RATONES \n"
-        "➡️ `/ratones` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
-        "➡️ `/start_ratones` ⇢ Se crea el tablero \n\n"
-        "🥁 **4. RITMO A GO-GO** (Eliminación por turnos)\n"
-        "➡️ `/stop` - Alistarse para el ritmo\n"
-        "➡️ `/start_stop` - Lanzar letra, categoría e iniciar turnos\n\n"
-        "💡 _Tip: Para los juegos de velocidad y turnos, diles a todos los causas que se unan antes de darle start o no los dejará jugar._ 💅"
+        animation = GIF_INFO,
+        caption = (
+            " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
+            "1. EL AHORCADO \n"
+            "⤷ `/ahorcado` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
+            "⤷ `/start_ahorcado` - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
+            "2. LA BOMBA \n"
+            "⤷ `/bomba` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
+            "⤷ `/start_bomba` - Encender la mecha\n\n"
+            "3. RATONES \n"
+            "➡️ `/ratones` ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
+            "➡️ `/start_ratones` ⇢ Se crea el tablero \n\n"
+            "🥁 **4. RITMO A GO-GO** (Eliminación por turnos)\n"
+            "➡️ `/stop` - Alistarse para el ritmo\n"
+            "➡️ `/start_stop` - Lanzar letra, categoría e iniciar turnos\n\n"
+            "💡 _Tip: Para los juegos de velocidad y turnos, diles a todos los causas que se unan antes de darle start o no los dejará jugar._ 💅"
+        )
     )
 
 # --- 5. JUEGO 1: AHORCADO ---
 async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("• • • UNIRSE • • •", callback_data="unirme_click")
-    gif_ahorcado = "https://i.pinimg.com/originals/5a/69/09/5a6909832b566bbf9c338c6bb99f253d.gif"
     await update.message.reply_animation(
-        animation = gif_ahorcado,
+        animation = GIF_AHORCADO,
         caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
-        reply_markup=InlineKeyboardMarkup([[boton]]))
+        reply_markup=InlineKeyboardMarkup([[boton]])
+    )
 
 async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     if chat_id not in sesión or len(sesión[chat_id]["jugadores"]) < 2:
-        gif_error = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
         await update.message.reply_animation(
-            animation = gif_error,
-            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
-            return 
+            animation = GIF_ERROR,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego"
+        )
+        return 
     moderador = random.choice(sesión[chat_id]["jugadores"])
     sesión[chat_id].update({"moderador_id": moderator["id"], "activa": True})
     esperando_palabra[moderador["id"]] = chat_id
@@ -112,19 +118,20 @@ async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
     sesión_bomba["activa"] = False
     boton = InlineKeyboardButton("• • • ENTRAR AL CAMPO • • •", callback_data="unirme_bomba_click")
-    gif_bomba = "https://i.pinimg.com/originals/12/56/3d/12563dd1c28fe4b1d5fb77f763e257f5.gif"
     await update.message.reply_animation(
-    animation = gif_ahorcado,
-    caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
-    reply_markup=InlineKeyboardMarkup([[boton]]))
+        animation = GIF_BOMBA,
+        caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
+        reply_markup=InlineKeyboardMarkup([[boton]])
+    )
 
 async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     if len(sesión_bomba["jugadores"]) < 2:
         await update.message.reply_animation(
-            animation = gif_error,
-            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
-            return
+            animation = GIF_ERROR,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego"
+        )
+        return
     
     sesión_bomba["activa"] = True
     primer_jugador = random.choice(sesión_bomba["jugadores"])
@@ -154,20 +161,21 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_ratones["sobrevivientes"] = []
     sesión_ratones["activa"] = False
     boton = InlineKeyboardButton("🐭 ENTRAR A LA MADRIGUERA 🕳️", callback_data="unirme_ratones_click")
-    gif_ratones = "https://i.pinimg.com/originals/57/60/4c/57604c65e4f4a55bb185e1be1e4c0116.gif"
-        await update.message.repky_animation(
-            animation = gif_ratones,
-            caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
-            reply_markup=InlineKeyboardMarkup([[boton]]))
+    await update.message.reply_animation(
+        animation = GIF_RATONES,
+        caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
+        reply_markup=InlineKeyboardMarkup([[boton]])
+    )
 
 async def iniciar_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
 
-    if len(sesión_bomba["jugadores"]) < 2:
+    if len(sesión_ratones["jugadores"]) < 2:
         await update.message.reply_animation(
-            animation = gif_error,
-            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego")
-            return
+            animation = GIF_ERROR,
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego"
+        )
+        return
 
     sesión_ratones["activa"] = True
     sesión_ratones["sobrevivientes"] = [j["id"] for j in sesión_ratones["jugadores"]]
@@ -394,6 +402,7 @@ if __name__ == '__main__':
         # Handlers JUEGO 1: Ahorcado
         application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
         application.add_handler(CommandHandler("info", comandos))
+        application.add_handler(CommandHandler("start_ahorcado", iniciar_ahorcado))
         
         # Handlers JUEGO 2: La Bomba
         application.add_handler(CommandHandler("bomba", unirse_bomba))
