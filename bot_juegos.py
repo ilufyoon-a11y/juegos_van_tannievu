@@ -324,13 +324,14 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Callbacks Bomba
     elif query.data.startswith("pasar_a_"):
         if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: 
-        return
+            return
         
         nuevo_id = int(query.data.replace("pasar_a_", ""))
         sesión_bomba["bomba_en"] = nuevo_id
         nuevo_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == nuevo_id)
         
-        # Volvemos a armar la lista de botones con TODOS los demás jugadores nuevos_botones = []
+        # Volvemos a armar la lista de botones con TODOS los demás jugadores
+        nuevos_botones = []
         for jugador in sesión_bomba["jugadores"]:
             if jugador["id"] != nuevo_id:
                 nuevos_botones.append([InlineKeyboardButton(f"Lanzar a {jugador['name']}", callback_data=f"pasar_a_{jugador['id']}")])
@@ -430,7 +431,6 @@ if __name__ == '__main__':
         
         # MENÚ PRINCIPAL
         application.add_handler(CommandHandler("start", start_bienvenida))
-        application.add_handler(CommandHandler("cmd", start_bienvenida))
 
         # Handlers JUEGO 1: Ahorcado
         application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
@@ -453,5 +453,5 @@ if __name__ == '__main__':
         application.add_handler(CallbackQueryHandler(manejar_botones))
         application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, manejar_mensajes))
         
-        print("🥭 Sistema MANGO en línea con Ritmo A Go-Go incluido. ¡A jugar! 🚀")
+        print("SISTEMA FUNCIONANDO, PRUEBALO!")
         application.run_polling()
