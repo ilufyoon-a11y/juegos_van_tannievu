@@ -140,20 +140,44 @@ async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
-    tiempo_explotar = random.randint(10, 20)
-    boton_pasar = InlineKeyboardButton("¡PASAR BOMBA!", callback_data="pasar_bomba_click")
+    tiempo_explotar = random.randint(5, 15) 
+    
+    # 1. Ver quién tiene la bomba al iniciar
+    actual_id = sesión_bomba["bomba_en"]
+    actual_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == actual_id)
+    
+    # 2. Generar la lista de botones para TODOS los jugadores unidos
+    botones = []
+    for jugador in sesión_bomba["jugadores"]:
+        if jugador["id"] != actual_id: 
+            botones.append([InlineKeyboardButton(f"Lanzar a {jugador['name']}", callback_data=f"pasar_a_{jugador['id']}")])
+    
+    # 3. Mandar el mensaje al grupo con la lista completa de objetivos
     mensaje_bomba = await context.bot.send_message(
-        chat_id=chat_id, text="Tienes la bomba. ¡Presiona el botón rápido para pasarla antes de que explote!", reply_markup=InlineKeyboardMarkup([[boton_pasar]])
+        chat_id=chat_id, 
+        text=f"¡La mecha fue encendida!\n\nLa tiene: {actual_name}\n¡Elige a cualquiera de la lista para pasársela ya!", 
+        reply_markup=InlineKeyboardMarkup(botones),
     )
+    
+    sesión_bomba["mensaje_id"] = mensaje_bomba.message_id
+    
+    # 4. El reloj corre...
     await asyncio.sleep(tiempo_explotar)
+    
+    # 5. ¡BOOM! Al que le cayó, le cayó
     if sesión_bomba["activa"]:
         sesión_bomba["activa"] = False
         perdedor_id = sesión_bomba["bomba_en"]
         perdedor_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
-        await context.bot.edit_message_text(
-            chat_id=chat_id, message_id=mensaje_bomba.message_id,
-            text=f"¡¡¡¡BOOOOOOM!!!!\n\nLa bomba le explotó en la cara a {perdedor_name}. ¡Que pena, quedaste hecho cenizas!"
-        )
+        
+        try:
+            await context.bot.edit_message_text(
+                chat_id=chat_id, 
+                message_id=mensaje_bomba.message_id,
+                text=f"¡¡¡¡BOOOOOOM!!!! \n\nLa bomba explotó y dejó a {perdedor_name} hecho cenizas.",
+            )
+        except:
+            await context.bot.send_message(chat_id=chat_id, text=f"¡¡¡¡BOOOOOOM!!!!\n\nLa bomba le explotó en la cara a {perdedor_name}.")
 
 # --- 7. JUEGO 3: RATONES BATTLE ROYALE (3x3) ---
 async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -298,17 +322,23 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
 
     # Callbacks Bomba
-    elif query.data == "unirme_bomba_click":
-        if not any(j['id'] == user.id for j in sesión_bomba["jugadores"]):
-            sesión_bomba["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"{user.first_name} entró al campo.")
-    elif query.data == "pasar_bomba_click":
-        if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: return
-        otros = [j for j in sesión_bomba["jugadores"] if j["id"] != user.id]
-        if otros:
-            nuevo = random.choice(otros)
-            sesión_bomba["bomba_en"] = nuevo["id"]
-            await query.message.reply_text(f"¡Casi! {user.first_name} le pasó la bomba a {nuevo['name']}.")
+    elif query.data.startswith("pasar_a_"):
+        if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: 
+        return
+        
+        nuevo_id = int(query.data.replace("pasar_a_", ""))
+        sesión_bomba["bomba_en"] = nuevo_id
+        nuevo_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == nuevo_id)
+        
+        # Volvemos a armar la lista de botones con TODOS los demás jugadores nuevos_botones = []
+        for jugador in sesión_bomba["jugadores"]:
+            if jugador["id"] != nuevo_id:
+                nuevos_botones.append([InlineKeyboardButton(f"Lanzar a {jugador['name']}", callback_data=f"pasar_a_{jugador['id']}")])
+        
+        await query.message.edit_text(
+            text=f"¡{user.first_name} se salvó de milagro!\n\n💣 ¡Ahora la tiene {nuevo_name}!\n¡Rápido, elige a quién mandársela!",
+            reply_markup=InlineKeyboardMarkup(nuevos_botones)
+        )
 
     # Callbacks Ratones
     elif query.data == "unirme_ratones_click":
