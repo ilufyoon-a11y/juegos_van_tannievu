@@ -53,7 +53,7 @@ sesión_stop = {
     "timer_task": None      # Control del reloj por turno
 }
 
-CATEGORIAS_STOP = ["FRUTA O VERDURA 🍎", "PAÍS O CIUDAD 🗺️", "ANIMAL 🦁", "COLOR 🎨", "CARRERA O PROFESIÓN 🏗️", "CANTANTE O BANDA 🎤"]
+CATEGORIAS_STOP = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
 
 # --- 3. AUXILIARES (AHORCADO) ---
 def dibujar_pantalla_ahorcado(chat_id):
@@ -195,7 +195,7 @@ async def rondas_battle_royale(chat_id, context):
         sesión_ratones["esperando_click"] = list(sesión_ratones["sobrevivientes"])
         
         sesión_ratones["mensaje_id"] = await context.bot.send_message(
-            chat_id=chat_id, text="❗ **¡APARECIÓ EL RATÓN! ¡DALE CLICK YA!** ❗", reply_markup=InlineKeyboardMarkup(botones)
+            chat_id=chat_id, text="¡APARECIÓ EL RATÓN! ¡ATRAPALO!", reply_markup=InlineKeyboardMarkup(botones)
         )
 
         limite = 5.0
@@ -222,10 +222,9 @@ async def rondas_battle_royale(chat_id, context):
 async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["jugadores"] = []
     sesión_stop["activa"] = False
-    boton = InlineKeyboardButton("📝 ENTRAR AL RITMO 🥁", callback_data="unirme_stop_click")
+    boton = InlineKeyboardButton("ENTRAR AL RITMO", callback_data="unirme_stop_click")
     await update.message.reply_text(
-        "🥁 **RITMO A GO-GO: ELIMINACIÓN** 🥁\n\nDiga usted palabras correctas en su turno. Si repites, fallas la letra o te duermes... ¡ELIMINADO! 💀", 
-        reply_markup=InlineKeyboardMarkup([[boton]]), parse_mode="Markdown"
+        "RITMO A GO-GO\n\nDiga usted  correctas en su turno. Si repites, fallas la letra o te duermes... ¡ELIMINADO! 💀", 
     )
 
 async def iniciar_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
