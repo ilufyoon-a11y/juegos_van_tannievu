@@ -321,7 +321,15 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sesión[chat_id]["jugadores"].append({"id": user.id, "name": user.first_name})
             await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
 
-    # Callbacks Bomba
+    # Callbacks Bomba (¡Arreglado aquí! Se agregó el registro de clicks de entrada)
+    elif query.data == "unirme_bomba_click":
+        if sesión_bomba["activa"]: 
+            await query.message.reply_text(f"❌ {user.first_name}, ¡la partida ya empezó! Espera la otra ronda.")
+            return
+        if not any(j['id'] == user.id for j in sesión_bomba["jugadores"]):
+            sesión_bomba["jugadores"].append({"id": user.id, "name": user.first_name})
+            await query.message.reply_text(f"💣 {user.first_name} entró al campo de juego.")
+
     elif query.data.startswith("pasar_a_"):
         if not sesión_bomba["activa"] or user.id != sesión_bomba["bomba_en"]: 
             return
