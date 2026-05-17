@@ -33,7 +33,7 @@ GIF_RITMO      = "https://i.pinimg.com/originals/4f/67/6e/4f676ee6c7f543d92a2ea2
 GIF_ERROR      = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
 
 sesión = {}            # Ahorcado
-esperando_palabra = {} # Ahorcado (Privado)
+esperando_palabra = {} # Moderador 
 
 sesión_bomba = {
     "jugadores": [], "bomba_en": None, "activa": False, "tarea_bomba": None
@@ -55,12 +55,15 @@ sesión_stop = {
 }
 
 CATEGORIAS_STOP = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
+EMOJIS_BOMBA = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
+EMOJIS_BOMBA = 
 
 # --- 3. AUXILIARES (AHORCADO) ---
 def dibujar_pantalla_ahorcado(chat_id):
     datos = sesión[chat_id]
     palabra = datos["palabra_secreta"]
     adivinadas = datos["letras_adivinadas"]
+    # Comparamos temporalmente en minúsculas para que dibuje la letra correcta sin importar cómo la escriban ✨
     return "".join([letra + " " if letra in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
@@ -96,7 +99,7 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("UNIRSE", callback_data="unirme_click")
     await update.message.reply_animation(
         animation = GIF_AHORCADO,
-        caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
+        caption = "¡Juguemos al Ahorcado! Por favor, presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -111,7 +114,7 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     moderador = random.choice(sesión[chat_id]["jugadores"])
     sesión[chat_id].update({"moderador_id": moderador["id"], "activa": True})
     esperando_palabra[moderador["id"]] = chat_id
-    await update.message.reply_text(f"¡Iniciado! Moderador elegido. {moderador['name']} Pásame la palabra al privado para poder iniciar el juego .")
+    await update.message.reply_text(f"¡Listo! Moderador elegido. {moderador['name']} Pásame la palabra al privado para poder iniciar el juego .")
 
 # --- 6. JUEGO 2: LA BOMBA ---
 async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -120,7 +123,7 @@ async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("ENTRAR AL CAMPO", callback_data="unirme_bomba_click")
     await update.message.reply_animation(
         animation = GIF_BOMBA,
-        caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
+        caption = "¡Juguemos a la Bomba! Por favor, presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -129,7 +132,7 @@ async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if len(sesión_bomba["jugadores"]) < 2:
         await update.message.reply_animation(
             animation = GIF_ERROR,
-            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error por favor vuelve a inciar el juego"
+            caption = "Se necesitan minimo 2 personas para jugar. De tratarse un error, por favor, vuelve a iniciar el juego"
         )
         return
     
@@ -140,22 +143,22 @@ async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
-    tiempo_explotar = random.randint(5, 15) 
+    tiempo_explotar = random.randint(10, 25) 
     
     # 1. Ver quién tiene la bomba al iniciar
     actual_id = sesión_bomba["bomba_en"]
-    actual_name = next(j['name'] for j in sesión_bomba["jugadores"] if j['id'] == actual_id)
+    actual_emoji = next(j['emoji'] for j in sesión_bomba["jugadores"] if j['id'] == actual_id)
     
     # 2. Generar la lista de botones para TODOS los jugadores unidos
     botones = []
     for jugador in sesión_bomba["jugadores"]:
         if jugador["id"] != actual_id: 
-            botones.append([InlineKeyboardButton(f"Lanzar a {jugador['name']}", callback_data=f"pasar_a_{jugador['id']}")])
+            botones.append([InlineKeyboardButton(f"Lanzar a {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
     
     # 3. Mandar el mensaje al grupo con la lista completa de objetivos
     mensaje_bomba = await context.bot.send_message(
         chat_id=chat_id, 
-        text=f"¡La mecha fue encendida!\n\nLa tiene: {actual_name}\n¡Elige a cualquiera de la lista para pasársela ya!", 
+        text=f"¡La mecha fue encendida!\n\nLa tiene: {actual_name}\n¡Elige a cualquiera de la lista para pasársela!", 
         reply_markup=InlineKeyboardMarkup(botones),
     )
     
@@ -374,7 +377,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_name = update.effective_user.first_name
     chat_type = update.effective_chat.type
     chat_id = update.effective_chat.id
-    texto = update.message.text.upper() if update.message.text else ""
+    texto = update.message.text if update.message.text else ""  # El texto se queda tal cual el usuario lo manda 💖
     
     # Setup Ahorcado por privado
     if chat_type == "private" and user_id in esperando_palabra:
@@ -398,7 +401,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if palabra_limpia in sesión_stop["palabras_dichas"]:
                 sesión_stop["sobrevivientes"].remove(user_id)
                 await update.message.reply_text(f"¡YA LA DIJERON! '{update.message.text}' se repitió. {user_name} ELIMINADO")
-            elif not texto.startswith(sesión_stop["letra_actual"]):
+            elif not texto.upper().startswith(sesión_stop["letra_actual"].upper()): # Aseguramos mayúsculas solo aquí para STOP
                 sesión_stop["sobrevivientes"].remove(user_id)
                 await update.message.reply_text(f"Tenía que empezar con {sesión_stop['letra_actual']}. {user_name} ELIMINADO")
             else:
@@ -419,13 +422,17 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user_id not in datos["jugadores_vidas"]: datos["jugadores_vidas"][user_id] = 6
         if datos["jugadores_vidas"][user_id] <= 0: return
 
-        if texto in datos["palabra_secreta"]:
-            if texto not in datos["letras_adivinadas"]: datos["letras_adivinadas"].append(texto)
+        # Evaluamos la letra en minúscula contra la palabra secreta en minúscula al vuelo 🪄
+        if texto.lower() in datos["palabra_secreta"].lower():
+            if texto.lower() not in datos["letras_adivinadas"]: 
+                datos["letras_adivinadas"].append(texto.lower())
         else:
             datos["jugadores_vidas"][user_id] -= 1
 
         tablero = dibujar_pantalla_ahorcado(chat_id)
         await update.message.reply_text(f"Palabra: '{tablero}'\nIntentos restantes: {datos['jugadores_vidas'][user_id]}", parse_mode="Markdown")
+        
+        # El tablero se dibuja en base a coincidencias minúsculas, por lo que quitamos los guiones sin importar el case original
         if "_" not in tablero:
             await update.message.reply_text(f"¡VICTORIA DE {user_name}! La palabra era {datos['palabra_secreta']}")
             datos["activa"] = False
