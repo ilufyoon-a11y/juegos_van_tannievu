@@ -389,10 +389,11 @@ if __name__ == '__main__':
         
         # MENÚ PRINCIPAL
         application.add_handler(CommandHandler("start", start_bienvenida))
-        
+        application.add_handler(CommandHandler("cmd", start_bienvenida))
+
         # Handlers JUEGO 1: Ahorcado
         application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
-        application.add_handler(CommandHandler("start_ahorcado", iniciar_ahorcado))
+        application.add_handler(CommandHandler("info", comandos))
         
         # Handlers JUEGO 2: La Bomba
         application.add_handler(CommandHandler("bomba", unirse_bomba))
