@@ -56,7 +56,7 @@ sesión_stop = {
 
 CATEGORIAS_STOP = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
 EMOJIS_BOMBA = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
-EMOJIS_BOMBA = 
+EMOJIS_BOMBA = ["☃️", "👾", "🌞", "🌟", "🌹", "🌺", "🌷", "🪷", "🌸", "🪻", "🌻", "🌼", "🍂", "🌾"]
 
 # --- 3. AUXILIARES (AHORCADO) ---
 def dibujar_pantalla_ahorcado(chat_id):
