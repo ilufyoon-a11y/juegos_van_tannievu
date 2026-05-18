@@ -29,7 +29,7 @@ GIF_INFO       = "BQACAgEAAxkBAAIcQGoLcnBBtCFfAWrjVlCWW9jRzwbNAAKZCAACET1ZRB3JSN
 GIF_AHORCADO   = "CgACAgEAAxkBAAIcMGoLZwRVAVwGLLEM0mss6AXdarSuAAKECAACET1ZRD_sm2Ez43f5OwQ"
 GIF_BOMBA      = "BQACAgEAAxkBAAIcF2oLJPd_DMATUHOOpXVrxTJuMWD_AAJ3CAACET1ZROF6hqT2K2yEOwQ"
 GIF_RATONES    = "CgACAgEAAxkBAAIcSGoLc6s3p51ubOioJPADvNkjlXB6AAKVCAACET1ZRFQ5dDf_PrlBOwQ"
-GIF_RITMO      = "BQACAgEAAxkBAAIcSmoLda-2xXv4qqTWBP0_cKNBnx82AAJABwACiURZRBz_IAQRNkuhOwQ"
+GIF_RITMOAGO   = "BQACAgEAAxkBAAIcSmoLda-2xXv4qqTWBP0_cKNBnx82AAJABwACiURZRBz_IAQRNkuhOwQ"
 GIF_ERROR      = "BQACAgEAAxkBAAIcRGoLcnqRwiI_kD7Mq2L91yDJt7z0AAKaCAACET1ZRMDKj0zeLrPPOwQ"
 
 sesión = {}            # Ahorcado
@@ -280,7 +280,7 @@ async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["activa"] = False
     boton = InlineKeyboardButton("UNIRME", callback_data="unirme_stop_click")
     await update.message.reply_document(
-        document = GIF_RITMO,
+        document = GIF_RITMOAGO,
         caption = "¡Juguemos al Ritmo AGO-GO! Por favor, presiona el boton para unirte a la partida", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
