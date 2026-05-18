@@ -25,12 +25,12 @@ def keep_alive():
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE GIFS GLOBALES (Corregidos según su ID nativo 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
-GIF_INFO       = "BQACAgEAAxkBAAIcQGoLcnBBtCFfAWrjVlCWW9jRzwbNAAKZCAACET1ZRB3JSNFeeMBsOwQ" # 📄 DOCUMENTO
-GIF_AHORCADO   = "CgACAgEAAxkBAAIcd2oLgy6y7ht3InaEkuKYz1Te49kpAAJMBwACiURZRNyZ4g36p0xzOwQ" # 🎬 ANIMACIÓN
-GIF_BOMBA      = "BQACAgEAAxkBAAIcF2oLJPd_DMATUHOOpXVrxTJuMWD_AAJ3CAACET1ZROF6hqT2K2yEOwQ" # 📄 DOCUMENTO
-GIF_RATONES    = "CgACAgEAAxkBAAIcc2oLgwNPqJGPVtva4LQVApMtB8p2AAJLBwACiURZRKuHiIeKvxdSOwQ" # 🎬 ANIMACIÓN
-GIF_RITMOAGO   = "CgACAgEAAxkBAAIcg2oLg44rAAEZ5DbPR8C8ge3jO7yxggACTwcAAolEWUSQJ3W_qviXbTsE" # 🎬 ANIMACIÓN
-GIF_ERROR      = "CgACAgEAAxkBAAIce2oLg1_GlBvPEwTQe9Eg977XduJ_AAJNBwACiURZRLMbBXprZjKvOwQ" # 🎬 ANIMACIÓN
+GIF_INFO       = "https://i.imgur.com/U7EtTqE.gif"
+GIF_AHORCADO   = "https://i.imgur.com/r53ewjA.gif"
+GIF_BOMBA      = "https://i.imgur.com/1QxLZea.gif"
+GIF_RATONES    = "https://i.imgur.com/XVuiL5F.gif" 
+GIF_RITMOAGO   = "https://i.imgur.com/5wYWyEM.gif"
+GIF_ERROR      = "https://i.imgur.com/vfCZr08.gif"N
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
@@ -85,9 +85,8 @@ async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # 🌟 CORREGIDO: GIF_INFO empieza con BQAC, se envía como DOCUMENT
-    await update.message.reply_document(
-        document = GIF_INFO,
+    await update.message.reply_animation(
+        nimation = GIF_INFO,
         caption = (
             " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
             "1. EL AHORCADO \n"
@@ -116,7 +115,6 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sesión[chat_id]["jugadores"] = []
         
     boton = InlineKeyboardButton("UNIRSE", callback_data="unirme_click")
-    # 🌟 CORREGIDO: GIF_AHORCADO empieza con CgAC, se envía como ANIMATION
     await update.message.reply_animation(
         animation = GIF_AHORCADO,
         caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
@@ -158,9 +156,8 @@ async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
     sesión_bomba["activa"] = False
     boton = InlineKeyboardButton("ENTRAR AL CAMPO", callback_data="unirme_bomba_click")
-    # 🌟 CORREGIDO: GIF_BOMBA empieza con BQAC, se envía como DOCUMENT
-    await update.message.reply_document(
-        document = GIF_BOMBA,
+    await update.message.reply_animation(
+        animation = GIF_BOMBA,
         caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
@@ -204,7 +201,7 @@ async def cuenta_regresiva_bomba(chat_id, context):
         perdedor_id = sesión_bomba["bomba_en"]
         perdedor = next(j for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
         
-        texto_final = f"¡¡¡¡BOOOOOOM!!!! \n\nLa bomba exploded en manos de {perdedor['name']} y quedó hecho cenizas."
+        texto_final = f"¡¡¡¡BOOOOOOM!!!! \n\nLa bomba explotó en manos de {perdedor['name']} y quedó hecho cenizas."
         
         try:
             await context.bot.edit_message_text(chat_id=chat_id, message_id=sesión_bomba["mensaje_id"], text=texto_final)
@@ -217,7 +214,6 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_ratones["sobrevivientes"] = []
     sesión_ratones["activa"] = False
     boton = InlineKeyboardButton(" UNIRSE ", callback_data="unirme_ratones_click")
-    # 🌟 CORREGIDO: GIF_RATONES empieza con CgAC, se envía como ANIMATION
     await update.message.reply_animation(
         animation = GIF_RATONES,
         caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
