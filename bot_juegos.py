@@ -30,7 +30,7 @@ GIF_AHORCADO   = "https://i.imgur.com/r53ewjA.gif"
 GIF_BOMBA      = "https://i.imgur.com/1QxLZea.gif"
 GIF_RATONES    = "https://i.imgur.com/XVuiL5F.gif" 
 GIF_RITMOAGO   = "https://i.imgur.com/5wYWyEM.gif"
-GIF_ERROR      = "https://i.imgur.com/vfCZr08.gif"N
+GIF_ERROR      = "https://i.imgur.com/vfCZr08.gif"
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
