@@ -25,7 +25,7 @@ def keep_alive():
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE GIFS GLOBALES (Corregidos según su ID nativo 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
-GIF_INFO       = "https://i.postimg.cc/htnMHX4d/lv-0-20260518150214.gif"
+GIF_INFO       = "BQACAgEAAxkBAAIch2oLmOSTBzZ32975OCaRt0XUaZgkAAJhCAACHKlhRN4tp3yGBS_COwQ"
 GIF_AHORCADO   = "https://i.postimg.cc/Kcd0D9dW/In-Shot-20260518-160525585.gif"
 GIF_BOMBA      = "https://i.postimg.cc/7Z4Xp5Pz/lv-0-20260518093552.gif"
 GIF_RATONES    = "https://i.postimg.cc/c1VFBDVp/In-Shot-20260518-154652313.gif" 
@@ -85,8 +85,10 @@ async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_animation(
-        animation = GIF_INFO,
+    await update.message.reply_video(
+        video = GIF_INFO,
+        autoplay = True,
+        loop = True,
         caption = (
             " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
             "1. EL AHORCADO \n"
