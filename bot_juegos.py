@@ -64,7 +64,17 @@ def dibujar_pantalla_ahorcado(chat_id):
     datos = sesión[chat_id]
     palabra = datos["palabra_secreta"]
     adivinadas = datos["letras_adivinadas"]
-    return "".join([letra + " " if letra.lower() in adivinadas else ("  " if letra == " " else "_ ") for letra in palabra]).strip()
+    
+    resultado = []
+    for letra in palabra:
+        if letra.lower() in adivinadas:
+            resultado.append(letra + " ")
+        elif letra == " ":
+            resultado.append("  ")
+        else:
+            resultado.append("_ ")
+            
+    return "".join(resultado).strip()
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
 async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -401,7 +411,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat_type == "private" and user_id in esperando_palabra:
         gid = esperando_palabra[user_id]
         
-        # Nos aseguramos de guardarla en minúsculas para el motor de juego
         sesión[gid].update({
             "palabra_secreta": texto.lower(), 
             "letras_adivinadas": [], 
@@ -414,13 +423,11 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=gid, text=f"¡El moderador ya eligió!\nPalabra: '{guiones}'")
         return
 
-    # Escucha del juego Ahorcado en el Grupo 🎯 (Prioridad superior)
+    # Escucha del juego Ahorcado en el Grupo 🎯
     if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
-        # El bot solo procesa letras individuales de la A a la Z
         if len(texto) == 1 and texto.isalpha():
-            # Evita que el moderador sople o juegue solo
             if user_id == sesión[chat_id].get("moderador_id"):
-                await update.message.reply_text("¡Oye! Tú eres la moderadora, no puedes jugar esta ronda. 🤫")
+                await update.message.reply_text("¡Oye! Tú eres la moderadora, no puedes jugar esta ronda.")
                 return
                 
             datos = sesión[chat_id]
@@ -428,7 +435,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 datos["jugadores_vidas"][user_id] = 6
                 
             if datos["jugadores_vidas"][user_id] <= 0: 
-                await update.message.reply_text(f"❌ {user_name}, ya no tienes intentos en esta ronda. 💀")
+                await update.message.reply_text(f"❌ {user_name}, ya no tienes intentos en esta ronda.")
                 return
 
             letra_ingresada = texto.lower()
@@ -442,14 +449,39 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             tablero = dibujar_pantalla_ahorcado(chat_id)
             await update.message.reply_text(
                 f"Palabra: '{tablero}'\n"
-                f"Intentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}", 
-                parse_mode="Markdown"
+                f"Intentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}"
             )
             
-            # Verificación de victoria efectiva (Removiendo los espacios del dibujo)
+            # Verificación de victoria limpia sin espacios
             if "_" not in tablero.replace(" ", ""):
-                await update.message.reply_text(f"¡VICTORIA DE {user_name}! 🥳 La palabra era: **{datos['palabra_secreta'].upper()}**")
+                await update.message.reply_text(f"¡VICTORIA DE {user_name}! 🥳 La palabra era: {datos['palabra_secreta'].upper()}")
                 datos["activa"] = False
+            return
+
+    # Escucha de Ritmo A Go-Go
+    if sesión_stop.get("activa") and texto and not update.message.text.startswith("/"):
+        actual_id = sesión_stop["sobrevivientes"][sesión_stop["turno_index"]]
+        if user_id == actual_id:
+            if sesión_stop["timer_task"]: 
+                sesión_stop["timer_task"].cancel()
+
+            palabra_limpia = texto.lower()
+
+            if palabra_limpia in sesión_stop["palabras_dichas"]:
+                sesión_stop["sobrevivientes"].remove(user_id)
+                await update.message.reply_text(f"¡YA LA DIJERON! '{texto}' se repitió. {user_name} ELIMINADO")
+            elif not texto.upper().startswith(sesión_stop["letra_actual"].upper()):
+                sesión_stop["sobrevivientes"].remove(user_id)
+                await update.message.reply_text(f"Tenía que empezar con {sesión_stop['letra_actual']}. {user_name} ELIMINADO")
+            else:
+                sesión_stop["palabras_dichas"].append(palabra_limpia)
+                await update.message.reply_text(f"¡Bien! '{texto}' anotada.")
+                sesión_stop["turno_index"] += 1
+
+            if sesión_stop["turno_index"] >= len(sesión_stop["sobrevivientes"]):
+                sesión_stop["turno_index"] = 0
+
+            await lanzar_turno_stop(chat_id, context)
             return
 
     # Escucha de Ritmo A Go-Go
