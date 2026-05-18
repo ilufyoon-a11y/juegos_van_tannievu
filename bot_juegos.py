@@ -25,11 +25,11 @@ def keep_alive():
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE GIFS GLOBALES (¡Reusables en cualquier función! 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
-GIF_INFO       = "https://i.pinimg.com/originals/af/e2/32/afe23206bc53e3e2858430a5a57976b8.gif"
+GIF_INFO       = "CgACAgEAAxkBAAIcC2oKpA_h2bpxAVdnEhtaNpwpILATAALYBgACKJpQRD31kijQCalCOwQ"
 GIF_AHORCADO   = "https://i.pinimg.com/originals/5a/69/09/5a6909832b566bbf9c338c6bb99f253d.gif"
 GIF_BOMBA      = "https://i.pinimg.com/originals/12/56/3d/12563dd1c28fe4b1d5fb77f763e257f5.gif"
 GIF_RATONES    = "https://i.pinimg.com/originals/57/60/4c/57604c65e4f4a55bb185e1be1e4c0116.gif"
-GIF_RITMO      = "https://i.pinimg.com/originals/4f/67/6e/4f676ee6c7f543d92a2ea28109758120.gif"
+GIF_RITMO      = "BQACAgEAAxkBAAIcAmoKoaYdAAHTsEPiAAEoZh-AvlZBjuEAAtYGAAIomlBE0hETSh8NkKo7BA"
 GIF_ERROR      = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
 
 sesión = {}            # Ahorcado
