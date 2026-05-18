@@ -25,12 +25,12 @@ def keep_alive():
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE GIFS GLOBALES (¡Reusables en cualquier función! 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
-GIF_INFO       = "CgACAgEAAxkBAAIcC2oKpA_h2bpxAVdnEhtaNpwpILATAALYBgACKJpQRD31kijQCalCOwQ"
+GIF_INFO       = "BQACAgEAAxkBAAIcQGoLcnBBtCFfAWrjVlCWW9jRzwbNAAKZCAACET1ZRB3JSNFeeMBsOwQ"
 GIF_AHORCADO   = "CgACAgEAAxkBAAIcMGoLZwRVAVwGLLEM0mss6AXdarSuAAKECAACET1ZRD_sm2Ez43f5OwQ"
 GIF_BOMBA      = "BQACAgEAAxkBAAIcF2oLJPd_DMATUHOOpXVrxTJuMWD_AAJ3CAACET1ZROF6hqT2K2yEOwQ"
 GIF_RATONES    = "CgACAgEAAxkBAAIcMGoLZwRVAVwGLLEM0mss6AXdarSuAAKECAACET1ZRD_sm2Ez43f5OwQ"
 GIF_RITMO      = "BQACAgEAAxkBAAIcAmoKoaYdAAHTsEPiAAEoZh-AvlZBjuEAAtYGAAIomlBE0hETSh8NkKo7BA"
-GIF_ERROR      = "https://i.pinimg.com/originals/66/9c/fb/669cfb27126c8eb1fcaf9847a3e91a7e.gif"
+GIF_ERROR      = "BQACAgEAAxkBAAIcRGoLcnqRwiI_kD7Mq2L91yDJt7z0AAKaCAACET1ZRMDKj0zeLrPPOwQ"
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
