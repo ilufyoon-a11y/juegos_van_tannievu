@@ -78,15 +78,15 @@ def dibujar_pantalla_ahorcado(chat_id):
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
 async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_animation(
-        animation = GIF_BIENVENIDA,
+    await update.message.reply_document(
+        document = GIF_BIENVENIDA,
         caption = "── .✦ Muchas gracias por ayudarme a testear mis codigos hechos con las patas, lo aprecio mucho, muack"
     )
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_animation(
-        animation = GIF_INFO,
+    await update.message.reply_document(
+        document = GIF_INFO,
         caption = (
             " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
             "1. EL AHORCADO \n"
@@ -286,8 +286,8 @@ async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["jugadores"] = []
     sesión_stop["activa"] = False
     boton = InlineKeyboardButton("UNIRME", callback_data="unirme_stop_click")
-    await update.message.reply_animation(
-        animation = GIF_RITMO,
+    await update.message.reply_document(
+        document = GIF_RITMO,
         caption = "¡Juguemos al Ritmo AGO-GO! Por favor, presiona el boton para unirte a la partida", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
