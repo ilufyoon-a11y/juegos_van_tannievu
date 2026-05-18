@@ -394,15 +394,63 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     texto = update.message.text.strip() if update.message.text else ""
     
-    # Setup Ahorcado por privado
+    if not texto:
+        return
+
+    # Setup Ahorcado por privado (El moderador ingresa la palabra)
     if chat_type == "private" and user_id in esperando_palabra:
         gid = esperando_palabra[user_id]
-        sesión[gid].update({"palabra_secreta": texto, "letras_adivinadas": [], "jugadores_vidas": {}})
+        
+        # Nos aseguramos de guardarla en minúsculas para el motor de juego
+        sesión[gid].update({
+            "palabra_secreta": texto.lower(), 
+            "letras_adivinadas": [], 
+            "jugadores_vidas": {}
+        })
         del esperando_palabra[user_id]
+        
         await update.message.reply_text("¡Palabra guardada! Vuelve al grupo.")
         guiones = " ".join(["_" if c != " " else "  " for c in texto])
         await context.bot.send_message(chat_id=gid, text=f"¡El moderador ya eligió!\nPalabra: '{guiones}'")
         return
+
+    # Escucha del juego Ahorcado en el Grupo 🎯 (Prioridad superior)
+    if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
+        # El bot solo procesa letras individuales de la A a la Z
+        if len(texto) == 1 and texto.isalpha():
+            # Evita que el moderador sople o juegue solo
+            if user_id == sesión[chat_id].get("moderador_id"):
+                await update.message.reply_text("¡Oye! Tú eres la moderadora, no puedes jugar esta ronda. 🤫")
+                return
+                
+            datos = sesión[chat_id]
+            if user_id not in datos["jugadores_vidas"]: 
+                datos["jugadores_vidas"][user_id] = 6
+                
+            if datos["jugadores_vidas"][user_id] <= 0: 
+                await update.message.reply_text(f"❌ {user_name}, ya no tienes intentos en esta ronda. 💀")
+                return
+
+            letra_ingresada = texto.lower()
+
+            if letra_ingresada in datos["palabra_secreta"]:
+                if letra_ingresada not in datos["letras_adivinadas"]: 
+                    datos["letras_adivinadas"].append(letra_ingresada)
+            else:
+                datos["jugadores_vidas"][user_id] -= 1
+
+            tablero = dibujar_pantalla_ahorcado(chat_id)
+            await update.message.reply_text(
+                f"Palabra: '{tablero}'\n"
+                f"Intentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}", 
+                parse_mode="Markdown"
+            )
+            
+            # Verificación de victoria efectiva (Removiendo los espacios del dibujo)
+            if "_" not in tablero.replace(" ", ""):
+                await update.message.reply_text(f"¡VICTORIA DE {user_name}! 🥳 La palabra era: **{datos['palabra_secreta'].upper()}**")
+                datos["activa"] = False
+            return
 
     # Escucha de Ritmo A Go-Go
     if sesión_stop.get("activa") and texto and not update.message.text.startswith("/"):
@@ -429,33 +477,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             await lanzar_turno_stop(chat_id, context)
             return
-
-    # Escucha del juego Ahorcado
-    if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
-        if len(texto) != 1 or not texto.isalpha() or user_id == sesión[chat_id]["moderador_id"]: 
-            return
-            
-        datos = sesión[chat_id]
-        if user_id not in datos["jugadores_vidas"]: 
-            datos["jugadores_vidas"][user_id] = 6
-            
-        if datos["jugadores_vidas"][user_id] <= 0: 
-            return
-
-        letra_ingresada = texto.lower()
-
-        if letra_ingresada in datos["palabra_secreta"].lower():
-            if letra_ingresada not in datos["letras_adivinadas"]: 
-                datos["letras_adivinadas"].append(letra_ingresada)
-        else:
-            datos["jugadores_vidas"][user_id] -= 1
-
-        tablero = dibujar_pantalla_ahorcado(chat_id)
-        await update.message.reply_text(f"Palabra: '{tablero}'\nIntentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}", parse_mode="Markdown")
-        
-        if "_" not in tablero:
-            await update.message.reply_text(f"¡VICTORIA DE {user_name}! La palabra era {datos['palabra_secreta']}")
-            datos["activa"] = False
 
 # --- 11. BLOQUE PRINCIPAL DE ARRANQUE ---
 if __name__ == '__main__':
