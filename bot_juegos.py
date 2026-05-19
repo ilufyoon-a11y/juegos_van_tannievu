@@ -423,7 +423,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         if not any(j['id'] == user.id for j in sesión[chat_id]["jugadores"]):
             sesión[chat_id]["jugadores"].append({"id": user.id, "name": user.first_name})
-            await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
+            await query.message.reply_text(f" 𓈒 🎶  ݁  {user.first_name} se unió a la ronda ੭")
 
     # Callbacks Bomba
     elif query.data == "unirme_bomba_click":
