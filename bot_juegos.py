@@ -139,7 +139,7 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sesión[chat_id]["activa"] = False
         sesión[chat_id]["jugadores"] = []
         
-    boton = InlineKeyboardButton("UNIRSE", callback_data="unirme_click")
+    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_click")
     await update.message.reply_photo(
         photo = GIF_AHORCADO,
         caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
@@ -183,7 +183,7 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
     sesión_bomba["activa"] = False
-    boton = InlineKeyboardButton("ENTRAR AL CAMPO", callback_data="unirme_bomba_click")
+    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_bomba_click")
     await update.message.reply_photo(
         photo = FOTO_BOMBA,
         caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
@@ -244,7 +244,7 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_ratones["jugadores"] = []
     sesión_ratones["sobrevivientes"] = []
     sesión_ratones["activa"] = False
-    boton = InlineKeyboardButton(" UNIRSE ", callback_data="unirme_ratones_click")
+    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_ratones_click")
     await update.message.reply_photo(
         photo = GIF_RATONES,
         caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
@@ -308,7 +308,7 @@ async def rondas_battle_royale(chat_id, context):
 async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["jugadores"] = []
     sesión_stop["activa"] = False
-    boton = InlineKeyboardButton("UNIRME", callback_data="unirme_stop_click")
+    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_stop_click")
     await update.message.reply_photo(
         photo = GIF_RITMOAGO,
         caption = "¡Juguemos al Ritmo AGO-GO! Por favor, presiona el boton para unirte a la partida", 
