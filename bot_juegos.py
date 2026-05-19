@@ -30,7 +30,7 @@ GIF_AHORCADO   = "https://i.postimg.cc/6qg3jBTv/1000004761.jpg"
 # Parcheado: Link directo .jpg para que se abra gigante en el chat 💥
 FOTO_BOMBA     = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg"
 GIF_RATONES    = "https://i.postimg.cc/wMmHBLTM/1000004766.jpg"
-GIF_RITMOAGO   = "https://i.postimg.cc/MXJJQ1k9/lv-0-20260518152334.gif"
+GIF_RITMOAGO   = "https://i.postimg.cc/CMXk6g3n/upscalemedia-transformed.jpg"
 GIF_ERROR      = "CgACAgEAAxkBAAIcYGoLgEkS0IC8Nm5eZvkTxPl95zDJAAJHBwACiURZROyXOAb37_ihOwQ"
 
 sesión = {}            # Ahorcado
