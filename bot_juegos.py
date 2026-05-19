@@ -24,7 +24,7 @@ def keep_alive():
 
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE IMÁGENES FIJAS Y GIFS (¡Enlaces directos y limpios! 💅)
-GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
+GIF_BIENVENIDA = "https://i.postimg.cc/T1jPgpDX/upscalemedia-transformed-(3).jpg"
 GIF_INFO       = "https://i.postimg.cc/9XgrQHCd/upscalemedia-transformed-(1).jpg"
 GIF_AHORCADO   = "https://i.postimg.cc/6qg3jBTv/1000004761.jpg"
 FOTO_BOMBA     = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg"
