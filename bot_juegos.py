@@ -23,15 +23,17 @@ def keep_alive():
     t.start()
 
 # --- 2. VARIABLES GLOBALES Y DICCIONARIOS ---
-# 📸 BANCO DE FOTOS FIJAS (¡Adiós animaciones problemáticas! 💅)
-# CAMBIA ESTOS LINKS POR TUS ENLACES DIRECTOS DE POSTIMAGES (.jpg)
-FOTO_BIENVENIDA   = "https://i.postimg.cc/Xv7Y1n8p/bienvenida.jpg"
-FOTO_INFO         = "https://i.postimg.cc/Xv7Y1n8p/menu_info.jpg"
-FOTO_AHORCADO     = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ"
-FOTO_BOMBA        = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ"
-FOTO_RATONES      = "https://i.postimg.cc/Xv7Y1n8p/ratones.jpg"
-FOTO_RITMOAGO     = "https://i.postimg.cc/Xv7Y1n8p/ritmo_gogo.jpg"
-FOTO_ERROR        = "https://i.postimg.cc/Xv7Y1n8p/error_sistema.jpg"
+# 📸 BANCO DE FOTOS USANDO FILE IDs DE TELEGRAM
+# Reemplaza estos textos con tus File IDs reales (los que empiezan con AgACAg...)
+FOTO_BIENVENIDA   = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+FOTO_INFO         = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+FOTO_AHORCADO     = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+FOTO_RATONES      = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+FOTO_RITMOAGO     = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+FOTO_ERROR        = "AgACAgEAAxkBAAIcvGoL791u355h_5aS4eXVl3ZdUqZbAAKFDGsbHKlhRNIEXidHWA1CAQADAgADcwADOwQ" # Cambiar por el tuyo
+
+# Aquí ya te dejé guardado el ID que me pasaste para la bomba 💣
+FOTO_BOMBA        = "AgACAgEAAxkBAAIctGoL7rfCA5Ojj7fSuMYWn_6WVqH4AAKDDGsbHKlhRO9DfmI_-OIXAQADAgADcwADOwQ"
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
@@ -45,17 +47,16 @@ sesión_ratones = {
 }
 
 sesión_stop = {
-    "jugadores": [],        # Lista de inscritos
-    "sobrevivientes": [],   # IDs de los que siguen vivos
-    "turno_index": 0,       # Quién está jugando ahorita
-    "palabras_dichas": [],  # Lista para que NO se repitan
+    "jugadores": [],        
+    "sobrevivientes": [],   
+    "turno_index": 0,       
+    "palabras_dichas": [],  
     "letra_actual": "",
     "categoria_actual": "",
     "activa": False,
-    "timer_task": None      # Control del reloj por turno
+    "timer_task": None      
 }
 
-# Diccionario vacío para el juego del dibujo
 sesión_pictionary = {
     "activa": False,
     "palabra_correcta": None,
@@ -63,7 +64,6 @@ sesión_pictionary = {
     "dibujante_name": None
 }
 
-# Banco de palabras secretas para el Pictionary
 PALABRAS_PICTIONARY = [
     "shooky", "chimmy", "cooky", "tata", "mang", "rj", "koya", "van", 
     "microfono", "guitarra", "gato", "cafe", "piano", "army bomb"
@@ -91,7 +91,7 @@ def dibujar_pantalla_ahorcado(chat_id):
 
 # ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚ COMANDO START ₊˚ ✧ ‿︵‿୨୧‿︵‿ ✧ ₊˚
 async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Cambiado a reply_photo para evitar errores de renderizado
+    # Ahora lee el File ID correctamente sin alterarse
     await update.message.reply_photo(
         photo = FOTO_BIENVENIDA,
         caption = "── .✦ Muchas gracias por ayudarme a testear mis codigos hechos con las patas, lo aprecio mucho, muack"
@@ -99,7 +99,6 @@ async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    # Cambiado de reply_document a reply_photo para que la lista se vea limpia
     await update.message.reply_photo(
         photo = FOTO_INFO,
         caption = (
@@ -344,7 +343,7 @@ async def timer_jugador_stop(chat_id, jugador_id, name, context):
     await asyncio.sleep(12)
     if sesión_stop["activa"] and sesión_stop["sobrevivientes"][sesión_stop["turno_index"]] == jugador_id:
         sesión_stop["sobrevivientes"].remove(jugador_id)
-        await context.bot.send_message(chat_id=chat_id, text=f"⏳ ¡{name} no respondió a tiempo, eliminado por lento. 💀")
+        await context.bot.send_message(chat_id=chat_id, text=f"⏳ ¡{name} no responded a tiempo, eliminado por lento. 💀")
         
         if sesión_stop["turno_index"] >= len(sesión_stop["sobrevivientes"]):
             sesión_stop["turno_index"] = 0
@@ -389,7 +388,6 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = query.message.chat.id
     await query.answer()
 
-    # Callbacks Ahorcado
     if query.data == "unirme_click":
         if chat_id not in sesión: 
             sesión[chat_id] = {"jugadores": [], "activa": False}
@@ -397,7 +395,6 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sesión[chat_id]["jugadores"].append({"id": user.id, "name": user.first_name})
             await query.message.reply_text(f"{user.first_name} se unió a la ronda.")
 
-    # Callbacks Bomba
     elif query.data == "unirme_bomba_click":
         if sesión_bomba["activa"]: 
             await query.message.reply_text(f"❌ {user.first_name}, ¡la partida ya empezó! Espera la otra ronda.")
@@ -432,7 +429,6 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup(nuevos_botones)
         )
 
-    # Callbacks Ratones
     elif query.data == "unirme_ratones_click":
         if not any(j['id'] == user.id for j in sesión_ratones["jugadores"]):
             sesión_ratones["jugadores"].append({"id": user.id, "name": user.first_name})
@@ -445,7 +441,6 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if user.id in sesión_ratones["esperando_click"]:
             await query.message.reply_text(f"¡{user.first_name} le dio a un hueco vacío y el ratón escapo!.")
 
-    # Callbacks STOP
     elif query.data == "unirme_stop_click":
         if not any(j['id'] == user.id for j in sesión_stop["jugadores"]):
             sesión_stop["jugadores"].append({"id": user.id, "name": user.first_name})
@@ -462,7 +457,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not texto:
         return
 
-    # Setup Ahorcado por privado
     if chat_type == "private" and user_id in esperando_palabra:
         gid = esperando_palabra[user_id]
         
@@ -478,7 +472,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=gid, text=f"¡El moderador ya eligió!\nPalabra: '{guiones}'")
         return
 
-    # Escucha del juego Pictionary en el Grupo 🎯
     if sesión_pictionary.get("activa") and chat_type != "private" and not texto.startswith("/"):
         if texto.lower() == sesión_pictionary["palabra_correcta"]:
             if user_id == sesión_pictionary["dibujante_id"]:
@@ -494,7 +487,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return
 
-    # Escucha del juego Ahorcado en el Grupo 🎯
     if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
         if len(texto) == 1 and texto.isalpha():
             if user_id == sesión[chat_id].get("moderador_id"):
@@ -528,7 +520,6 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 datos["activa"] = False
             return
 
-    # Escucha de Ritmo A Go-Go
     if sesión_stop.get("activa") and texto and not update.message.text.startswith("/"):
         actual_id = sesión_stop["sobrevivientes"][sesión_stop["turno_index"]]
         if user_id == actual_id:
