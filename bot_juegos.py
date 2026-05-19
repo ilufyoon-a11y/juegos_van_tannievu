@@ -25,7 +25,7 @@ def keep_alive():
 # --- 2. VARIABLES GLOBALES Y DICCONARIOS ---
 # 📸 BANCO DE IMÁGENES FIJAS Y GIFS (¡Enlaces directos y limpios! 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
-GIF_INFO       = "https://i.postimg.cc/JnHVnpy2/lv-0-20260518150214-ezgif-com-cut.gif"
+GIF_INFO       = "https://i.postimg.cc/9XgrQHCd/upscalemedia-transformed-(1).jpg"
 GIF_AHORCADO   = "https://i.postimg.cc/6qg3jBTv/1000004761.jpg"
 # Parcheado: Link directo .jpg para que se abra gigante en el chat 💥
 FOTO_BOMBA     = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg"
@@ -98,8 +98,8 @@ async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # --- 4. COMANDO MENÚ PRINCIPAL ---
 async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_document(
-        document = GIF_INFO,
+    await update.message.reply_photo(
+        photo = GIF_INFO,
         caption = (
             " ˗ˏˋ ꒰ LISTA DE COMANDOS INTRODUCIDOS ꒱ ˎˊ˗\n\n"
             "1. EL AHORCADO \n"
@@ -129,8 +129,8 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sesión[chat_id]["jugadores"] = []
         
     boton = InlineKeyboardButton("UNIRSE", callback_data="unirme_click")
-    await update.message.reply_animation(
-        animation = GIF_AHORCADO,
+    await update.message.reply_photo(
+        photo = GIF_AHORCADO,
         caption = "¡Juguemos al Ahorcado! Por favor presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
@@ -290,8 +290,8 @@ async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["jugadores"] = []
     sesión_stop["activa"] = False
     boton = InlineKeyboardButton("UNIRME", callback_data="unirme_stop_click")
-    await update.message.reply_document(
-        document = GIF_RITMOAGO,
+    await update.message.reply_photo(
+        photo = GIF_RITMOAGO,
         caption = "¡Juguemos al Ritmo AGO-GO! Por favor, presiona el boton para unirte a la partida", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
