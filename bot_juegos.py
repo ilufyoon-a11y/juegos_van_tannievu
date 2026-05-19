@@ -159,8 +159,8 @@ async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["activa"] = False
     boton = InlineKeyboardButton("ENTRAR AL CAMPO", callback_data="unirme_bomba_click")
     # Cambiado a reply_document porque GIF_BOMBA ahora es un ID interno 'BQAC...'
-    await update.message.reply_document(
-        document = GIF_BOMBA,
+    await update.message.reply_photo(
+        photo = GIF_BOMBA,
         caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
