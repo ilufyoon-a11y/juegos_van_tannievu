@@ -31,7 +31,7 @@ GIF_AHORCADO   = "https://i.postimg.cc/6qg3jBTv/1000004761.jpg"
 FOTO_BOMBA     = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg"
 GIF_RATONES    = "https://i.postimg.cc/wMmHBLTM/1000004766.jpg"
 GIF_RITMOAGO   = "https://i.postimg.cc/CMXk6g3n/upscalemedia-transformed.jpg"
-GIF_ERROR      = "CgACAgEAAxkBAAIcYGoLgEkS0IC8Nm5eZvkTxPl95zDJAAJHBwACiURZROyXOAb37_ihOwQ"
+GIF_ERROR      = "https://i.postimg.cc/G38XXrMW/Airbrush-IMAGE-ENHANCER-1779170852039-1779170852039.jpg"
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
