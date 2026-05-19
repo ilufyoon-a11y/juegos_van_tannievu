@@ -27,7 +27,7 @@ def keep_alive():
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
 GIF_INFO       = "https://i.postimg.cc/JnHVnpy2/lv-0-20260518150214-ezgif-com-cut.gif"
 GIF_AHORCADO   = "https://i.postimg.cc/yNmggyMB/In-Shot-20260518-160525585.gif"
-GIF_BOMBA      = "https://i.postimg.cc/4y03nXgX/c0a2bfc5785b7d83d41f933447f5be2f.jpg"
+GIF_BOMBA      = "AgACAgEAAxkBAAIcrWoL7UIE7Fis_Lh0BA8lYfUTGUgXAAKBDGsbHKlhRPTsN9a3zycbAQADAgADcwADOwQ"
 GIF_RATONES    = "CgACAgEAAxkBAAIcVGoLexdgkZuzvUmOmDPVoz2I5R_bAAJEBwACiURZREcuvW_lsALzOwQ"
 GIF_RITMOAGO   = "https://i.postimg.cc/MXJJQ1k9/lv-0-20260518152334.gif"
 GIF_ERROR      = "CgACAgEAAxkBAAIcYGoLgEkS0IC8Nm5eZvkTxPl95zDJAAJHBwACiURZROyXOAb37_ihOwQ"
