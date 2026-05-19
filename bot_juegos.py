@@ -29,7 +29,7 @@ GIF_INFO       = "https://i.postimg.cc/JnHVnpy2/lv-0-20260518150214-ezgif-com-cu
 GIF_AHORCADO   = "https://i.postimg.cc/yNmggyMB/In-Shot-20260518-160525585.gif"
 GIF_BOMBA      = "BQACAgEAAxkBAAIcF2oLJPd_DMATUHOOpXVrxTJuMWD_AAJ3CAACET1ZROF6hqT2K2yEOwQ"
 GIF_RATONES    = "CgACAgEAAxkBAAIcVGoLexdgkZuzvUmOmDPVoz2I5R_bAAJEBwACiURZREcuvW_lsALzOwQ"
-GIF_RITMOAGO   = "CgACAgEAAxkBAAIcaGoLgGjjUjqPBNZd24KEfhobulidAAJJBwACiURZRMjekP7ASWG6OwQ"
+GIF_RITMOAGO   = "https://i.postimg.cc/MXJJQ1k9/lv-0-20260518152334.gif"
 GIF_ERROR      = "CgACAgEAAxkBAAIcYGoLgEkS0IC8Nm5eZvkTxPl95zDJAAJHBwACiURZROyXOAb37_ihOwQ"
 
 sesión = {}            # Ahorcado
