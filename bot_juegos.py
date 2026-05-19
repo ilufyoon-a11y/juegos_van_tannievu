@@ -26,7 +26,7 @@ def keep_alive():
 # 📸 BANCO DE GIFS GLOBALES (¡Reusables en cualquier función! 💅)
 GIF_BIENVENIDA = "https://i.pinimg.com/originals/7f/e1/24/7fe124e7e79808bfb940b1aefa199249.gif"
 GIF_INFO       = "https://i.postimg.cc/JnHVnpy2/lv-0-20260518150214-ezgif-com-cut.gif"
-GIF_AHORCADO   = "CgACAgEAAxkBAAIcc2oLgwNPqJGPVtva4LQVApMtB8p2AAJLBwACiURZRKuHiIeKvxdSOwQ"
+GIF_AHORCADO   = "https://i.postimg.cc/yNmggyMB/In-Shot-20260518-160525585.gif"
 GIF_BOMBA      = "BQACAgEAAxkBAAIcF2oLJPd_DMATUHOOpXVrxTJuMWD_AAJ3CAACET1ZROF6hqT2K2yEOwQ"
 GIF_RATONES    = "CgACAgEAAxkBAAIcVGoLexdgkZuzvUmOmDPVoz2I5R_bAAJEBwACiURZREcuvW_lsALzOwQ"
 GIF_RITMOAGO   = "CgACAgEAAxkBAAIcaGoLgGjjUjqPBNZd24KEfhobulidAAJJBwACiURZRMjekP7ASWG6OwQ"
