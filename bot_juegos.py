@@ -1010,7 +1010,9 @@ async def detener_juegos(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["vivos"] = []
     sesión_zombie["fase"] = None
 
-    await update.message.reply_text("¡CLOSE VAN!\n\nSe cerraron todas las rondas existentes.")
+    await update.message.reply_photo(
+        photo = GIF_OFFVAN,
+        caption = "¡CLOSE VAN!\n\nSe cerraron todas las rondas existentes.")
 
 
 # =====================================================================
