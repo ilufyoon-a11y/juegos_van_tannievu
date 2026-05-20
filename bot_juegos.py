@@ -277,7 +277,7 @@ async def iniciar_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     sesión_ratones["activa"] = True
     sesión_ratones["sobrevivientes"] = [j["id"] for j in sesión_ratones["jugadores"]]
-    await update.message.reply_text("¡Apareciendo tablero! Atentos...")
+    await update.message.reply_text("¡Los ratones estan listos para salir!. ¡Atentos!...")
     asyncio.create_task(rondas_battle_royale(chat_id, context))
 
 async def rondas_battle_royale(chat_id, context):
@@ -285,7 +285,7 @@ async def rondas_battle_royale(chat_id, context):
     while sesión_ratones["activa"] and len(sesión_ratones["sobrevivientes"]) > 1:
         await asyncio.sleep(random.randint(3, 10))
         vivos = [next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == uid) for uid in sesión_ratones["sobrevivientes"]]
-        await context.bot.send_message(chat_id=chat_id, text=f" RONDA {ronda}\nVivos: {', '.join(vivos)}")
+        await context.bot.send_message(chat_id=chat_id, text=f" 𝖱𝗈𝗇𝖽𝖺: {ronda}\n\n𝖵𝗂𝗏𝗈𝗌: {', '.join(vivos)}")
         await asyncio.sleep(4)
 
         botones = [[InlineKeyboardButton("🕳️", callback_data="raton_fallo") for _ in range(3)] for _ in range(3)]
