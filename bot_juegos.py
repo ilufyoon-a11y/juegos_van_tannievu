@@ -213,7 +213,7 @@ async def iniciar_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["bomba_en"] = primer_jugador["id"]
     sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
     
-    await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador} ✶")
+    await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador['name']} ✶")
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
@@ -238,7 +238,7 @@ async def cuenta_regresiva_bomba(chat_id, context):
         perdedor_id = sesión_bomba["bomba_en"]
         perdedor = next(j for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
         
-        texto_final = f"¡¡𝖮𝗁, 𝗇𝗈!! {perdedor['name'] 𝗇𝗈 𝗅𝗅𝖾𝗀𝗈 𝖺 𝗉𝖺𝗌𝖺𝗋 𝗅𝖺 𝖻𝗈𝗅𝖺 𝗒 𝗊𝗎𝖾𝖽𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝖽𝖺."
+        texto_final = f"¡¡𝖮𝗁, 𝗇𝗈!! {perdedor['name']} 𝗇𝗈 𝗅𝗅𝖾𝗀𝗈 𝖺 𝗉𝖺𝗌𝖺𝗋 𝗅𝖺 𝖻𝗈𝗅𝖺 𝗒 𝗊𝗎𝖾𝖽𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝖽𝖺."
         
         try:
             await context.bot.edit_message_text(chat_id=chat_id, message_id=sesión_bomba["mensaje_id"], text=texto_final)
