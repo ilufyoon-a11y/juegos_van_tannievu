@@ -190,6 +190,20 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     esperando_palabra[moderador["id"]] = chat_id
     await update.message.reply_text(f"˒˓  ¡𝖬𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋 𝖾𝗅𝖾𝗀𝗂𝖽𝗈!. 𝖤𝗌𝗉𝖾𝗋𝖺𝗇𝖽𝗈 𝗊𝗎𝖾 𝗌𝖾 𝖺𝗌𝗂𝗀𝗇𝖾 𝗅𝖺 𝗉𝖺𝗅𝖺𝖻𝗋𝖺 𝗉𝖺𝗋𝖺 𝗉𝗈𝖽𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈  ᨦᨩ") 
 
+    try: 
+        await context.bot.send_photo(
+            chat_id = moderador_id,
+            photo = GIF_LETRISTA,
+            caption = "¡𝖤𝗇 𝗁𝗈𝗋𝖺 𝖻𝗎𝖾𝗇𝖺, 𝗍𝖾 𝗍𝗈𝖼𝖺 𝗌𝖾𝗋 𝖾𝗅 𝗆𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝗅𝖺 𝗉𝖺𝗅𝖺𝖻𝗋𝖺 𝗊𝗎𝖾 𝖽𝖾𝗌𝗌𝖾𝗌 𝗌𝖾𝖺 𝖺𝖽𝗂𝗏𝗂𝗇𝖺𝖽𝖺"
+        )
+
+    except Exception:
+        await context.bot.send_message(
+            chat_id = chat_id,
+            text = f"𝖴𝗉𝗌, 𝗇𝗈 𝗌𝖾 𝗉𝗎𝖾𝖽𝖾 𝖾𝗇𝗏𝗂𝖺𝗋 𝗆𝖾𝗇𝗌𝖺𝗃𝖾 𝖺 ({moderador_id['name']}). 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖺𝗌𝖾𝗀𝗎𝗋𝖺𝗍𝖾 𝖽𝖾 𝗁𝖺𝖻𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝖽𝗈 𝖾𝗅 𝖻𝗈𝗍 𝖾𝗇 𝗉𝗋𝗂𝗏𝖺𝖽𝗈"
+        )
+        sesión_["activa"] = False
+        
 # =====================================================================
 # 5. JUEGO 2: SNOWBALL 💣
 # =====================================================================
@@ -445,7 +459,7 @@ async def iniciar_jitbx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     try:
         await context.bot.send_photo(
             chat_id = encubridor["id"],
-            photo = GIF_OFFVAN, 
+            photo = GIF_ENCUBRIDOR, 
             caption = (
                 "¡𝖤𝗇 𝗁𝗈𝗋𝖺 𝖻𝗎𝖾𝗇𝖺, 𝗍𝖾 𝗍𝗈𝖼𝖺 𝗌𝖾𝗋 𝖾𝗅 𝖾𝗇𝖼𝗎𝖻𝗋𝗂𝖽𝗈𝗋!\n\n"
                 "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌 𝗌𝖾𝗉𝖺𝗋𝖺𝖽𝗈𝗌 𝗉𝗈𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 (🌸, 🌟,...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
@@ -512,9 +526,10 @@ async def iniciar_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
         botones_ataque.append([InlineKeyboardButton(f"𝖬𝗈𝗋𝖽𝖾𝗋 𝖺 {humano_obj['name']}", callback_data=f"morder_{humano_id}_{chat_id}")])
         
     try:
-        await context.bot.send_message(
+        await context.bot.send_photo(
             chat_id = paciente_cero_id,
-            text = "𝖥𝗎𝗂𝗌𝗍𝖾 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝖾𝗇𝗍𝗋𝖺𝗋 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 𝗌𝗂𝖾𝗇𝗍𝖾𝗌 𝗎𝗇𝖺 𝗇𝖾𝖼𝖾𝗌𝗂𝖽𝖺𝖽 𝗂𝗇𝗍𝖾𝗇𝗌𝖺 𝖽𝖾 𝖼𝖺𝗋𝗇𝖾. ¿𝖰𝗎𝗂𝖾𝗇 𝗌𝖾𝗋𝖺 𝗍𝗎 𝗉𝗋𝖾𝗌𝖺?",
+            photo = GIF_CERO, 
+            caption = "𝖥𝗎𝗂𝗌𝗍𝖾 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝖾𝗇𝗍𝗋𝖺𝗋 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 𝗌𝗂𝖾𝗇𝗍𝖾𝗌 𝗎𝗇𝖺 𝗇𝖾𝖼𝖾𝗌𝗂𝖽𝖺𝖽 𝗂𝗇𝗍𝖾𝗇𝗌𝖺 𝖽𝖾 𝖼𝖺𝗋𝗇𝖾. ¿𝖰𝗎𝗂𝖾𝗇 𝗌𝖾𝗋𝖺 𝗍𝗎 𝗉𝗋𝖾𝗌𝖺?",
             reply_markup = InlineKeyboardMarkup(botones_ataque)
         )
     except Exception:
