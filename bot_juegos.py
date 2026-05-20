@@ -564,7 +564,7 @@ async def procesar_resultados_votacion(chat_id, context):
     
     empates = [k for k, v in conteo.items() if v == max_votos]
     if len(empates) > 1:
-        await context.bot.send_message(chat_id=chat_id, text="⚖️ **¡HAY UN EMPATE EN LOS VOTOS!** Nadie es sacrificado esta ronda por falta de consenso.")
+        await context.bot.send_message(chat_id=chat_id, text="¡𝖧𝗎𝖻𝗈 𝗎𝗇 𝖾𝗆𝗉𝖺𝗍𝖾 𝗒 𝗇𝖺𝖽𝗂𝖾 𝖿𝗎𝖾 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈!")
         await pasar_a_siguiente_ataque(chat_id, context)
         return
         
