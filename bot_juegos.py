@@ -457,10 +457,10 @@ async def iniciar_jitbx(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # =====================================================================
 # JUEGO 6: INFECCIÓN ZOMBIE 🧟
 # =====================================================================
+
 async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     
-    # Reiniciamos la sesión del grupo
     sesión_zombie["jugadores"] = []
     sesión_zombie["zombies"] = []
     sesión_zombie["vivos"] = []
@@ -468,9 +468,9 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["activa"] = False
     sesión_zombie["fase"] = None
     
-    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_zombie_click")
+    boton = InlineKeyboardButton("੭੭  𝐔𝐍𝐈𝐑𝐌𝐄  !¡", callback_data="unirme_zombie_click")
     await update.message.reply_photo(
-        photo = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg", # Puedes cambiar esta URL por una de zombies chiki
+        photo = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg", 
         caption = "🚨 **ALERTA DE BIOHAZARD** 🚨\n\nSe está esparciendo un virus. Entra al búnker antes de que cierren las puertas.",
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
@@ -479,13 +479,13 @@ async def iniciar_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     
     if sesión_zombie["activa"]:
-        await update.message.reply_text("Ya hay una epidemia en curso.")
+        await update.message.reply_text("¡𝖫𝗈 𝗌𝗂𝖾𝗇𝗍𝗈, 𝗒𝖺 𝗁𝖺𝗒 𝗎𝗇𝖺 𝗋𝗈𝗇𝖽𝖺 𝖾𝗇 𝖼𝗎𝗋𝗌𝗈!")
         return
         
     if len(sesión_zombie["jugadores"]) < 3:
         await update.message.reply_animation(
             animation = GIF_ERROR,
-            caption = "𝖲𝖾 𝗇𝖾𝖼𝖾𝗌𝗂𝗍𝖺𝗇 𝗆𝗂𝗇𝗂𝗆𝗈 𝟥 𝗉𝖾𝗋𝗌𝗈𝗇𝖺𝗌 𝗉𝖺𝗋𝖺 𝗃𝗎𝗀𝖺𝗋. 𝖣𝖾 𝗍𝗋𝖺𝗍𝖺𝗋𝗌𝖾 𝗎𝗇 𝖾𝗋𝗋𝗈𝗋, 𝗉𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗏𝗎𝖾𝗅𝗏𝖾 𝖺 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈."
+            caption = "𝖲𝖾 𝗇𝖾𝖼𝖾𝗌𝗂𝗍𝖺𝗇 𝗆𝗂𝗇𝗂𝗆𝗈 𝟥 𝗉𝖾𝗋𝗌𝗈𝗇𝖺𝗌 𝗉𝖺𝗋𝖺 𝗃𝗎𝗀𝖺𝗋. 𝖣𝖾 𝗍𝗋𝖺𝗍𝖺𝗋𝗌𝖾 𝗎𝗇 𝖾𝗋𝗋𝗈𝗋, 𝗉𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗏𝗎𝖾𝗅𝗏𝖾 𝖺 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈 "
         )
         return
 
@@ -493,7 +493,6 @@ async def iniciar_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["fase"] = "infeccion"
     sesión_zombie["vivos"] = [j["id"] for j in sesión_zombie["jugadores"]]
     
-    # Elegimos al Paciente Cero en secreto 🤫
     paciente_cero_id = random.choice(sesión_zombie["vivos"])
     sesión_zombie["zombies"].append(paciente_cero_id)
     sesión_zombie["vivos"].remove(paciente_cero_id)
@@ -501,39 +500,34 @@ async def iniciar_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     paciente_cero_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == paciente_cero_id)
     
     await update.message.reply_text(
-        "☣️ **EL VIRUS HA ENTRADO AL BÚNKER** ☣️\n\n"
-        "Uno de ustedes es el **Paciente Cero**. El brote ha comenzado en secreto.\n"
-        "Zombies: Revisen su chat privado para morder a alguien... 🩸"
+        "¡Un infectado se colo! Uno de ustedes fue mordido por un zombie 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗌𝗎𝖻𝗂𝗋 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌, el brote ha comenzado..."
     )
     
-    # Le mandamos el botón de ataque al Zombie por privado
     botones_ataque = []
     for humano_id in sesión_zombie["vivos"]:
         humano_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == humano_id)
-        botones_ataque.append([InlineKeyboardButton(f"Morder a 🩸 {humano_obj['name']}", callback_data=f"morder_{humano_id}_{chat_id}")])
+        botones_ataque.append([InlineKeyboardButton(f"𝖬𝗈𝗋𝖽𝖾𝗋 𝖺 {humano_obj['name']}", callback_data=f"morder_{humano_id}_{chat_id}")])
         
     try:
         await context.bot.send_message(
             chat_id = paciente_cero_id,
-            text = "🧟 **¡ERES EL PACIENTE CERO!** 🧟\n\nTus dientes están listos. Selecciona a quién vas a infectar de la lista:",
+            text = "𝖥𝗎𝗂𝗌𝗍𝖾 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝖾𝗇𝗍𝗋𝖺𝗋 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 𝗌𝗂𝖾𝗇𝗍𝖾𝗌 𝗎𝗇𝖺 𝗇𝖾𝖼𝖾𝗌𝗂𝖽𝖺𝖽 𝗂𝗇𝗍𝖾𝗇𝗌𝖺 𝖽𝖾 𝖼𝖺𝗋𝗇𝖾. ¿𝖰𝗎𝗂𝖾𝗇 𝗌𝖾𝗋𝖺 𝗍𝗎 𝗉𝗋𝖾𝗌𝖺?",
             reply_markup = InlineKeyboardMarkup(botones_ataque)
         )
     except Exception:
         await context.bot.send_message(
             chat_id = chat_id,
-            text = f"⚠️ El Paciente Cero ({paciente_cero_obj['name']}) no tiene el bot iniciado al privado. ¡Inicien el bot antes de jugar!"
+            text = f"𝖴𝗉𝗌, 𝗇𝗈 𝗌𝖾 𝗉𝗎𝖾𝖽𝖾 𝖾𝗇𝗏𝗂𝖺𝗋 𝗆𝖾𝗇𝗌𝖺𝗃𝖾 𝖺 ({paciente_cero_obj['name']}). 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖺𝗌𝖾𝗀𝗎𝗋𝖺𝗍𝖾 𝖽𝖾 𝗁𝖺𝖻𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝖽𝗈 𝖾𝗅 𝖻𝗈𝗍 𝖾𝗇 𝗉𝗋𝗂𝗏𝖺𝖽𝗈"
         )
         sesión_zombie["activa"] = False
 
 async def abrir_votacion_zombie(chat_id, context):
     sesión_zombie["fase"] = "votacion"
-    sesión_zombie["votos"] = {} # Limpiamos votos anteriores
+    sesión_zombie["votos"] = {} 
     
-    # Botones en el grupo para votar a cualquiera de los sobrevivientes
     botones_voto = []
     for jugador in sesión_zombie["jugadores"]:
-        # Solo se puede votar a gente que siga en el juego (sea zombie o humano)
-        botones_voto.append([InlineKeyboardButton(f"🗳️ Votar a {jugador['name']}", callback_data=f"voto_z_{jugador['id']}")])
+        botones_voto.append([InlineKeyboardButton(f"𝖤𝗑𝗉𝗎𝗅𝗌𝖺𝗋 𝖺 {jugador['name']}", callback_data=f"voto_z_{jugador['id']}")])
     
     msg_voto = await context.bot.send_message(
         chat_id = chat_id,
@@ -547,7 +541,6 @@ async def abrir_votacion_zombie(chat_id, context):
     )
     sesión_zombie["mensaje_voto_id"] = msg_voto.message_id
     
-    # Temporizador de 30 segundos para votar
     asyncio.create_task(timer_votacion_zombie(chat_id, context))
 
 async def timer_votacion_zombie(chat_id, context):
@@ -558,17 +551,14 @@ async def timer_votacion_zombie(chat_id, context):
 async def procesar_resultados_votacion(chat_id, context):
     sesión_zombie["fase"] = None
     
-    # Borramos el mensaje de votación para que ya no interactúen
     try: await context.bot.delete_message(chat_id=chat_id, message_id=sesión_zombie["mensaje_voto_id"])
     except: pass
     
     if not sesión_zombie["votos"]:
         await context.bot.send_message(chat_id=chat_id, text="🤷‍♂️ Nadie votó a tiempo. El pánico los congeló. La infección continúa...")
-        # Siguiente ronda de ataque zombie si quedan humanos
         await pasar_a_siguiente_ataque(chat_id, context)
         return
 
-    # Contamos los votos
     conteo = {}
     for vid in sesión_zombie["votos"].values():
         conteo[vid] = conteo.get(vid, 0) + 1
@@ -576,7 +566,6 @@ async def procesar_resultados_votacion(chat_id, context):
     mas_votado_id = max(conteo, key=conteo.get)
     max_votos = conteo[mas_votado_id]
     
-    # Verificar empate
     empates = [k for k, v in conteo.items() if v == max_votos]
     if len(empates) > 1:
         await context.bot.send_message(chat_id=chat_id, text="⚖️ **¡HAY UN EMPATE EN LOS VOTOS!** Nadie es sacrificado esta ronda por falta de consenso.")
@@ -585,10 +574,8 @@ async def procesar_resultados_votacion(chat_id, context):
         
     eliminado_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == mas_votado_id)
     
-    # Verificamos qué era el eliminado
     if mas_votado_id in sesión_zombie["zombies"]:
         sesión_zombie["zombies"].remove(mas_votado_id)
-        # Lo sacamos del juego
         sesión_zombie["jugadores"] = [j for j in sesión_zombie["jugadores"] if j["id"] != mas_votado_id]
         
         await context.bot.send_message(
@@ -597,14 +584,13 @@ async def procesar_resultados_votacion(chat_id, context):
         )
     else:
         sesión_zombie["vivos"].remove(mas_votado_id)
-        sesión_zombie["jugadores"] = [j <div class="for"> for j in sesión_zombie["jugadores"] if j["id"] != mas_votado_id]
+        sesión_zombie["jugadores"] = [j for j in sesión_zombie["jugadores"] if j["id"] != mas_votado_id]
         
         await context.bot.send_message(
             chat_id = chat_id,
             text = f"💔 **{eliminado_obj['name']} fue sacrificado injustamente con {max_votos} votos...**\nEra un humano completamente sano. El búnker cae en la paranoia..."
         )
 
-    # Comprobamos condiciones de victoria
     if not sesión_zombie["zombies"]:
         await context.bot.send_message(chat_id=chat_id, text="🥳 🎉 **¡VICTORIA HUMANA!** Todos los zombies fueron eliminados. El búnker está a salvo por ahora.")
         sesión_zombie["activa"] = False
@@ -612,13 +598,11 @@ async def procesar_resultados_votacion(chat_id, context):
         await context.bot.send_message(chat_id=chat_id, text="🧟‍♂️ 🚨 **¡VICTORIA ZOMBIE!** Ya no quedan humanos sanos. La horda ha tomado el control.")
         sesión_zombie["activa"] = False
     else:
-        # El juego sigue
         await pasar_a_siguiente_ataque(chat_id, context)
 
 async def pasar_a_siguiente_ataque(chat_id, context):
     sesión_zombie["fase"] = "infeccion"
     
-    # Todos los zombies actuales reciben el panel para morder, pero solo uno necesita morder para activar la fase
     for z_id in sesión_zombie["zombies"]:
         botones_ataque = []
         for humano_id in sesión_zombie["vivos"]:
@@ -735,59 +719,48 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # === Callbacks Juego Zombie ===
     elif query.data == "unirme_zombie_click":
         if sesión_zombie["activa"]:
-            await query.answer("❌ ¡La infección ya empezó! No puedes entrar a mitad de brote.", show_alert=True)
+            await query.answer("❌ El búnker ya está cerrado. La epidemia comenzó.", show_alert=True)
             return
         if not any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
-            sesión_zombie["jugadores"].append({"id": user.id, "name": user.first_name, "username": user.username})
-            await query.message.reply_text(f"☣️ {user.first_name} se encerró en el búnker.")
+            sesión_zombie["jugadores"].append({"id": user.id, "name": user.first_name})
+            await query.message.reply_text(f"𔓕 ֹ {user.first_name} entró al búnker 🏃‍♂️💨")
 
     elif query.data.startswith("morder_"):
-        # Esto pasa en el privado del zombie
         partes = query.data.split("_")
         victima_id = int(partes[1])
         grupo_chat_id = int(partes[2])
         
-        if not sesión_zombie["activa"] or sesión_zombie["fase"] != "infeccion":
-            await query.answer("No puedes morder en este momento.", show_alert=True)
-            return
-            
-        if user.id not in sesión_zombie["zombies"]:
-            await query.answer("¡Tú no eres un zombie!", show_alert=True)
-            return
-
-        # Infectar a la víctima
-        if victima_id in sesión_zombie["vivos"]:
-            sesión_zombie["vivos"].remove(victima_id)
-            sesión_zombie["zombies"].append(victima_id)
-            
-            victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
-            await query.edit_message_text(f"🩸 Has infectado con éxito a {victima_obj['name']}. ¡Ahora es de tu bando!")
-            
-            # Avisarle a la nueva víctima en secreto
-            try:
-                await context.bot.send_message(chat_id=victima_id, text="☣️ **¡TE HAN MORDIDO!** Ahora eres un Zombie. Ayuda a tu horda a ganar desvidiando las sospechas.")
-            except: pass
-            
-            # Lanzamos la votación de emergencia en el grupo principal
-            await abrir_votacion_zombie(grupo_chat_id, context)
+        if sesión_zombie["activa"] and sesión_zombie["fase"] == "infeccion":
+            if victima_id in sesión_zombie["vivos"]:
+                sesión_zombie["vivos"].remove(victima_id)
+                sesión_zombie["zombies"].append(victima_id)
+                
+                victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
+                await query.edit_message_text(f"🩸 Ataque exitoso. Has infectado a {victima_obj['name']}.")
+                
+                # 📢 ANUNCIO EN EL GRUPO: Avisamos quién murió/fue infectado
+                await context.bot.send_message(
+                    chat_id = grupo_chat_id,
+                    text = f"🚨 **¡UN ATAQUE HA OCURRIDO!** 🚨\n\n🩸 **{victima_obj['name']}** ha sido atacado en la oscuridad por un zombie y se está transformando... 🧟‍♂️"
+                )
+                
+                # Un pequeño delay de 2 segundos para el drama antes de la votación
+                await asyncio.sleep(2)
+                
+                # Abrimos votación inmediatamente
+                await abrir_votacion_zombie(grupo_chat_id, context)
+            else:
+                await query.edit_message_text("⚠️ Esa víctima ya no está disponible.")
 
     elif query.data.startswith("voto_z_"):
-        if not sesión_zombie["activa"] or sesión_zombie["fase"] != "votacion":
-            await query.answer("No estamos en fase de votación.", show_alert=True)
-            return
-            
-        # Verificar si el que vota pertenece al juego
-        if not any(j["id"] == user.id for j in sesión_zombie["jugadores"]):
-            await query.answer("❌ No estás participando en esta ronda.", show_alert=True)
-            return
-            
-        votado_id = int(query.data.replace("voto_z_", ""))
+        votado_id = int(query.data.split("_")[2])
         
-        # Guardamos o cambiamos el voto
-        sesión_zombie["votos"][user.id] = votado_id
-        votado_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == votado_id)
-        
-        await query.answer(f"Registrado tu voto para: {votado_obj['name']}", show_alert=False)
+        if sesión_zombie["activa"] and sesión_zombie["fase"] == "votacion":
+            if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
+                sesión_zombie["votos"][user.id] = votado_id
+                await query.answer(f"Registraste tu voto de manera secreta. 🗳️", show_alert=True)
+            else:
+                await query.answer("❌ No estás participando en esta ronda.", show_alert=True)
 
 # =====================================================================
 # 10. MANEJADOR DE MENSAJES (TEXTO)
