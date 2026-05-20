@@ -29,16 +29,19 @@ def keep_alive():
 # 2. VARIABLES GLOBALES Y DICCIONARIOS
 # =====================================================================
 # 📸 BANCO DE IMÁGENES 
-GIF_BIENVENIDA = "https://i.postimg.cc/T1jPgpDX/upscalemedia-transformed-(3).jpg" #NECESITA ARREGLO
+GIF_BIENVENIDA = "https://i.postimg.cc/T1jPgpDX/upscalemedia-transformed-(3).jpg" #FUNCIONA PERFECTO 
 GIF_INFO       = "https://i.postimg.cc/9XgrQHCd/upscalemedia-transformed-(1).jpg" #FUNCIONA PERFECTO 
 GIF_AHORCADO   = "https://i.postimg.cc/6qg3jBTv/1000004761.jpg" #FUNCIONA PERFECTO
 FOTO_SNOWWBALL = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg" #FUNCIONA PERFECTO
 GIF_RATONES    = "https://i.postimg.cc/wMmHBLTM/1000004766.jpg" #FUNCIONA PERFECTO
 GIF_RITMOAGO   = "https://i.postimg.cc/CMXk6g3n/upscalemedia-transformed.jpg" #FUNCIONA PERFECTO
 GIF_ERROR      = "https://i.postimg.cc/G38XXrMW/Airbrush-IMAGE-ENHANCER-1779170852039-1779170852039.jpg" #FUNCIONA PERFECTO
-GIF_OFFVAN     = "https://i.postimg.cc/mZ7k066k/upscalemedia-transformed-(2).jpg" #NECESITA SER LLAMADO COMO PHOTO
-GIF_JITB       = "https://i.postimg.cc/fLqYbX2s/Airbrush-IMAGE-ENHANCER-1779302294635-1779302294635.jpg" #NECESITA ARREGLO - fir
+GIF_OFFVAN     = "https://i.postimg.cc/mZ7k066k/upscalemedia-transformed-(2).jpg" #FUNCIONA PERFECTO 
+GIF_JITB       = "https://i.postimg.cc/fLqYbX2s/Airbrush-IMAGE-ENHANCER-1779302294635-1779302294635.jpg" #FUNCIONA PERFECTO 
 GIF_ZOMBIE     = "https://i.postimg.cc/8PWQJWM1/1000004869.jpg" #FUNCIONA PERFECTO 
+GIF_ENCUBRIDOR = "https://i.postimg.cc/QMmj1qZm/8a87226444e22cdd01aaff0060557a2b-(1).jpg"
+GIF_CERO       = "https://i.postimg.cc/vH5TDfDZ/763aa3f517ca4e8b1b1ae10f55dfb556-(1).jpg"
+GIF_LETRISTA   = "https://i.postimg.cc/Zndk78XB/Airbrush-IMAGE-ENHANCER-1779303536547-1779303536547.jpg"
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
