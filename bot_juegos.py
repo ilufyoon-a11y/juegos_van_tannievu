@@ -37,8 +37,8 @@ GIF_RATONES    = "https://i.postimg.cc/wMmHBLTM/1000004766.jpg" #FUNCIONA PERFEC
 GIF_RITMOAGO   = "https://i.postimg.cc/CMXk6g3n/upscalemedia-transformed.jpg" #FUNCIONA PERFECTO
 GIF_ERROR      = "https://i.postimg.cc/G38XXrMW/Airbrush-IMAGE-ENHANCER-1779170852039-1779170852039.jpg" #FUNCIONA PERFECTO
 GIF_OFFVAN     = "https://i.postimg.cc/mZ7k066k/upscalemedia-transformed-(2).jpg" #NECESITA SER LLAMADO COMO PHOTO
-GIF_JITB       = "https://i.postimg.cc/8PWQJWM1/1000004869.jpg" #NECESITA ARREGLO - fir
-GIF_zombie     = "https://i.postimg.cc/8PWQJWM1/1000004869.jpg" #FUNCIONA PERFECTO 
+GIF_JITB       = "https://i.postimg.cc/fLqYbX2s/Airbrush-IMAGE-ENHANCER-1779302294635-1779302294635.jpg" #NECESITA ARREGLO - fir
+GIF_ZOMBIE     = "https://i.postimg.cc/8PWQJWM1/1000004869.jpg" #FUNCIONA PERFECTO 
 
 sesión = {}            # Ahorcado
 esperando_palabra = {} # Ahorcado (Privado)
@@ -470,7 +470,7 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     boton = InlineKeyboardButton("੭੭  𝐔𝐍𝐈𝐑𝐌𝐄  !¡", callback_data="unirme_zombie_click")
     await update.message.reply_photo(
-        photo = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg", 
+        photo = GIF_ZOMBIE, 
         caption = "៹ ࣪  🧟 𝖫𝖺 𝗇𝗈𝖼𝗁𝖾 𝗁𝖺 𝗅𝗅𝖾𝗀𝖺𝖽𝗈 𝗒 𝗅𝗈𝗌 𝗓𝗈𝗆𝖻𝗂𝖾𝗌 𝖾𝗌𝗍𝖺𝗇 𝖾𝗆𝗉𝖾𝗓𝖺𝖽𝗈 𝖺 𝗌𝖺𝗅𝗂𝗋 ¡𝖠𝗉𝗋𝖾𝗌𝗎𝗋𝖺𝗍𝖾 𝖺 𝗌𝗎𝖻𝗂𝗋𝗍𝖾 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌!  ֪",
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
