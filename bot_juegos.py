@@ -462,7 +462,7 @@ async def iniciar_jitbx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             photo = GIF_ENCUBRIDOR, 
             caption = (
                 "¡𝖤𝗇 𝗁𝗈𝗋𝖺 𝖻𝗎𝖾𝗇𝖺, 𝗍𝖾 𝗍𝗈𝖼𝖺 𝗌𝖾𝗋 𝖾𝗅 𝖾𝗇𝖼𝗎𝖻𝗋𝗂𝖽𝗈𝗋!\n\n"
-                "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌 𝗌𝖾𝗉𝖺𝗋𝖺𝖽𝗈𝗌 𝗉𝗈𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 (🌸, 🌟,...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
+                "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌 𝗌𝖾𝗉𝖺𝗋𝖺𝖽𝗈𝗌 𝗉𝗈𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 (🌸 🌟 📰...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
             )
         )
     except Exception as e:
@@ -559,7 +559,7 @@ async def abrir_votacion_zombie(chat_id, context):
     asyncio.create_task(timer_votacion_zombie(chat_id, context))
 
 async def timer_votacion_zombie(chat_id, context):
-    await asyncio.sleep(30)
+    await asyncio.sleep(120)
     if sesión_zombie["activa"] and sesión_zombie["fase"] == "votacion":
         await procesar_resultados_votacion(chat_id, context)
 
