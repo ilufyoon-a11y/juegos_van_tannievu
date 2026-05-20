@@ -608,7 +608,7 @@ async def pasar_a_siguiente_ataque(chat_id, context):
         try:
             await context.bot.send_message(
                 chat_id = z_id,
-                text = "🧟 **Ronda de Infección:** Elige a tu siguiente víctima antes de que sospechen:",
+                text = "𝖮𝗍𝗋𝖺 𝗏𝖾𝗓 𝗌𝗂𝖾𝗇𝗍𝖾𝗌 𝖺𝗇𝗌𝗂𝖾𝖽𝖺𝖽 𝗉𝗈𝗋 𝗉𝗋𝗈𝖻𝖺𝗋 𝖼𝖺𝗋𝗇𝖾. 𝖤𝗅𝗂𝗀𝗎𝖾 𝖺 𝗍𝗎 𝗌𝗂𝗀𝗎𝗂𝖾𝗇𝗍𝖾 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝖼𝗈𝗇 𝗉𝗋𝖾𝖼𝖺𝗎𝖼𝗂𝗈𝗇",
                 reply_markup = InlineKeyboardMarkup(botones_ataque)
             )
         except: pass
