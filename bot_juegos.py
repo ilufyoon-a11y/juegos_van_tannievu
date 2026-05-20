@@ -470,7 +470,7 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("੭੭  𝐔𝐍𝐈𝐑𝐌𝐄  !¡", callback_data="unirme_zombie_click")
     await update.message.reply_photo(
         photo = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg", 
-        caption = "🚨 **ALERTA DE BIOHAZARD** 🚨\n\nSe está esparciendo un virus. Entra al búnker antes de que cierren las puertas.",
+        caption = "៹ ࣪  🧟 𝖫𝖺 𝗇𝗈𝖼𝗁𝖾 𝗁𝖺 𝗅𝗅𝖾𝗀𝖺𝖽𝗈 𝗒 𝗅𝗈𝗌 𝗓𝗈𝗆𝖻𝗂𝖾𝗌 𝖾𝗌𝗍𝖺𝗇 𝖾𝗆𝗉𝖾𝗓𝖺𝖽𝗈 𝖺 𝗌𝖺𝗅𝗂𝗋 ¡𝖠𝗉𝗋𝖾𝗌𝗎𝗋𝖺𝗍𝖾 𝖺 𝗌𝗎𝖻𝗂𝗋𝗍𝖾 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌!  ֪",
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
