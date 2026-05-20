@@ -187,7 +187,7 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"˒˓  ¡𝖬𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋 𝖾𝗅𝖾𝗀𝗂𝖽𝗈!. 𝖤𝗌𝗉𝖾𝗋𝖺𝗇𝖽𝗈 𝗊𝗎𝖾 𝗌𝖾 𝖺𝗌𝗂𝗀𝗇𝖾 𝗅𝖺 𝗉𝖺𝗅𝖺𝖻𝗋𝖺 𝗉𝖺𝗋𝖺 𝗉𝗈𝖽𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈  ᨦᨩ") 
 
 # =====================================================================
-# 5. JUEGO 2: LA BOMBA 💣
+# 5. JUEGO 2: SNOWBALL 💣
 # =====================================================================
 async def unirse_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
