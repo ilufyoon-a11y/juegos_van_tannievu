@@ -126,18 +126,18 @@ async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
         photo = GIF_INFO,
         caption = (
             "🐋    𖹭𖹭ㅤ𝗝𝗨𝗘𝗚𝗢𝗦 𝗗𝗜𝗦𝗣𝗢𝗡𝗜𝗕𝗟𝗘𝗦     ꒱꒱\n\n"
-            "1. EL AHORCADO \n"
-            "⤷ /ahorcado ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse \n"
-            "⤷ /start_ahorcado - Se elige a la persona que definirá la palabra para inicar el juego\n\n"
-            "2. LA BOMBA \n"
-            "⤷ /bomba ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
-            "⤷ /start_bomba - Encender la mecha\n\n"
-            "3. RATONES \n"
-            "⤷ /ratones ⇢ Inicia el juego, crea una ronda y les permite a los demas unirse\n"
-            "⤷ /start_ratones ⇢ Se crea el tablero \n\n"
-            "4. RITMO A GO-GO \n"
-            "⤷ /stop ⇢ Alistarse para el la partida\n"
-            "⤷ /start_stop ⇢ Lanza la letra, categoría e iniciar turnos\n\n"
+            "𝒊. 𝐀𝐡𝐨𝐫𝐜𝐚𝐝𝐨\n"
+            "𝖤𝗅 𝗃𝗎𝖾𝗀𝗈 𝖼𝗅𝖺𝗌𝗂𝖼𝗈 𝗊𝗎𝖾 𝗍𝗈𝖽𝗈𝗌 𝖼𝗈𝗇𝗈𝖼𝖾𝗇\n\n"
+            "𝒊𝒊. 𝐒𝐧𝐨𝐰𝐛𝐚𝐥𝐥\n"
+            "𝖴𝗇𝖺 𝖻𝗈𝗅𝖺 𝖽𝖾 𝗇𝗂𝖾𝗏𝖾 𝖾𝗌𝗍𝖺 𝖻𝖺𝗃𝖺𝗇𝖽𝗈 𝖽𝖾𝗌𝖽𝖾 𝗎𝗇𝖺 𝖼𝗈𝗅𝗂𝗇𝖺 𝗒 𝗏𝖺 𝖽𝗂𝗋𝖾𝖼𝗍𝗈 𝗁𝖺𝖼𝗂𝖺 𝖺 𝗎𝗌𝗍𝖾𝖽𝖾𝗌. ¡𝖫𝖺𝗇𝗓𝖺𝗅𝖺 𝖺 𝗈𝗍𝗋𝗈 𝗈 𝗌𝖾 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝖽𝗈!\n\n"
+            "𝒊𝒊. 𝐑𝐚𝐭𝐨𝐧𝐞𝐬\n"
+            "𝖴𝗇𝖺 𝗉𝗅𝖺𝗀𝖺 𝗌𝖾 𝗁𝖺 𝖽𝖾𝗌𝗁𝖺𝗍𝖺𝖽𝗈 𝗒 𝗅𝖺 𝗎𝗇𝗂𝖼𝖺 𝖿𝗈𝗋𝗆𝖺 𝖽𝖾 𝖽𝖾𝗌𝗁𝖺𝖼𝖾𝗋𝗌𝖾 𝖽𝖾 𝖾𝗅𝗅𝖺 𝖾𝗌 𝗀𝗈𝗅𝗉𝖾𝖺𝗇𝖽𝗈 𝖺 𝗅𝗈𝗌 𝗋𝖺𝗍𝗈𝗇𝖾𝗌"
+            "𝒊𝒗. 𝐒𝐭𝐨𝐩"
+            "𝖴𝗇𝖺 𝗏𝖺𝗋𝗂𝖺𝖼𝗂𝗈𝗇 𝖽𝖾 𝗌𝗍𝗈𝗉, 𝖽𝗈𝗇𝖽𝖾 𝖼𝖺𝖽𝖺 𝗎𝗇𝗈 𝖽𝖾𝖻𝖾 𝖽𝖾𝖼𝗂𝗋 𝗉𝖺𝗅𝖺𝖻𝗋𝖺𝗌 𝗋𝖾𝗅𝖺𝖼𝗂𝗈𝗇𝖺𝖽𝖺𝗌 𝖺 𝗅𝖺 𝖼𝖺𝗍𝖾𝗀𝗈𝗋𝗂𝖺 𝗌𝗂𝗇 𝗋𝖾𝗉𝖾𝗍𝗂𝗋 𝗅𝖺𝗌 𝖽𝗂𝖼𝗁𝖺𝗌 𝖺𝗇𝗍𝖾𝗋𝗂𝗈𝗋𝗆𝖾𝗇𝗍𝖾\n\n"
+            "𝒗. 𝐖𝐡𝐚𝐭'𝐬 𝐢𝐧 𝐭𝐡𝐞 𝐛𝐨𝐱\n"
+            "𝖨𝗇𝗌𝗉𝗂𝗋𝖺𝖽𝗈 𝖾𝗇 𝖵𝖺𝗋𝗂𝖾𝗍𝗒 𝖲𝗁𝗈𝗐𝗌 𝗈𝖿 𝖬𝖾𝗆𝗈𝗋𝗂𝖾𝗌: 𝖯𝖺𝗋𝗍 𝟣, 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝗌𝗈𝗅𝗈 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗆𝖾𝗆𝗈𝗋𝗂𝗓𝖺𝗋 𝗅𝗈𝗌 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝖽𝖾𝗇𝗍𝗋𝗈 𝖽𝖾 𝗅𝖺 𝖼𝖺𝗃𝖺. ¡𝖠 𝗆𝖺𝗒𝗈𝗋 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝖺𝖽𝗂𝗏𝗂𝗇𝖺𝖽𝗈𝗌, 𝗆𝖺𝗒𝗈𝗋 𝗉𝗎𝗇𝗍𝖺𝗃𝖾!\n\n"
+            "𝒗𝒊. 𝐙𝐨𝐦𝐛𝐢𝐞\n"
+            "𝖴𝗇𝖺 𝖾𝗑𝖼𝗎𝗋𝗌𝗂𝗈𝗇 𝗌𝖾 𝗏𝗂𝗈 𝗂𝗇𝗍𝖾𝗋𝗋𝗎𝗆𝗉𝗂𝖽𝖺 𝗉𝗈𝗋 𝗎𝗇 𝗏𝗂𝗋𝗎𝗌 𝗓𝗈𝗆𝖻𝗂𝖾 𝗒 𝖽𝖾𝖻𝖾𝗇 𝖾𝗌𝗉𝖾𝗋𝖺𝗋 𝗁𝖺𝗌𝗍𝖺 𝗊𝗎𝖾 𝗅𝗈𝗌 𝗋𝖾𝗌𝖼𝖺𝗍𝖾𝗇, 𝗌𝗈𝗅𝗈 𝗌𝖾 𝗉𝗎𝖾𝖽𝖾𝗇 𝗋𝖾𝗌𝗀𝗎𝖺𝗋𝖽𝖺𝗋 𝖾𝗇 𝗎𝗇 𝖺𝗎𝗍𝗈𝖻𝗎𝗌, 𝗉𝖾𝗋𝗈 𝗎𝗇 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝗌𝖾 𝖼𝗈𝗅𝗈 𝗒 𝖺𝗍𝖺𝖼𝖺 𝗉𝗈𝗋 𝗅𝖺𝗌 𝗇𝗈𝖼𝗁𝖾𝗌 𝖼𝗎𝖺𝗇𝖽𝗈 𝗅𝖺𝗌 𝗅𝗎𝖼𝖾𝗌 𝗌𝖾 𝖺𝗉𝖺𝗀𝖺𝗇 𝗉𝗈𝗋 𝗌𝖾𝗀𝗎𝗋𝗂𝖽𝖺𝖽 ¿𝖯𝗈𝖽𝗋𝖺𝗇 𝗌𝗈𝖻𝗋𝖾𝗏𝗂𝗏𝗂𝗋?s\n\n"
         )
     )
 
@@ -698,7 +698,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 nuevos_botones.append([InlineKeyboardButton(f"𝖫𝖺𝗇𝗓𝖺𝗋 𝖺 {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
         
         await query.message.edit_text(
-            text=f"¡{user_jugador['name']} 𝗌𝖾 𝗌𝖺𝗅𝗏𝗈 𝖽𝖾 𝗆𝗂𝗅𝖺𝗀𝗋𝗈!\n\n💣 ¡𝖠𝗁𝗈𝗋𝖺 𝗅𝖺 𝗍𝗂𝖾𝗇𝖾 {nuevo_jugador['name']}!\n¡𝖱𝖺́𝗉𝗂𝖽𝗈, 𝗉𝖺𝗌𝖺𝗌𝖾𝗅𝖺 𝖺 𝗈𝗍𝗋𝖺 𝗉𝖾𝗋𝗌𝗈𝗇𝖺!",
+            text=f"¡{user_jugador['name']} 𝗌𝖾 𝗌𝖺𝗅𝗏𝗈 𝖽𝖾 𝗆𝗂𝗅𝖺𝗀𝗋𝗈!\n\n¡𝖠𝗁𝗈𝗋𝖺 𝗅𝖺 𝗍𝗂𝖾𝗇𝖾 {nuevo_jugador['name']}!\n¡𝖱𝖺́𝗉𝗂𝖽𝗈, 𝗉𝖺𝗌𝖺𝗌𝖾𝗅𝖺 𝖺 𝗈𝗍𝗋𝖺 𝗉𝖾𝗋𝗌𝗈𝗇𝖺!",
             reply_markup=InlineKeyboardMarkup(nuevos_botones)
         )
 
@@ -765,7 +765,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # Abrimos votación inmediatamente
                 await abrir_votacion_zombie(grupo_chat_id, context)
             else:
-                await query.edit_message_text("⚠️ 𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                await query.edit_message_text("𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
 
     elif query.data.startswith("voto_z_"):
         votado_id = int(query.data.split("_")[2])
@@ -828,7 +828,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         lista_visual = " ".join(emojis_originales)
         mensaje_flash = await context.bot.send_message(
             chat_id=gid,
-            text=f"¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖲𝖤𝖱𝖠 𝖠𝖡𝖨𝖤𝖱𝖳𝖠! \n\n 𝖬𝖾𝗆𝗈𝗋𝗂𝗓𝖺 𝖻𝗂𝖾𝗇 𝗅𝗈𝗌 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌, 𝖽𝖾𝗌𝖺𝗉𝖺𝗋𝖾𝖼𝖾𝗋𝖺́𝗇 𝖾𝗇 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌:\n\n👉  {lista_visual}  👈"
+            text=f"¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖲𝖤𝖱𝖠 𝖠𝖡𝖨𝖤𝖱𝖳𝖠! \n\n 𝖬𝖾𝗆𝗈𝗋𝗂𝗓𝖺 𝖻𝗂𝖾𝗇 𝗅𝗈𝗌 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌, 𝖽𝖾𝗌𝖺𝗉𝖺𝗋𝖾𝖼𝖾𝗋𝖺́𝗇 𝖾𝗇 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌:\n\n{lista_visual}"
         )
         
         await asyncio.sleep(2)
@@ -1010,7 +1010,7 @@ async def detener_juegos(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["vivos"] = []
     sesión_zombie["fase"] = None
 
-    await update.message.reply_text("¡CLOSE VAN! 💥\n\nSe cerraron todas las rondas existentes.")
+    await update.message.reply_text("¡CLOSE VAN!\n\nSe cerraron todas las rondas existentes.")
 
 
 # =====================================================================
