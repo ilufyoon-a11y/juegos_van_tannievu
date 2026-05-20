@@ -613,7 +613,7 @@ async def pasar_a_siguiente_ataque(chat_id, context):
             )
         except: pass
     
-    await context.bot.send_message(chat_id=chat_id, text="🌙 **La noche cae en el búnker...** Los zombies están acechando desde los ductos de ventilación.")
+    await context.bot.send_message(chat_id=chat_id, text="𝖫𝖺 𝗇𝗈𝖼𝗁𝖾 𝖼𝖺𝖾 𝗒 𝗌𝖾 𝖽𝖾𝖻𝖾𝗇 𝗉𝖺𝗀𝖺𝗋 𝗅𝖺𝗌 𝗅𝗎𝖼𝖾𝗌 𝖽𝖾𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌... 𝖤𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖾𝗌𝗍𝖺 𝖺𝗅 𝖺𝖼𝖾𝖼𝗁𝗈")
         
 # =====================================================================
 # 9. MANEJADOR DE CALLBACKS (BOTONES) - CON ESCUDOS ACTIVOS 🛡️
@@ -676,10 +676,10 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         nuevos_botones = []
         for jugador in sesión_bomba["jugadores"]:
             if jugador["id"] != nuevo_id:
-                nuevos_botones.append([InlineKeyboardButton(f"Lanzar a {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
+                nuevos_botones.append([InlineKeyboardButton(f"𝖫𝖺𝗇𝗓𝖺𝗋 𝖺 {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
         
         await query.message.edit_text(
-            text=f"¡{user_jugador['name']} se salvó de milagro!\n\n💣 ¡Ahora la tiene {nuevo_jugador['name']}!\n¡Rápido, elige a qué persona mandársela!",
+            text=f"¡{user_jugador['name']} 𝗌𝖾 𝗌𝖺𝗅𝗏𝗈 𝖽𝖾 𝗆𝗂𝗅𝖺𝗀𝗋𝗈!\n\n💣 ¡𝖠𝗁𝗈𝗋𝖺 𝗅𝖺 𝗍𝗂𝖾𝗇𝖾 {nuevo_jugador['name']}!\n¡𝖱𝖺́𝗉𝗂𝖽𝗈, 𝗉𝖺𝗌𝖺𝗌𝖾𝗅𝖺 𝖺 𝗈𝗍𝗋𝖺 𝗉𝖾𝗋𝗌𝗈𝗇𝖺!",
             reply_markup=InlineKeyboardMarkup(nuevos_botones)
         )
 
@@ -696,11 +696,11 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif query.data == "raton_salvado":
         if sesión_ratones["activa"] and user.id in sesión_ratones["esperando_click"]:
             sesión_ratones["esperando_click"].remove(user.id)
-            await query.message.reply_text(f"¡{user.first_name} logró aplastar al ratón!")
+            await query.message.reply_text(f"¡{user.first_name} 𝗅𝗈𝗀𝗋𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝗋 𝖺𝗅 𝗋𝖺𝗍𝗈𝗇!")
             
     elif query.data == "raton_fallo":
         if user.id in sesión_ratones["esperando_click"]:
-            await query.message.reply_text(f"¡{user.first_name} le dio a un hueco vacío y el ratón escapo!.")
+            await query.message.reply_text(f"¡{user.first_name} 𝗅𝖾 𝖽𝗂𝗈 𝖺 𝗎𝗇 𝗁𝗎𝖾𝖼𝗈 𝗏𝖺𝖼ı́𝗈 𝗒 𝖾𝗅 𝗋𝖺𝗍𝗈𝗇 𝖾𝗌𝖼𝖺𝗉𝗈!.")
 
     # Callbacks STOP
     elif query.data == "unirme_stop_click":
@@ -732,12 +732,12 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 sesión_zombie["zombies"].append(victima_id)
                 
                 victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
-                await query.edit_message_text(f"🩸 Ataque exitoso. Has infectado a {victima_obj['name']}.")
+                await query.edit_message_text(f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
                 
                 # 📢 ANUNCIO EN EL GRUPO: Avisamos quién murió/fue infectado
                 await context.bot.send_message(
                     chat_id = grupo_chat_id,
-                    text = f"🚨 **¡UN ATAQUE HA OCURRIDO!** 🚨\n\n🩸 **{victima_obj['name']}** ha sido atacado en la oscuridad por un zombie y se está transformando... 🧟‍♂️"
+                    text = f"¡𝖴𝖭 𝖠𝖳𝖠𝖰𝖴𝖤 𝖧𝖠 𝖮𝖢𝖴𝖱𝖱𝖨𝖣𝖮!\n\n{victima_obj['name']} 𝗁𝖺 𝗌𝗂𝖽𝗈 𝖺𝗍𝖺𝖼𝖺𝖽𝗈 𝖾𝗇 𝗅𝖺 𝗈𝗌𝖼𝗎𝗋𝗂𝖽𝖺𝖽 𝗉𝗈𝗋 𝗎𝗇 𝗓𝗈𝗆𝖻𝗂𝖾 𝗒 𝗌𝖾 𝖾𝗌𝗍𝖺́ 𝗍𝗋𝖺𝗇𝗌𝖿𝗈𝗋𝗆𝖺𝗇𝖽𝗈, 𝗍𝗎𝗏𝗈 𝗊𝗎𝖾 𝗌𝖾𝗋 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾 𝗂𝗇𝗆𝖾𝖽𝗂𝖺𝗍𝗈"
                 )
                 
                 # Un pequeño delay de 2 segundos para el drama antes de la votación
@@ -746,7 +746,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # Abrimos votación inmediatamente
                 await abrir_votacion_zombie(grupo_chat_id, context)
             else:
-                await query.edit_message_text("⚠️ Esa víctima ya no está disponible.")
+                await query.edit_message_text("⚠️ 𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
 
     elif query.data.startswith("voto_z_"):
         votado_id = int(query.data.split("_")[2])
@@ -754,9 +754,9 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "votacion":
             if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
                 sesión_zombie["votos"][user.id] = votado_id
-                await query.answer("Registraste tu voto de manera secreta. 🗳️", show_alert=True)
+                await query.answer("{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈", show_alert=True)
             else:
-                await query.answer("❌ No estás participando en esta ronda.", show_alert=True)
+                await query.answer("𝖴𝗉𝗌, 𝗍𝗎 𝗇𝗈 𝖾𝗌𝗍𝖺𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝖽𝗈 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺.", show_alert=True)
 
 # =====================================================================
 # 10. MANEJADOR DE MENSAJES (TEXTO)
@@ -782,9 +782,9 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         })
         del esperando_palabra[user_id]
         
-        await update.message.reply_text("¡Palabra guardada! Vuelve al grupo.")
+        await update.message.reply_text("¡𝖯𝖺𝗅𝖺𝖻𝗋𝖺 𝗀𝗎𝖺𝗋𝖽𝖺𝖽𝖺! 𝖵𝗎𝖾𝗅𝗏𝖾 𝖺𝗅 𝗀𝗋𝗎𝗉𝗈.")
         guiones = " ".join(["_" if c != " " else "  " for c in texto])
-        await context.bot.send_message(chat_id=gid, text=f"¡El moderador ya eligió!\nPalabra: '{guiones}'")
+        await context.bot.send_message(chat_id=gid, text=f"¡𝖤𝗅 𝗆𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋 𝗁𝖺 𝗁𝖺𝖻𝗅𝖺𝖽𝗈!\n\n𝖯𝖠𝖫𝖠𝖡𝖱𝖠a: '{guiones}'")
         return
 
     # Setup jack in the box por privado
@@ -793,7 +793,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         emojis_originales = list(texto.replace(" ", ""))
         if len(emojis_originales) != 6:
-            await update.message.reply_text("¡Error! No son 6 elementos, por favor, vuelve a enviar")
+            await update.message.reply_text("¡Alto ahi! Esos no son 6 elementos, por favor, vuelve a enviar")
             return      
         
         sesión_jitb[gid].update({
@@ -804,12 +804,12 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         })
 
         del esperando_elementos[user_id]
-        await update.message.reply_text("¡Los 6 elementos han sido guardados y mezclados!")
+        await update.message.reply_text("¡𝖬𝗎𝖼𝗁𝖺𝗌 𝗀𝗋𝖺𝖼𝗂𝖺𝗌, 𝗅𝗈𝗌 𝟨 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌 𝗁𝖺𝗇 𝗌𝗂𝖽𝗈 𝗀𝗎𝖺𝗋𝖽𝖺𝖽𝗈𝗌!")
         
         lista_visual = " ".join(emojis_originales)
         mensaje_flash = await context.bot.send_message(
             chat_id=gid,
-            text=f"¡LA CAJA SERÁ ABIERTA! \n\n Mira bien los elementos, desaparecerán en 2 segundos:\n\n👉  {lista_visual}  👈"
+            text=f"¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖲𝖤𝖱𝖠 𝖠𝖡𝖨𝖤𝖱𝖳𝖠! \n\n 𝖬𝖾𝗆𝗈𝗋𝗂𝗓𝖺 𝖻𝗂𝖾𝗇 𝗅𝗈𝗌 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌, 𝖽𝖾𝗌𝖺𝗉𝖺𝗋𝖾𝖼𝖾𝗋𝖺́𝗇 𝖾𝗇 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌:\n\n👉  {lista_visual}  👈"
         )
         
         await asyncio.sleep(2)
@@ -821,7 +821,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await context.bot.send_message(
             chat_id=gid,
-            text="📭 ¡La caja se cerró! ¡A MANDAR EMOJIS! 🎰\nEscribe de uno en uno. Si le atinas a uno que estaba en la caja, te llevas 1 punto."
+            text="¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖥𝖴𝖤 𝖢𝖤𝖱𝖱𝖠𝖣𝖠!\nEnvia tus respuestas de uno en uno.\n𝖲𝗂 𝗅𝖾 𝖼𝗈𝗂𝗇𝖼𝗂𝖽𝖾𝗌 𝖼𝗈𝗇 𝗎𝗇𝗈 𝗊𝗎𝖾 𝖾𝗌𝗍𝖺𝖻𝖺 𝖾𝗇 𝗅𝖺 𝖼𝖺𝗃𝖺, 𝗍𝖾 𝗅𝗅𝖾𝗏𝖺𝗌 𝟣 𝗉𝗎𝗇𝗍𝗈."
         )
         return
         
@@ -829,7 +829,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat_id in sesión and sesión[chat_id].get("activa") and "palabra_secreta" in sesión[chat_id]:
         if len(texto) == 1 and texto.isalpha():
             if user_id == sesión[chat_id].get("moderador_id"):
-                await update.message.reply_text("¡Oye! Tú eres la moderadora, no puedes jugar esta ronda.")
+                await update.message.reply_text("¡𝖮𝗒𝖾! 𝖳𝗎́ 𝖾𝗋𝖾𝗌 𝗅𝖺 𝗆𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋𝖺, 𝗇𝗈 𝗉𝗎𝖾𝖽𝖾𝗌 𝗃𝗎𝗀𝖺𝗋 𝖾𝗌𝗍𝖺 𝗋𝗈𝗇𝖽𝖺.")
                 return
                 
             datos = sesión[chat_id]
@@ -837,7 +837,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 datos["jugadores_vidas"][user_id] = 6
                 
             if datos["jugadores_vidas"][user_id] <= 0: 
-                await update.message.reply_text(f"❌ {user_name}, ya no tienes intentos en esta ronda.")
+                await update.message.reply_text(f"𝖰𝗎𝖾 𝗉𝖾𝗇𝖺 {user_name}, 𝗒𝖺 𝗇𝗈 𝖼𝗎𝖾𝗇𝗍𝖺𝗌 𝖼𝗈𝗇 𝗂𝗇𝗍𝖾𝗇𝗍𝗈𝗌 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾𝗌 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗋𝗈𝗇𝖽𝖺.")
                 return
 
             letra_ingresada = texto.lower()
@@ -850,12 +850,12 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             tablero = dibujar_pantalla_ahorcado(chat_id)
             await update.message.reply_text(
-                f"Palabra: '{tablero}'\n"
-                f"Intentos restantes de {user_name}: {datos['jugadores_vidas'][user_id]}"
+                f"𝖯𝖠𝖫𝖠𝖡𝖱𝖠: '{tablero}'\n"
+                f"{user_name} 𝖼𝗎𝖾𝗇𝗍𝖺𝗌 𝖼𝗈𝗇 {datos['jugadores_vidas'][user_id]} 𝗂𝗇𝗍𝖾𝗇𝗍𝗈𝗌"
             )
             
             if "_" not in tablero.replace(" ", ""):
-                await update.message.reply_text(f"¡VICTORIA DE {user_name}! 🥳 La palabra era: {datos['palabra_secreta'].upper()}")
+                await update.message.reply_text(f"¡{user_name} 𝗀𝖺𝗇𝗈 𝖾𝗌𝗍𝖺 𝗋𝗈𝗇𝖽𝖺!. Efectivamente, la palabra era: {datos['palabra_secreta'].upper()}")
                 datos["activa"] = False
             return
 
@@ -868,8 +868,8 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
             total_adivinados = len(sesion["emojis_adivinados"])
             await update.message.reply_text(
-                f"✨ ¡PUNTO PARA {user_name}! El emoji {texto} sí estaba en la caja. 🎉\n"
-                f"Llevamos [{total_adivinados}/6] descubiertos."
+                f"¡𝖯𝗎𝗇𝗍𝗈 𝗉𝖺𝗋𝖺 {user_name}! 𝖤𝗅 𝗈𝖻𝗃𝖾𝗍𝗈 𝗌𝗂 𝖾𝗌𝗍𝖺𝖻𝖺 𝖽𝖾𝗇𝗍𝗋𝗈 𝖽𝖾 𝗅𝖺 𝖼𝖺𝗃𝖺\n"
+                f"𝖫𝗅𝖾𝗏𝖺𝗆𝗈𝗌 [{total_adivinados} - 6] 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝖽𝖾𝗌𝖼𝗎𝖻𝗂𝖾𝗋𝗍𝗈𝗌."
             )
             
             if total_adivinados == 6:
@@ -884,8 +884,8 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 
                 tabla_posiciones.sort(key=lambda x: x[1], reverse=True)
                 
-                mensaje_recuento = "🏁 ¡JUEGO TERMINADO! Se descubrieron todos los emojis de la caja. 🧠⚡\n\n"
-                mensaje_recuento += "Puntuación: \n"
+                mensaje_recuento = "¡𝖱𝖮𝖭𝖣𝖠 𝖥𝖨𝖭𝖠𝖫𝖨𝖹𝖠𝖣𝖠! 𝖲𝖾 𝖽𝖾𝗌𝖼𝗎𝖻𝗋𝗂𝖾𝗋𝗈𝗇 𝗍𝗈𝖽𝗈𝗌 𝗅𝗈𝗌 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝗊𝗎𝖾 𝗁𝖺𝖻𝗂𝖺𝗇 𝖽𝖾𝗇𝗍𝗋𝗈 𝖽𝖾 𝗅𝖺 𝖼𝖺𝗃𝖺. \n\n"
+                mensaje_recuento += "𝖯𝗎𝗇𝗍𝗎𝖺𝖼𝗂𝗈𝗇 𝖿𝗂𝗇𝖺𝗅: \n"
                 
                 medallas = ["🥇", "🥈", "🥉"]
                 for index, (nombre, puntos) in enumerate(tabla_posiciones):
@@ -911,15 +911,15 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
                 if palabra_limpia in sesión_stop["palabras_dichas"]:
                     sesión_stop["sobrevivientes"].remove(user_id)
-                    await update.message.reply_text(f"¡YA LA DIJERON! '{texto}' se repitió. {user_name} ELIMINADO ❌")
+                    await update.message.reply_text(f"¡𝖠𝗅𝗍𝗈! '{texto}' 𝗒𝖺 𝗅𝖺 𝖽𝗂𝗃𝖾𝗋𝗈𝗇. 𝖰𝗎𝖾𝖽𝖺𝗌 𝖾𝗅𝗂𝗆𝗂𝗇𝖺𝖽𝗈 {user_name}")
                     eliminado = True
                 elif not texto.upper().startswith(sesión_stop["letra_actual"].upper()):
                     sesión_stop["sobrevivientes"].remove(user_id)
-                    await update.message.reply_text(f"Tenía que empezar con {sesión_stop['letra_actual']}. {user_name} ELIMINADO ❌")
+                    await update.message.reply_text(f"𝖫𝖺 𝗉𝖺𝗅𝖺𝖻𝗋𝖺 𝗍𝖾𝗇𝗂𝖺 𝗊𝗎𝖾 𝖾𝗆𝗉𝖾𝗓𝖺𝗋 𝖼𝗈𝗇 {sesión_stop['letra_actual']}. 𝖰𝗎𝖾𝖽𝖺𝗌 𝖾𝗅𝗂𝗆𝗂𝗇𝖺𝖽𝗈 {user_name}")
                     eliminado = True
                 else:
                     sesión_stop["palabras_dichas"].append(palabra_limpia)
-                    await update.message.reply_text(f"¡Bien! '{texto}' anotada. ✅")
+                    await update.message.reply_text(f"¡𝖡𝗂𝖾𝗇 𝗁𝖾𝖼𝗁𝗈! '{texto}' 𝗁𝖺 𝗌𝗂𝖽𝗈 𝖺𝗇𝗈𝗍𝖺𝖽𝖺")
 
                 # CORREGIDO: Verificación de Fin de Juego (Saber si queda un único ganador superviviente)
                 if len(sesión_stop["sobrevivientes"]) <= 1:
@@ -928,9 +928,9 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         ganador_id = sesión_stop["sobrevivientes"][0]
                         ganador_obj = next((j for j in sesión_stop["jugadores"] if j["id"] == ganador_id), None)
                         g_name = ganador_obj["name"] if ganador_obj else "Alguien"
-                        await context.bot.send_message(chat_id=chat_id, text=f"🏁 ¡JUEGO TERMINADO! El último sobreviviente en pie es ¡{g_name}! 🏆👑")
+                        await context.bot.send_message(chat_id=chat_id, text=f"¡𝖩𝗎𝖾𝗀𝗈 𝗍𝖾𝗋𝗆𝗂𝗇𝖺𝖽𝗈!. 𝖤𝗌𝗍𝖺 𝗋𝗈𝗇𝖽𝖺 𝗅𝖺 𝗀𝖺𝗇𝗈 {g_name}")
                     else:
-                        await context.bot.send_message(chat_id=chat_id, text=f"🏁 ¡JUEGO TERMINADO! Nadie logró sobrevivir a la ronda. 💀")
+                        await context.bot.send_message(chat_id=chat_id, text=f"¡𝖩𝗎𝖾𝗀𝗈 𝗍𝖾𝗋𝗆𝗂𝗇𝖺𝖽𝗈!. 𝖭𝖺𝖽𝗂𝖾 𝗀𝖺𝗇𝗈 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗈𝗉𝗈𝗋𝗍𝗎𝗇𝗂𝖽𝖺𝖽")
                     return
 
                 # CORREGIDO: Ajuste seguro del índice de turnos tras eliminación
