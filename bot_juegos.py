@@ -189,17 +189,17 @@ async def iniciar_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # =====================================================================
 # 5. JUEGO 2: LA BOMBA 💣
 # =====================================================================
-async def unirse_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def unirse_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["jugadores"] = []
     sesión_bomba["activa"] = False
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_bomba_click")
     await update.message.reply_photo(
         photo = FOTO_BOMBA,
-        caption = "¡Juguemos a la Bomba! Por favor presiona el boton para unirte:", 
+        caption = "៹ ࣪  ❄️ ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺𝗅 𝗌𝗇𝗈𝗐𝖻𝖺𝗅𝗅! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
-async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def iniciar_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     if len(sesión_bomba["jugadores"]) < 2:
         await update.message.reply_animation(
@@ -213,7 +213,7 @@ async def iniciar_bomba(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["bomba_en"] = primer_jugador["id"]
     sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
     
-    await update.message.reply_text(f"¡LA BOMBA ESTÁ ENCENDIDA!\n\nHa caído en manos de un jugador incógnito: {primer_jugador['emoji']}")
+    await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador} ✶")
     sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 async def cuenta_regresiva_bomba(chat_id, context):
@@ -222,11 +222,11 @@ async def cuenta_regresiva_bomba(chat_id, context):
     botones = []
     for jugador in sesión_bomba["jugadores"]:
         if jugador["id"] != sesión_bomba["bomba_en"]: 
-            botones.append([InlineKeyboardButton(f"Lanzar a {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
+            botones.append([InlineKeyboardButton(f"𝖫𝖺𝗇𝗓𝖺𝗋 𝖺 {jugador['emoji']}", callback_data=f"pasar_a_{jugador['id']}")])
     
     mensaje_bomba = await context.bot.send_message(
         chat_id=chat_id, 
-        text=f"¡La mecha fue encendida!\n\nLa tiene el jugador: {sesión_bomba['bomba_emoji']}\n¡Nadie sabe quién es! Elige un emoji para deshacerte de ella rápido:", 
+        text=f"¡𝖣𝖺𝗍𝖾 𝗉𝗋𝗂𝗌𝖺 𝗒 𝖽𝖾𝗌𝗁𝖺𝖼𝖾𝗍𝖾 𝖽𝖾 𝖾𝗅𝗅𝖺!", 
         reply_markup=InlineKeyboardMarkup(botones),
     )
     
@@ -238,7 +238,7 @@ async def cuenta_regresiva_bomba(chat_id, context):
         perdedor_id = sesión_bomba["bomba_en"]
         perdedor = next(j for j in sesión_bomba["jugadores"] if j['id'] == perdedor_id)
         
-        texto_final = f"¡¡¡¡BOOOOOOM!!!! \n\nLa bomba exploded en manos de {perdedor['name']} y quedó hecho cenizas."
+        texto_final = f"¡¡𝖮𝗁, 𝗇𝗈!! {perdedor['name'] 𝗇𝗈 𝗅𝗅𝖾𝗀𝗈 𝖺 𝗉𝖺𝗌𝖺𝗋 𝗅𝖺 𝖻𝗈𝗅𝖺 𝗒 𝗊𝗎𝖾𝖽𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝖽𝖺."
         
         try:
             await context.bot.edit_message_text(chat_id=chat_id, message_id=sesión_bomba["mensaje_id"], text=texto_final)
@@ -256,7 +256,7 @@ async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_ratones_click")
     await update.message.reply_photo(
         photo = GIF_RATONES,
-        caption = "¡Golpea al ratón! \n¡El último en aplastarlo en cada ronda queda fuera!",
+        caption = "៹ ࣪  🐭 ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺 atrapar al ratón! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃",
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -265,7 +265,7 @@ async def iniciar_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     #EVITAR QUE SE INICIE UNA NUEVA PARTIDA POR ERROR DE DEDO 
     if sesión_ratones.get("activa", False):
-        await update.message.reply_text("Ya hay una ronda en curso. No puedes iniciar el juego ahora!")
+        await update.message.reply_text("¡𝖫𝗈 𝗌𝗂𝖾𝗇𝗍𝗈, 𝗒𝖺 𝗁𝖺𝗒 𝗎𝗇𝖺 𝗋𝗈𝗇𝖽𝖺 𝖾𝗇 𝖼𝗎𝗋𝗌𝗈!")
         return
     
     if len(sesión_ratones["jugadores"]) < 2:
@@ -293,7 +293,7 @@ async def rondas_battle_royale(chat_id, context):
         sesión_ratones["esperando_click"] = list(sesión_ratones["sobrevivientes"])
         
         sesión_ratones["mensaje_id"] = await context.bot.send_message(
-            chat_id=chat_id, text="¡APARECIÓ EL RATÓN! ¡ATRAPALO!", reply_markup=InlineKeyboardMarkup(botones)
+            chat_id=chat_id, text="¡𝖴𝗇 𝗋𝖺𝗍𝗈𝗇 𝗌𝖾 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖺𝗌𝗈𝗆𝖺𝗋, 𝖺𝗉𝗋𝖾𝗌𝗎𝗋𝖺𝗍𝖾 𝖺 𝖺𝗍𝗋𝖺𝗉𝖺𝗋𝗅𝗈!", reply_markup=InlineKeyboardMarkup(botones)
         )
 
         limite = 5.0
@@ -308,13 +308,13 @@ async def rondas_battle_royale(chat_id, context):
             lento_id = sesión_ratones["esperando_click"][-1]
             lento_name = next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == lento_id)
             sesión_ratones["sobrevivientes"].remove(lento_id)
-            await context.bot.send_message(chat_id=chat_id, text=f" ¡{lento_name} fue muy lento! El ratón escapó. ELIMINADO.")
+            await context.bot.send_message(chat_id=chat_id, text=f" ¡{lento_name} 𝖿𝗎𝖾 𝗆𝗎𝗒 𝗅𝖾𝗇𝗍𝗈 𝗒 𝖾𝗅 𝗋𝖺𝗍𝗈𝗇 𝗅𝗈𝗀𝗋𝗈 𝖾𝗌𝖼𝖺𝗉𝖺𝗋!. 𝖰𝗎𝖾𝖽𝖺 𝖿𝗎𝖾𝗋𝖺 𝖽𝖾𝗅 𝗃𝗎𝖾𝗀𝗈")
         ronda += 1
 
     sesión_ratones["activa"] = False
     if len(sesión_ratones["sobrevivientes"]) == 1:
         ganador_name = next(j['name'] for j in sesión_ratones["jugadores"] if j['id'] == sesión_ratones["sobrevivientes"][0])
-        await context.bot.send_message(chat_id=chat_id, text=f"¡Termino la plaga de ratones!\n\nFelicidades {ganador_name}.")
+        await context.bot.send_message(chat_id=chat_id, text=f"¡{ganador_name} 𝗁𝖺 𝗍𝖾𝗋𝗆𝗂𝗇𝖺𝖽𝗈 𝖼𝗈𝗇 𝗅𝖺 𝗉𝗅𝖺𝗀𝖺 𝖽𝖾 𝗋𝖺𝗍𝗈𝗇𝖾𝗌, 𝖿𝖾𝗅𝗂𝖼𝗂𝖽𝖺𝖽𝖾𝗌!")
 
 
 # =====================================================================
@@ -326,7 +326,7 @@ async def unirse_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_stop_click")
     await update.message.reply_photo(
         photo = GIF_RITMOAGO,
-        caption = "¡Juguemos al Ritmo AGO-GO! Por favor, presiona el boton para unirte a la partida", 
+        caption = "៹ ࣪  🎶 ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺 𝗋𝗂𝗍𝗆𝗈 𝖺𝗀𝗈 𝗀𝗈! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -347,7 +347,7 @@ async def iniciar_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["categoria_actual"] = random.choice(CATEGORIAS_STOP)
     
     await update.message.reply_text(
-        f"¡RITMO AGO-GO, DIGA USTED {sesión_stop['categoria_actual']} CON LA LETRA {sesión_stop['letra_actual']}\n\n¡Atentos a su turno!", 
+        f"¡𝖱𝖨𝖳𝖬𝖮 𝖠𝖦𝖮 𝖦𝖮, 𝖣𝖨𝖦𝖠 𝖴𝖲𝖳𝖤𝖣 𝖭𝖮𝖬𝖡𝖱𝖤𝖲 𝖣𝖤 {sesión_stop['categoria_actual']} 𝖢𝖮𝖭 𝖫𝖠 𝖫𝖤𝖳𝖱𝖠 {sesión_stop['letra_actual']} 𝖯𝖮𝖱 𝖤𝖩𝖤𝖬𝖯𝖫𝖮...\n\n¡𝖠𝗍𝖾𝗇𝗍𝗈𝗌 𝖺 𝗌𝗎 𝗍𝗎𝗋𝗇𝗈, 𝗌𝗈𝗅𝗈 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝟣𝟧 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝖾𝗋!", 
     )
     await asyncio.sleep(3)
     await lanzar_turno_stop(chat_id, context)
@@ -358,7 +358,7 @@ async def lanzar_turno_stop(chat_id, context):
     if len(sesión_stop["sobrevivientes"]) == 1:
         sesión_stop["activa"] = False
         ganador_name = next(j['name'] for j in sesión_stop["jugadores"] if j['id'] == sesión_stop["sobrevivientes"][0])
-        await context.bot.send_message(chat_id=chat_id, text=f"¡{ganador_name} ganó el Ritmo A Go-Go!")
+        await context.bot.send_message(chat_id=chat_id, text=f"¡{ganador_name} 𝗀𝖺𝗇𝗈 𝗅𝖺 𝗋𝗈𝗇𝖽𝖺!")
         return
 
     actual_id = sesión_stop["sobrevivientes"][sesión_stop["turno_index"]]
@@ -366,7 +366,7 @@ async def lanzar_turno_stop(chat_id, context):
 
     await context.bot.send_message(
         chat_id=chat_id, 
-        text=f"Turno de: {actual_name} ¡Escribe ya! (Tienes 12 segundos)"
+        text=f"¡{actual_name} 𝖾𝗌 𝗍𝗎 𝗍𝗎𝗋𝗇𝗈, 𝖺𝗉𝗋𝖾𝗌𝗎𝗋𝖺𝗍𝖾!"
     )
 
     if sesión_stop["timer_task"]: 
@@ -374,10 +374,10 @@ async def lanzar_turno_stop(chat_id, context):
     sesión_stop["timer_task"] = asyncio.create_task(timer_jugador_stop(chat_id, actual_id, actual_name, context))
 
 async def timer_jugador_stop(chat_id, jugador_id, name, context):
-    await asyncio.sleep(12)
+    await asyncio.sleep(15)
     if sesión_stop["activa"] and sesión_stop["sobrevivientes"][sesión_stop["turno_index"]] == jugador_id:
         sesión_stop["sobrevivientes"].remove(jugador_id)
-        await context.bot.send_message(chat_id=chat_id, text=f"⏳ ¡{name} no respondió a tiempo, eliminado por lento. 💀")
+        await context.bot.send_message(chat_id=chat_id, text=f"¡{name} 𝗇𝗈 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝗂𝗈 𝖺 𝗍𝗂𝖾𝗆𝗉𝗈, 𝗆𝗎𝗒 𝗅𝖾𝗇𝗍𝗈, 𝗊𝗎𝖾𝖽𝖺 𝖾𝗅𝗂𝗆𝗂𝗇𝖺𝖽𝗈!")
         
         if sesión_stop["turno_index"] >= len(sesión_stop["sobrevivientes"]):
             sesión_stop["turno_index"] = 0
@@ -404,7 +404,7 @@ async def unirse_box(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_box_click")
     await update.message.reply_photo(
         photo = GIF_JITB,
-        caption = "¡Juguemos a memory box! Por favor presiona el boton para unirte:", 
+        caption = "៹ ࣪  📦 ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺 𝗊𝗎𝖾 𝗁𝖺𝗒 𝖾𝗇 𝗅𝖺 𝖼𝖺𝗃𝖺! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
@@ -437,23 +437,21 @@ async def iniciar_jitbx(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     esperando_elementos[encubridor["id"]] = chat_id
     await update.message.reply_text(
-        f"¡Ronda iniciada! Encubridor@ elegido. Esperando que esconda los objetos para poder iniciar el juego.")
+        f"˒˓   ¡𝖤𝗇𝖼𝗎𝖻𝗋𝗂𝖽𝗈𝗋 𝖾𝗅𝖾𝗀𝗂𝖽𝗈!. 𝖤𝗌𝗉𝖾𝗋𝖺𝗇𝖽𝗈 𝗊𝗎𝖾 𝗌𝖾 𝖺𝗌𝗂𝗀𝗇𝖾𝗇 𝗅𝗈𝗌 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝗉𝖺𝗋𝖺 𝗉𝗈𝖽𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈  ᨦᨩ")
 
     try:
         await context.bot.send_photo(
             chat_id = encubridor["id"],
             photo = GIF_OFFVAN, 
             caption = (
-                "🃏 ¡Te toca ser el encubridor en Jack In The Box!\n\n"
-                "Por favor, responde a este mensaje enviando exactamente 6 emojis pegados o separados por espacios.\n"
-                "Ejemplo: 🍎🍌🍇🍊🍓🍉\n\n"
-                "⚠️ ¡Los demás intentarán recordarlos rápido!"
+                "¡𝖤𝗇 𝗁𝗈𝗋𝖺 𝖻𝗎𝖾𝗇𝖺, 𝗍𝖾 𝗍𝗈𝖼𝖺 𝗌𝖾𝗋 𝖾𝗅 𝖾𝗇𝖼𝗎𝖻𝗋𝗂𝖽𝗈𝗋!\n\n"
+                "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌 𝗌𝖾𝗉𝖺𝗋𝖺𝖽𝗈𝗌 𝗉𝗈𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 (🌸, 🌟,...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
             )
         )
     except Exception as e:
         await update.message.reply_text(
-            f"No se puede enviar mensaje a @{encubridor.get('username', 'usuario')}. "
-            f"Asegúrate de haberle dado /start al bot en tu privado.") 
+            f"𝖴𝗉𝗌, 𝗇𝗈 𝗌𝖾 𝗉𝗎𝖾𝖽𝖾 𝖾𝗇𝗏𝗂𝖺𝗋 𝗆𝖾𝗇𝗌𝖺𝗃𝖾 𝖺 @{encubridor.get('username', 'usuario')}. "
+            f"𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖺𝗌𝖾𝗀𝗎𝗋𝖺𝗍𝖾 𝖽𝖾 𝗁𝖺𝖻𝖾𝗋 𝗂𝗇𝗂𝖼𝗂𝖺𝖽𝗈 𝖾𝗅 𝖻𝗈𝗍 𝖾𝗇 𝗉𝗋𝗂𝗏𝖺𝖽𝗈.") 
 
 
 # =====================================================================
@@ -470,7 +468,7 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["activa"] = False
     sesión_zombie["fase"] = None
     
-    boton = InlineKeyboardButton("☣️ 𝐔𝐍𝐈𝐑𝐌𝐄 𝐀𝐋 𝐁𝐔́𝐍𝐊𝐄𝐑", callback_data="unirme_zombie_click")
+    boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_zombie_click")
     await update.message.reply_photo(
         photo = "https://i.postimg.cc/ryb94Wgj/1000004755.jpg", # Puedes cambiar esta URL por una de zombies chiki
         caption = "🚨 **ALERTA DE BIOHAZARD** 🚨\n\nSe está esparciendo un virus. Entra al búnker antes de que cierren las puertas.",
