@@ -531,7 +531,7 @@ async def abrir_votacion_zombie(chat_id, context):
     msg_voto = await context.bot.send_message(
         chat_id = chat_id,
         text = (
-            "¡𝖱𝖾𝗎𝗇𝗂𝗈𝗇 𝖽𝖾 𝖾𝗆𝖾𝗋𝗀𝖾𝗇𝖼𝗂𝖺! 𝖠𝗅𝗀𝗎𝗂𝖾𝗇 𝗒𝖺 𝖿𝗎𝖾 𝗆𝗈𝗋𝖽𝗂𝖽𝗈 𝖺𝗌𝗂 𝗊𝗎𝖾 𝖽𝖾𝖻𝖾𝗇 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝗋 𝖺𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗊𝗎𝖾 𝗆𝗎𝖾𝗋𝖽𝖺 𝖺 𝗈𝗍𝗋𝖺 𝗉𝖾𝗋𝗌𝗈𝗇𝖺, 𝗌𝗈𝗅𝗈 𝖼𝗎𝖾𝗇𝗍𝖺𝗇 𝖼𝗈𝗇 𝟣𝟤𝟢 𝗆𝗂𝗇𝗎𝗍𝗈𝗌 𝗉𝖺𝗋𝖺 𝗉𝗈𝗇𝖾𝗋𝗌𝖾 𝖽𝖾 𝖺𝖼𝗎𝖾𝗋𝖽𝗈 𝗒 𝗏𝗈𝗍𝖺𝗋"
+            "¡𝖱𝖾𝗎𝗇𝗂𝗈𝗇 𝖽𝖾 𝖾𝗆𝖾𝗋𝗀𝖾𝗇𝖼𝗂𝖺! 𝖠𝗅𝗀𝗎𝗂𝖾𝗇 𝗒𝖺 𝖿𝗎𝖾 𝗆𝗈𝗋𝖽𝗂𝖽𝗈 𝖺𝗌𝗂 𝗊𝗎𝖾 𝖽𝖾𝖻𝖾𝗇 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝗋 𝖺𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗊𝗎𝖾 𝗆𝗎𝖾𝗋𝖽𝖺 𝖺 𝗈𝗍𝗋𝖺 𝗉𝖾𝗋𝗌𝗈𝗇𝖺, 𝗌𝗈𝗅𝗈 𝖼𝗎𝖾𝗇𝗍𝖺𝗇 𝖼𝗈𝗇 𝟣𝟤𝟢 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗉𝗈𝗇𝖾𝗋𝗌𝖾 𝖽𝖾 𝖺𝖼𝗎𝖾𝗋𝖽𝗈 𝗒 𝗏𝗈𝗍𝖺𝗋"
         ),
         reply_markup = InlineKeyboardMarkup(botones_voto)
     )
@@ -551,7 +551,7 @@ async def procesar_resultados_votacion(chat_id, context):
     except: pass
     
     if not sesión_zombie["votos"]:
-        await context.bot.send_message(chat_id=chat_id, text="🤷‍♂️ Nadie votó a tiempo. El pánico los congeló. La infección continúa...")
+        await context.bot.send_message(chat_id=chat_id, text="𝖭𝖺𝖽𝗂𝖾 𝗏𝗈𝗍𝗈 𝖺 𝗍𝗂𝖾𝗆𝗉𝗈, 𝖾𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝗌𝗂𝗀𝗎𝖾 𝖺𝗊𝗎ı́, 𝖾𝗅 𝖺𝗍𝖺𝗊𝗎𝖾 𝖼𝗈𝗇𝗍𝗂𝗇𝗎𝖺...")
         await pasar_a_siguiente_ataque(chat_id, context)
         return
 
