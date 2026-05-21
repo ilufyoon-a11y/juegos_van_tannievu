@@ -128,16 +128,22 @@ async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "🐋    𖹭𖹭ㅤ𝗝𝗨𝗘𝗚𝗢𝗦 𝗗𝗜𝗦𝗣𝗢𝗡𝗜𝗕𝗟𝗘𝗦     ꒱꒱\n\n"
             "𝒊. 𝐀𝐡𝐨𝐫𝐜𝐚𝐝𝐨\n\n"
             "𝖤𝗅 𝗃𝗎𝖾𝗀𝗈 𝖼𝗅𝖺𝗌𝗂𝖼𝗈 𝗊𝗎𝖾 𝗍𝗈𝖽𝗈𝗌 𝖼𝗈𝗇𝗈𝖼𝖾𝗇\n\n"
+            "(/ahorcado - /start_ahorcado)\n\n"
             "𝒊𝒊. 𝐒𝐧𝐨𝐰𝐛𝐚𝐥𝐥\n\n"
             "𝖴𝗇𝖺 𝖻𝗈𝗅𝖺 𝖽𝖾 𝗇𝗂𝖾𝗏𝖾 𝖾𝗌𝗍𝖺 𝖻𝖺𝗃𝖺𝗇𝖽𝗈 𝖽𝖾𝗌𝖽𝖾 𝗎𝗇𝖺 𝖼𝗈𝗅𝗂𝗇𝖺 𝗒 𝗏𝖺 𝖽𝗂𝗋𝖾𝖼𝗍𝗈 𝗁𝖺𝖼𝗂𝖺 𝖺 𝗎𝗌𝗍𝖾𝖽𝖾𝗌. ¡𝖫𝖺𝗇𝗓𝖺𝗅𝖺 𝖺 𝗈𝗍𝗋𝗈 𝗈 𝗊𝗎𝖾𝖽𝖺 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝖽@!\n\n"
+            "(/snowball - /start_snowball)\n\n"
             "𝒊𝒊. 𝐑𝐚𝐭𝐨𝐧𝐞𝐬\n\n"
             "𝖴𝗇𝖺 𝗉𝗅𝖺𝗀𝖺 𝗌𝖾 𝗁𝖺 𝖽𝖾𝗌𝗁𝖺𝗍𝖺𝖽𝗈 𝗒 𝗅𝖺 𝗎𝗇𝗂𝖼𝖺 𝖿𝗈𝗋𝗆𝖺 𝖽𝖾 𝖽𝖾𝗌𝗁𝖺𝖼𝖾𝗋𝗌𝖾 𝖽𝖾 𝖾𝗅𝗅𝖺 𝖾𝗌 𝗀𝗈𝗅𝗉𝖾𝖺𝗇𝖽𝗈 𝖺 𝗅𝗈𝗌 𝗋𝖺𝗍𝗈𝗇𝖾𝗌\n\n"
+            "(/ratones - /start_ratones)\n\n"
             "𝒊𝒗. 𝐑𝐢𝐭𝐦𝐨 𝐀𝐠𝐨 𝐆𝐨\n\n"
             "𝖴𝗇𝖺 𝗏𝖺𝗋𝗂𝖺𝖼𝗂𝗈𝗇 𝖽𝖾 𝗌𝗍𝗈𝗉, 𝖽𝗈𝗇𝖽𝖾 𝖼𝖺𝖽𝖺 𝗎𝗇𝗈 𝖽𝖾𝖻𝖾 𝖽𝖾𝖼𝗂𝗋 𝗉𝖺𝗅𝖺𝖻𝗋𝖺𝗌 𝗋𝖾𝗅𝖺𝖼𝗂𝗈𝗇𝖺𝖽𝖺𝗌 𝖺 𝗅𝖺 𝖼𝖺𝗍𝖾𝗀𝗈𝗋𝗂𝖺 𝗌𝗂𝗇 𝗋𝖾𝗉𝖾𝗍𝗂𝗋 𝗅𝖺𝗌 𝖽𝗂𝖼𝗁𝖺𝗌 𝖺𝗇𝗍𝖾𝗋𝗂𝗈𝗋𝗆𝖾𝗇𝗍𝖾\n\n"
+            "(/ritmo - /start_ritmo)\n\n"
             "𝒗. 𝐖𝐡𝐚𝐭'𝐬 𝐢𝐧 𝐭𝐡𝐞 𝐛𝐨𝐱\n\n"
             "𝖨𝗇𝗌𝗉𝗂𝗋𝖺𝖽𝗈 𝖾𝗇 𝖵𝖺𝗋𝗂𝖾𝗍𝗒 𝖲𝗁𝗈𝗐𝗌 𝗈𝖿 𝖬𝖾𝗆𝗈𝗋𝗂𝖾𝗌: 𝖯𝖺𝗋𝗍 𝟣, 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝗌𝗈𝗅𝗈 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗆𝖾𝗆𝗈𝗋𝗂𝗓𝖺𝗋 𝗅𝗈𝗌 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝖽𝖾𝗇𝗍𝗋𝗈 𝖽𝖾 𝗅𝖺 𝖼𝖺𝗃𝖺. ¡𝖠 𝗆𝖺𝗒𝗈𝗋 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝖺𝖽𝗂𝗏𝗂𝗇𝖺𝖽𝗈𝗌, 𝗆𝖺𝗒𝗈𝗋 𝗉𝗎𝗇𝗍𝖺𝗃𝖾!\n\n"
+            "(/box - /start_box)\n\n"
             "𝒗𝒊. 𝐙𝐨𝐦𝐛𝐢𝐞\n\n"
             "𝖴𝗇𝖺 𝖾𝗑𝖼𝗎𝗋𝗌𝗂𝗈𝗇 𝗌𝖾 𝗏𝗂𝗈 𝗂𝗇𝗍𝖾𝗋𝗋𝗎𝗆𝗉𝗂𝖽𝖺 𝗉𝗈𝗋 𝗎𝗇 𝗏𝗂𝗋𝗎𝗌 𝗓𝗈𝗆𝖻𝗂𝖾 𝗒 𝖽𝖾𝖻𝖾𝗇 𝖾𝗌𝗉𝖾𝗋𝖺𝗋 𝗁𝖺𝗌𝗍𝖺 𝗊𝗎𝖾 𝗅𝗈𝗌 𝗋𝖾𝗌𝖼𝖺𝗍𝖾𝗇, 𝗌𝗈𝗅𝗈 𝗌𝖾 𝗉𝗎𝖾𝖽𝖾𝗇 𝗋𝖾𝗌𝗀𝗎𝖺𝗋𝖽𝖺𝗋 𝖾𝗇 𝗎𝗇 𝖺𝗎𝗍𝗈𝖻𝗎𝗌, 𝗉𝖾𝗋𝗈 𝗎𝗇 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝗌𝖾 𝖼𝗈𝗅𝗈 𝗒 𝖺𝗍𝖺𝖼𝖺 𝗉𝗈𝗋 𝗅𝖺𝗌 𝗇𝗈𝖼𝗁𝖾𝗌 𝖼𝗎𝖺𝗇𝖽𝗈 𝗅𝖺𝗌 𝗅𝗎𝖼𝖾𝗌 𝗌𝖾 𝖺𝗉𝖺𝗀𝖺𝗇 𝗉𝗈𝗋 𝗌𝖾𝗀𝗎𝗋𝗂𝖽𝖺𝖽 ¿𝖯𝗈𝖽𝗋𝖺𝗇 𝗌𝗈𝖻𝗋𝖾𝗏𝗂𝗏𝗂𝗋?\n\n"
+            "(/zombie - /start_zombie)\n\n"
         )
     )
 
@@ -367,7 +373,7 @@ async def iniciar_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"¡𝖱𝖨𝖳𝖬𝖮 𝖠𝖦𝖮 𝖦𝖮, 𝖣𝖨𝖦𝖠 𝖴𝖲𝖳𝖤𝖣 𝖭𝖮𝖬𝖡𝖱𝖤𝖲 𝖣𝖤 {sesión_stop['categoria_actual']} 𝖢𝖮𝖭 𝖫𝖠 𝖫𝖤𝖳𝖱𝖠 {sesión_stop['letra_actual']} 𝖯𝖮𝖱 𝖤𝖩𝖤𝖬𝖯𝖫𝖮...\n\n¡𝖠𝗍𝖾𝗇𝗍𝗈𝗌 𝖺 𝗌𝗎 𝗍𝗎𝗋𝗇𝗈, 𝗌𝗈𝗅𝗈 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝟣𝟧 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝖾𝗋!", 
     )
-    await asyncio.sleep(3)
+    await asyncio.sleep(10)
     await lanzar_turno_stop(chat_id, context)
 
 async def lanzar_turno_stop(chat_id, context):
@@ -392,7 +398,7 @@ async def lanzar_turno_stop(chat_id, context):
     sesión_stop["timer_task"] = asyncio.create_task(timer_jugador_stop(chat_id, actual_id, actual_name, context))
 
 async def timer_jugador_stop(chat_id, jugador_id, name, context):
-    await asyncio.sleep(15)
+    await asyncio.sleep(30)
     if sesión_stop["activa"] and sesión_stop["sobrevivientes"][sesión_stop["turno_index"]] == jugador_id:
         sesión_stop["sobrevivientes"].remove(jugador_id)
         await context.bot.send_message(chat_id=chat_id, text=f"¡{name} 𝗇𝗈 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝗂𝗈 𝖺 𝗍𝗂𝖾𝗆𝗉𝗈, 𝗆𝗎𝗒 𝗅𝖾𝗇𝗍𝗈, 𝗊𝗎𝖾𝖽𝖺 𝖾𝗅𝗂𝗆𝗂𝗇𝖺𝖽𝗈!")
@@ -523,7 +529,7 @@ async def iniciar_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     botones_ataque = []
     for humano_id in sesión_zombie["vivos"]:
         humano_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == humano_id)
-        botones_ataque.append([InlineKeyboardButton(f"𝖬𝗈𝗋𝖽𝖾𝗋 𝖺 {humano_obj['name']}", callback_data=f"morder_{humano_id}_{chat_id}")])
+        botones_ataque.append([InlineKeyboardButton(f"𝖬𝗈𝗋𝖽𝖾𝗋 𝖺 {humano_obj['name']}", callback_data=f"morder:{humano_id}:{chat_id}")])
         
     try:
         await context.bot.send_photo(
@@ -714,13 +720,24 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
     elif query.data == "raton_salvado":
         if sesión_ratones["activa"] and user.id in sesión_ratones["esperando_click"]:
+            if len(sesión_ratones.get("sobrevivientes", [])) == 2:
+                sesión_ratones["activa"] = False
+                sesión_ratones["esperando_click"] = []
+                await query.message_text(
+                    f"¡{user.first_name} 𝖿𝗎𝖾 𝗆𝖺𝗌 𝗋𝖺𝗉𝗂𝖽𝗈 𝖾𝗇 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝗋 𝖺𝗅 𝗋𝖺𝗍𝗈𝗇!
+                    )
+                    return 
+                    
             sesión_ratones["esperando_click"].remove(user.id)
-            await query.message.reply_text(f"¡{user.first_name} 𝗅𝗈𝗀𝗋𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝗋 𝖺𝗅 𝗋𝖺𝗍𝗈𝗇!")
+            await query.message.reply_text(
+            f"¡{user.first_name} 𝗅𝗈𝗀𝗋𝗈 𝖺𝗉𝗅𝖺𝗌𝗍𝖺𝗋 𝖺𝗅 𝗋𝖺𝗍𝗈𝗇!"
+            )
             
     elif query.data == "raton_fallo":
         if user.id in sesión_ratones["esperando_click"]:
-            await query.message.reply_text(f"¡{user.first_name} 𝗅𝖾 𝖽𝗂𝗈 𝖺 𝗎𝗇 𝗁𝗎𝖾𝖼𝗈 𝗏𝖺𝖼ı́𝗈 𝗒 𝖾𝗅 𝗋𝖺𝗍𝗈𝗇 𝖾𝗌𝖼𝖺𝗉𝗈!.")
-
+            await query.message.reply_text(
+            f"¡{user.first_name} 𝗅𝖾 𝖽𝗂𝗈 𝖺 𝗎𝗇 𝗁𝗎𝖾𝖼𝗈 𝗏𝖺𝖼ı́𝗈 𝗒 𝖾𝗅 𝗋𝖺𝗍𝗈𝗇 𝖾𝗌𝖼𝖺𝗉𝗈!."
+            )
     # Callbacks STOP
     elif query.data == "unirme_stop_click":
         # 🛡️ Escudo Stop Active
@@ -739,43 +756,45 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
             sesión_zombie["jugadores"].append({"id": user.id, "name": user.first_name})
             await query.message.reply_text(f"🚌 ֹ {user.first_name} se unió 𓂃")
+        await query.answer()
 
     elif query.data.startswith("morder_"):
-        partes = query.data.split("_")
+        await query.answer()
+        partes = query.data.split(":")
         victima_id = int(partes[1])
         grupo_chat_id = int(partes[2])
         
         if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "infeccion":
-            if victima_id in sesión_zombie["vivos"]:
-                sesión_zombie["vivos"].remove(victima_id)
-                sesión_zombie["zombies"].append(victima_id)
+            if user.id in sesión_zombie.get("zombies", []):
+                if victima_id in sesión_zombie["vivos"]:
+                    sesión_zombie["vivos"].remove(victima_id)
+                    sesión_zombie["zombies"].append(victima_id)
                 
-                victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
-                await query.edit_message_text(f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
+                    victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
+                    await query.edit_message_text(f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
                 
-                # 📢 ANUNCIO EN EL GRUPO: Avisamos quién murió/fue infectado
-                await context.bot.send_message(
-                    chat_id = grupo_chat_id,
-                    text = f"¡𝖴𝖭 𝖠𝖳𝖠𝖰𝖴𝖤 𝖧𝖠 𝖮𝖢𝖴𝖱𝖱𝖨𝖣𝖮!\n\n{victima_obj['name']} 𝗁𝖺 𝗌𝗂𝖽𝗈 𝖺𝗍𝖺𝖼𝖺𝖽𝗈 𝖾𝗇 𝗅𝖺 𝗈𝗌𝖼𝗎𝗋𝗂𝖽𝖺𝖽 𝗉𝗈𝗋 𝗎𝗇 𝗓𝗈𝗆𝖻𝗂𝖾 𝗒 𝗌𝖾 𝖾𝗌𝗍𝖺́ 𝗍𝗋𝖺𝗇𝗌𝖿𝗈𝗋𝗆𝖺𝗇𝖽𝗈, 𝗍𝗎𝗏𝗈 𝗊𝗎𝖾 𝗌𝖾𝗋 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾 𝗂𝗇𝗆𝖾𝖽𝗂𝖺𝗍𝗈"
-                )
+                    # 📢 ANUNCIO EN EL GRUPO: Avisamos quién murió/fue infectado
+                    await context.bot.send_message(
+                        chat_id = grupo_chat_id,
+                        text = f"¡𝖴𝖭 𝖠𝖳𝖠𝖰𝖴𝖤 𝖧𝖠 𝖮𝖢𝖴𝖱𝖱𝖨𝖣𝖮!\n\n{victima_obj['name']} 𝗁𝖺 𝗌𝗂𝖽𝗈 𝖺𝗍𝖺𝖼𝖺𝖽𝗈 𝖾𝗇 𝗅𝖺 𝗈𝗌𝖼𝗎𝗋𝗂𝖽𝖺𝖽 𝗉𝗈𝗋 𝗎𝗇 𝗓𝗈𝗆𝖻𝗂𝖾 𝗒 𝗌𝖾 𝖾𝗌𝗍𝖺́ 𝗍𝗋𝖺𝗇𝗌𝖿𝗈𝗋𝗆𝖺𝗇𝖽𝗈, 𝗍𝗎𝗏𝗈 𝗊𝗎𝖾 𝗌𝖾𝗋 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾 𝗂𝗇𝗆𝖾𝖽𝗂𝖺𝗍𝗈"
+                    )
                 
-                # Un pequeño delay de 2 segundos para el drama antes de la votación
-                await asyncio.sleep(2)
+                    # Un pequeño delay de 2 segundos para el drama antes de la votación
+                    await asyncio.sleep(5)
                 
-                # Abrimos votación inmediatamente
-                await abrir_votacion_zombie(grupo_chat_id, context)
-            else:
-                await query.edit_message_text("𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                    await abrir_votacion_zombie(grupo_chat_id, context)
+                else:
+                    await query.edit_message_text("𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
 
-    elif query.data.startswith("voto_z_"):
-        votado_id = int(query.data.split("_")[2])
+        elif query.data.startswith("voto_z_"):
+            votado_id = int(query.data.split("_")[2])
         
-        if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "votacion":
-            if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
-                sesión_zombie["votos"][user.id] = votado_id
-                await query.answer("{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈", show_alert=True)
-            else:
-                await query.answer("𝖴𝗉𝗌, 𝗍𝗎 𝗇𝗈 𝖾𝗌𝗍𝖺𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝖽𝗈 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺.", show_alert=True)
+            if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "votacion":
+                if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
+                    sesión_zombie["votos"][user.id] = votado_id
+                    await query.answer("{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈", show_alert=True)
+                else:
+                    await query.answer("𝖴𝗉𝗌, 𝗍𝗎 𝗇𝗈 𝖾𝗌𝗍𝖺𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝖽𝗈 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺.", show_alert=True)
 
 # =====================================================================
 # 10. MANEJADOR DE MENSAJES (TEXTO)
@@ -828,10 +847,10 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         lista_visual = " ".join(emojis_originales)
         mensaje_flash = await context.bot.send_message(
             chat_id=gid,
-            text=f"¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖲𝖤𝖱𝖠 𝖠𝖡𝖨𝖤𝖱𝖳𝖠! \n\n 𝖬𝖾𝗆𝗈𝗋𝗂𝗓𝖺 𝖻𝗂𝖾𝗇 𝗅𝗈𝗌 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌, 𝖽𝖾𝗌𝖺𝗉𝖺𝗋𝖾𝖼𝖾𝗋𝖺́𝗇 𝖾𝗇 𝟤 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌:\n\n{lista_visual}"
+            text=f"¡𝖫𝖠 𝖢𝖠𝖩𝖠 𝖲𝖤𝖱𝖠 𝖠𝖡𝖨𝖤𝖱𝖳𝖠! \n\n 𝖬𝖾𝗆𝗈𝗋𝗂𝗓𝖺 𝖻𝗂𝖾𝗇 𝗅𝗈𝗌 𝖾𝗅𝖾𝗆𝖾𝗇𝗍𝗈𝗌, 𝖽𝖾𝗌𝖺𝗉𝖺𝗋𝖾𝖼𝖾𝗋𝖺́𝗇 𝖾𝗇 5 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌:\n\n{lista_visual}"
         )
         
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
 
         try:
             await context.bot.delete_message(chat_id=gid, message_id=mensaje_flash.message_id)
