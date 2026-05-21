@@ -155,7 +155,7 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_click")
     await update.message.reply_photo(
-        photo = GIF_SNOWWBALL,
+        photo = GIF_AHORCADO,
         caption = "\n\n ៹ ࣪  📝 ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺𝗅 𝖺𝗁𝗈𝗋𝖼𝖺𝖽𝗈! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
@@ -212,7 +212,7 @@ async def unirse_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["activa"] = False
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_bomba_click")
     await update.message.reply_photo(
-        photo = FOTO_BOMBA,
+        photo = GIF_SNOWBALL,
         caption = "៹ ࣪  ❄️ ¡𝖩𝗎𝗀𝗎𝖾𝗆𝗈𝗌 𝖺𝗅 𝗌𝗇𝗈𝗐𝖻𝖺𝗅𝗅! 𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗉𝗋𝖾𝗌𝗂𝗈𝗇𝖺 𝖾𝗅 𝖻𝗈𝗍𝗈𝗇 𝗉𝖺𝗋𝖺 𝗎𝗇𝗂𝗋𝗍𝖾 𝖺 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺  ֪   𓂃", 
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
