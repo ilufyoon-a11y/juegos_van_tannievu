@@ -90,7 +90,7 @@ esperando_mordida = {}     # Para el privado del zombie
 sesión_jitb = {}
 sesión_pictionary = {"activa": False, "palabra_correcta": None, "dibujante_id": None} # Agregado para evitar error en off_van
 
-CATEGORIAS_STOP = ["NOMBRE", "JUEGOS", "APELLIDO", "FRUTA O VERDURA ", "PAÍS O CIUDAD", "ANIMAL", "COLOR", "OBJETO", "PROFESIÓN  U OFICIO", "CANTANTE O BANDA", "COMIDA", "PELICULA O SERIE", "FAMOSO"]
+CATEGORIAS_STOP = ["𝗡𝗢𝗠𝗕𝗥𝗘", "𝗔𝗣𝗘𝗟𝗟𝗜𝗗𝗢", "𝗙𝗥𝗨𝗧𝗔 𝗢 𝗩𝗘𝗥𝗗𝗨𝗥𝗔", "𝗣𝗔𝗜𝗦 𝗢 𝗖𝗜𝗨𝗗𝗔𝗗", "𝗔𝗡𝗜𝗠𝗔𝗟", "𝗖𝗢𝗟𝗢𝗥", "𝗢𝗕𝗝𝗘𝗧𝗢", "𝗣𝗥𝗢𝗙𝗘𝗦𝗜𝗢́𝗡  𝗨 𝗢𝗙𝗜𝗖𝗜𝗢", "𝗖𝗔𝗡𝗧𝗔𝗡𝗧𝗘 𝗢 𝗕𝗔𝗡𝗗𝗔", "𝗖𝗢𝗠𝗜𝗗𝗔", "𝗣𝗘𝗟𝗜𝗖𝗨𝗟𝗔 𝗢 𝗦𝗘𝗥𝗜𝗘", "𝗙𝗔𝗠𝗢𝗦𝗢"]
 EMOJIS_BOMBA = ["🦊", "🥑", "🐱", "🐸", "🐼", "🌶️", "👻", "👽", "🤖", "🦄", "👑", "🍕", "🎈", "🔮", "🦈", "🐥", "🐻", "🦖"]
 
 
