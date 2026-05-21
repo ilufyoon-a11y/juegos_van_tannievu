@@ -160,6 +160,7 @@ async def comandos(update: Update, context: ContextTypes.DEFAULT_TYPE):
             "𝖢𝗈𝗆𝖺𝗇𝖽𝗈𝗌: /box, /start_box\n\n"
             "𝒗𝒊. 𝐙𝐨𝐦𝐛𝐢𝐞\n\n"
             "𝖢𝗈𝗆𝖺𝗇𝖽𝗈𝗌: /zombie, /start_zombie\n\n" 
+            "𝖠𝗇𝗍𝖾𝗌 𝖽𝖾 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝗎𝗇𝖺 𝗋𝗈𝗇𝖽𝖺 𝗇𝗎𝖾𝗏𝖺 𝗈 𝗁𝖺𝖻𝖾𝗋𝗌𝖾 𝗂𝗇𝗂𝖼𝗂𝖺𝖽𝗈 𝗆𝖺𝗌 𝖽𝖾 𝗎𝗇𝖺 𝗉𝗈𝗋 𝖾𝗊𝗎𝗂𝗏𝗈𝖼𝖺𝖼𝗂𝗈𝗇, 𝗉𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗃𝖾𝖼𝗎𝗍𝖾 /off_van 𝗉𝖺𝗋𝖺 𝗋𝖾𝗌𝖾𝗍𝖾𝖺𝗋 𝖾𝗅 𝖼𝗈𝖽𝗂𝗀𝗈 𝗒 𝖾𝗏𝗂𝗍𝖺𝗋 𝖾𝗋𝗋𝗈𝗋𝖾𝗌"
 
         )
     )
