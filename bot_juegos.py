@@ -236,23 +236,6 @@ async def unirse_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=InlineKeyboardMarkup([[boton]])
     )
 
-async def iniciar_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    chat_id = update.effective_chat.id
-    if len(sesión_bomba["jugadores"]) < 2:
-        await update.message.reply_photo(
-            photo = GIF_ERROR,
-            caption = "𝖲𝖾 𝗇𝖾𝖼𝖾𝗌𝗂𝗍𝖺𝗇 𝗆𝗂𝗇𝗂𝗆𝗈 𝟤 𝗉𝖾𝗋𝗌𝗈𝗇𝖺𝗌 𝗉𝖺𝗋𝖺 𝗃𝗎𝗀𝖺𝗋. 𝖣𝖾 𝗍𝗋𝖺𝗍𝖺𝗋𝗌𝖾 𝗎𝗇 𝖾𝗋𝗋𝗈𝗋, 𝗉𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗏𝗎𝖾𝗅𝗏𝖾 𝖺 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈."
-        )
-        return
-    
-    sesión_bomba["activa"] = True
-    primer_jugador = random.choice(["jugadores"])
-    sesión_bomba["bomba_en"] = primer_jugador["id"]
-    sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
-    
-    await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador['name']} ✶")    
-sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
-
 async def cuenta_regresiva_bomba(chat_id, context):
     tiempo_explotar = random.randint(10, 25) 
     
@@ -282,6 +265,24 @@ async def cuenta_regresiva_bomba(chat_id, context):
             await context.bot.edit_message_text(chat_id=chat_id, message_id=sesión_bomba["mensaje_id"], text=texto_final)
         except:
             await context.bot.send_message(chat_id=chat_id, text=texto_final)
+
+async def iniciar_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    chat_id = update.effective_chat.id
+    if len(sesión_bomba["jugadores"]) < 2:
+        await update.message.reply_photo(
+            photo = GIF_ERROR,
+            caption = "𝖲𝖾 𝗇𝖾𝖼𝖾𝗌𝗂𝗍𝖺𝗇 𝗆𝗂𝗇𝗂𝗆𝗈 𝟤 𝗉𝖾𝗋𝗌𝗈𝗇𝖺𝗌 𝗉𝖺𝗋𝖺 𝗃𝗎𝗀𝖺𝗋. 𝖣𝖾 𝗍𝗋𝖺𝗍𝖺𝗋𝗌𝖾 𝗎𝗇 𝖾𝗋𝗋𝗈𝗋, 𝗉𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝗏𝗎𝖾𝗅𝗏𝖾 𝖺 𝗂𝗇𝗂𝖼𝗂𝖺𝗋 𝖾𝗅 𝗃𝗎𝖾𝗀𝗈."
+        )
+        return
+    
+    sesión_bomba["activa"] = True
+    primer_jugador = random.choice(sesión_bomba["jugadores"])
+    sesión_bomba["bomba_en"] = primer_jugador["id"]
+    sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
+    
+    await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador['name']} ✶")    
+sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
+
 
 # JUEGO 3: RATONES BATTLE ROYALE­
 async def unirse_ratones(update: Update, context: ContextTypes.DEFAULT_TYPE):
