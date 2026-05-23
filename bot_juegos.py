@@ -975,7 +975,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 mensaje_recuento = "¡𝖱𝖮𝖭𝖣𝖠 𝖥𝖨𝖭𝖠𝖫𝖨𝖹𝖠𝖣𝖠! 𝖲𝖾 𝖽𝖾𝗌𝖼𝗎𝖻𝗋𝗂𝖾𝗋𝗈𝗇 𝗍𝗈𝖽𝗈𝗌 𝗅𝗈𝗌 𝗈𝖻𝗃𝖾𝗍𝗈𝗌 𝗊𝗎𝖾 𝗁𝖺𝖻𝗂𝖺𝗇 𝖽𝖾𝗇𝗍𝗋𝗈 𝖽𝖾 𝗅𝖺 𝖼𝖺𝗃𝖺. \n\n"
                 mensaje_recuento += "𝖯𝗎𝗇𝗍𝗎𝖺𝖼𝗂𝗈𝗇 𝖿𝗂𝗇𝖺𝗅: \n"
                 
-                medallas = ["🥇", "🥈", "🥉""]
+                medallas = ["🥇", "🥈", "🥉"]
                 for index, (nombre, puntos) in enumerate(tabla_posiciones):
                     decorador = medallas[index] if index < len(medallas) else "ðŸ”¹"
                     mensaje_recuento += f"{decorador} {nombre}: {puntos} pt(s)\n"
