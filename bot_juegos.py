@@ -872,7 +872,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         await update.message.reply_text("¡𝖯𝖺𝗅𝖺𝖻𝗋𝖺 𝗀𝗎𝖺𝗋𝖽𝖺𝖽𝖺! 𝖵𝗎𝖾𝗅𝗏𝖾 𝖺𝗅 𝗀𝗋𝗎𝗉𝗈.")
         guiones = " ".join(["_" if c != " " else "  " for c in texto])
-        await context.bot.send_message(chat_id=gid, text=f"¡𝖤𝗅 𝗆𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋 𝗁𝖺 𝗁𝖺𝖻𝗅𝖺𝖽𝗈!\n\n𝖯𝖠𝖫𝖠𝖡𝖱𝖠: '{guiones}’')
+        await context.bot.send_message(chat_id=gid, text=f"¡𝖤𝗅 𝗆𝗈𝖽𝖾𝗋𝖺𝖽𝗈𝗋 𝗁𝖺 𝗁𝖺𝖻𝗅𝖺𝖽𝗈!\n\n𝖯𝖠𝖫𝖠𝖡𝖱𝖠: '{guiones}')
         return
 
     # Setup jack in the box por privado
