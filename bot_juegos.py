@@ -103,6 +103,24 @@ def dibujar_pantalla_ahorcado(chat_id):
             
     return "".join(resultado).strip()
 
+def extraer_emojis(texto):
+    import re
+    patron = re.compile(
+        "[\U0001F600-\U0001F64F"
+        "\U0001F300-\U0001F5FF"
+        "\U0001F680-\U0001F6FF"
+        "\U0001F1E0-\U0001F1FF"
+        "\U00002600-\U000027BF"
+        "\U0001F900-\U0001F9FF"
+        "\U00002702-\U000027B0"
+        "\U000024C2-\U0001F251"
+        "\U0001FA00-\U0001FA6F"
+        "\U0001FA70-\U0001FAFF"
+        "]+",
+        flags=re.UNICODE
+    )
+    return patron.findall(texto)
+    
 # COMANDO START
 async def start_bienvenida(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_photo(
@@ -486,7 +504,7 @@ async def iniciar_jitbx(update: Update, context: ContextTypes.DEFAULT_TYPE):
             photo = GIF_ENCUBRIDOR, 
             caption = (
                "¡𝖤𝗇 𝗁𝗈𝗋𝖺 𝖻𝗎𝖾𝗇𝖺, 𝗍𝖾 𝗍𝗈𝖼𝖺 𝗌𝖾𝗋 𝖾𝗅 𝖾𝗇𝖼𝗎𝖻𝗋𝗂𝖽𝗈𝗋!\n\n"
-                "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌 𝗌𝖾𝗉𝖺𝗋𝖺𝖽𝗈𝗌 𝗉𝗈𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 (🌸 🌟 📰...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
+                "𝖯𝗈𝗋 𝖿𝖺𝗏𝗈𝗋, 𝖾𝗇𝗏𝗂𝖺 𝖾𝗑𝖺𝖼𝗍𝖺𝗆𝖾𝗇𝗍𝖾 𝟨 𝖾𝗆𝗈𝗃𝗂𝗌, 𝗉𝗋𝗈𝖼𝗎𝗋𝖺 𝗇𝗈 𝖽𝖾𝗃𝖺𝗋 𝖾𝗌𝗉𝖺𝖼𝗂𝗈𝗌 𝖾𝗇𝗍𝗋𝖾 𝖾𝗅𝗅𝗈𝗌 (🌸🌟📰...), 𝗌𝖾𝗋𝖺𝗇 𝗆𝗈𝗌𝗍𝗋𝖺𝖽𝗈𝗌 𝖻𝗋𝖾𝗏𝖾𝗆𝖾𝗇𝗍𝖾 𝖺 𝗅𝗈𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝗍𝖾𝗌 𝖽𝖾 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺"
             )
 
         )
@@ -810,7 +828,10 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     sesión_zombie["zombies"].append(victima_id)
                 
                     victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
-                    await query.edit_message_text(f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
+                    try: 
+                        await query.edit_message_caption(caption=f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
+                    except Exception:
+                        await context.bot.send_message(chat_id=user.id, text=f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
                 
                     # 📢 ANUNCIO EN EL GRUPO: Avisamos quién murió/fue infectado
                     await context.bot.send_message(
@@ -823,8 +844,10 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await asyncio.sleep(2)
                 
                     await abrir_votacion_zombie(grupo_chat_id, context)
-                else:
-                    await query.edit_message_text("𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                try:
+                    await query.edit_message_caption(caption="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                except Exception:
+                    await context.bot.send_message(chat_id=user.id, text="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
 
     elif query.data.startswith("voto_z:"):
         await query.answer()
@@ -870,7 +893,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if chat_type == "private" and user_id in esperando_elementos:
         gid = esperando_elementos[user_id]
 
-        emojis_originales = list(texto.replace(" ", ""))
+        emojis_originales = extraer_emojis(texto)
         if len(emojis_originales) != 6:
             await update.message.reply_text("¡Alto ahi! Esos no son 6 elementos, por favor, vuelve a enviar")
             return      
@@ -941,8 +964,11 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Escucha del juego Jack In The Box en el Grupo 🕵️‍♂️
     if chat_type != "private" and chat_id in sesión_jitb and sesión_jitb[chat_id].get("activa"):
         sesion = sesión_jitb[chat_id]
-        if texto in sesion.get("emojis_secretos", []) and texto not in sesion.get("emojis_adivinados", []):
-            sesion["emojis_adivinados"].append(texto)
+        emojis_enviados = extraer_emojis(texto)
+        texto_normalizado = emojis_enviados[0] if emojis_enviados else texto
+        if texto_normalizado in sesion.get("emojis_secretos", []) and texto_normalizado not in sesion.get("emojis_adivinados", []):
+            sesion["emojis_adivinados"].append(texto_normalizado)
+
             sesion["puntajes"][user_id] = sesion["puntajes"].get(user_id, 0) + 1
             
             total_adivinados = len(sesion["emojis_adivinados"])
