@@ -838,7 +838,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         votado_id = int(query.data.split(":")[1])
     
         if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "votacion":
-            if any(j['id'] == user.id for j in sesiÃ³n_zombie["jugadores"]):
+            if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
                 sesión_zombie["votos"][user.id] = votado_id
                 await query.answer(f"{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈", show_alert=True)
             else:
