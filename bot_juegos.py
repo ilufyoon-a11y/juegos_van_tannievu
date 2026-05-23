@@ -799,7 +799,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # === Callbacks Juego Zombie ===
     elif query.data == "unirme_zombie_click":
         if sesión_zombie.get("activa", False):
-            await query.answer"¡𝖫𝗈 𝗌𝗂𝖾𝗇𝗍𝗈, 𝗇𝗈 𝗍𝖾 𝗉𝗎𝖾𝖽𝖾𝗌 𝗎𝗇𝗂𝗋, 𝗒𝖺 𝗁𝖺𝗒 𝗎𝗇𝖺 𝗋𝗈𝗇𝖽𝖺 𝖾𝗇 𝖼𝗎𝗋𝗌𝗈!", show_alert=True)
+            await query.answer("¡𝖫𝗈 𝗌𝗂𝖾𝗇𝗍𝗈, 𝗇𝗈 𝗍𝖾 𝗉𝗎𝖾𝖽𝖾𝗌 𝗎𝗇𝗂𝗋, 𝗒𝖺 𝗁𝖺𝗒 𝗎𝗇𝖺 𝗋𝗈𝗇𝖽𝖺 𝖾𝗇 𝖼𝗎𝗋𝗌𝗈!", show_alert=True)
             return
         if not any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
             sesión_zombie["jugadores"].append({"id": user.id, "name": user.first_name})
