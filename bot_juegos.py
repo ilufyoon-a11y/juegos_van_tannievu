@@ -334,6 +334,7 @@ async def rondas_battle_royale(chat_id, context):
         
         sesión_ratones["mensaje_id"] = await context.bot.send_message(
             chat_id=chat_id, text="¡𝖴𝗇 𝗋𝖺𝗍𝗈𝗇 𝗌𝖾 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖺𝗌𝗈𝗆𝖺𝗋, 𝖺𝗉𝗋𝖾𝗌𝗎𝗋𝖺𝗍𝖾 𝖺 𝖺𝗍𝗋𝖺𝗉𝖺𝗋𝗅𝗈!", reply_markup=InlineKeyboardMarkup(botones)
+        )
 
         # Esperar un maximo de 7 segundos a que clickeen, o que la ronda cierre por clicks
         limite = 7.0
