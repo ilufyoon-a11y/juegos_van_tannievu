@@ -1093,47 +1093,47 @@ if __name__ == '__main__':
     flask_thread.daemon = True
     flask_thread.start()
     
-    # 2. Configuración del Token de forma segura
-    # Intentamos leerlo de Render; si no existe, usamos el token directamente en texto
-    token_bot = os.environ.get('TOKEN', '8746483086:AAGwxMrPgWenVYYKxwI2bzIRdV__z64XC9M')
+    token_bot = os.environ.get('TOKEN')
+    
+    if not token_bot:
+        raise ValueError("❌ ¡Error crítico! No se encontró la variable 'TOKEN' en el panel de Render.")
     
     print("🤖 Iniciando bot de Telegram con run_polling...")
     application = ApplicationBuilder().token(token_bot).build()
 
-    # Recuerda verificar que los nombres de tus funciones start, info, etc., coincidan
+    # == HANDLERS GENERALES (Perfectamente alineados con 4 espacios) ==
+    application.add_handler(CommandHandler("start", start_bienvenida))
+    application.add_handler(CommandHandler("info", info))
+    application.add_handler(CommandHandler("cmds", comandos))
+    application.add_handler(CommandHandler("off_van", detener_juegos))
 
-        application.add_handler(CommandHandler("start", start_bienvenida))
-        application.add_handler(CommandHandler("info", info))
-        application.add_handler(CommandHandler("cmds", comandos))
-        application.add_handler(CommandHandler("off_van", detener_juegos))
+    # Handlers JUEGO 1: Ahorcado
+    application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
+    application.add_handler(CommandHandler("start_ahorcado", iniciar_ahorcado))
+    
+    # Handlers JUEGO 2: La Bomba (Snowball)
+    application.add_handler(CommandHandler("snowball", unirse_snowball))
+    application.add_handler(CommandHandler("start_snowball", iniciar_snowball))
 
-        # Handlers JUEGO 1: Ahorcado
-        application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
-        application.add_handler(CommandHandler("start_ahorcado", iniciar_ahorcado))
-        
-        # Handlers JUEGO 2: La Bomba
-        application.add_handler(CommandHandler("snowball", unirse_snowball))
-        application.add_handler(CommandHandler("start_snowball", iniciar_snowball))
+    # Handlers JUEGO 3: Ratones
+    application.add_handler(CommandHandler("ratones", unirse_ratones))
+    application.add_handler(CommandHandler("start_ratones", iniciar_ratones))
 
-        # Handlers JUEGO 3: Ratones
-        application.add_handler(CommandHandler("ratones", unirse_ratones))
-        application.add_handler(CommandHandler("start_ratones", iniciar_ratones))
+    # Handlers JUEGO 4: Ritmo A Go-Go
+    application.add_handler(CommandHandler("ritmo", unirse_stop))
+    application.add_handler(CommandHandler("start_ritmo", iniciar_stop))
 
-        # Handlers JUEGO 4: Ritmo A Go-Go
-        application.add_handler(CommandHandler("ritmo", unirse_stop))
-        application.add_handler(CommandHandler("start_ritmo", iniciar_stop))
+    # Handlers JUEGO 5: Jack In The Box
+    application.add_handler(CommandHandler("box", unirse_box))
+    application.add_handler(CommandHandler("start_box", iniciar_jitbx))
 
-        # Handlers JUEGO 5: Jack In The Box
-        application.add_handler(CommandHandler("box", unirse_box))
-        application.add_handler(CommandHandler("start_box", iniciar_jitbx))
+    # Handlers JUEGO 6: Infección Zombie
+    application.add_handler(CommandHandler("zombie", unirse_zombie))
+    application.add_handler(CommandHandler("start_zombie", iniciar_zombie))
 
-        # Handlers JUEGO 6: InfecciÃ³n Zombie
-        application.add_handler(CommandHandler("zombie", unirse_zombie))
-        application.add_handler(CommandHandler("start_zombie", iniciar_zombie))
-
-        # Handlers de Botones y Mensajes Generales
-        application.add_handler(CallbackQueryHandler(manejar_botones))
-        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, manejar_mensajes))
+    # Handlers de Botones y Mensajes Generales
+    application.add_handler(CallbackQueryHandler(manejar_botones))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, manejar_mensajes))
 
     # 3. Arrancamos el bot en el hilo principal
     application.run_polling(drop_pending_updates=True)
