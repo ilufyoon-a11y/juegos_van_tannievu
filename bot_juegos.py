@@ -581,7 +581,7 @@ async def abrir_votacion_zombie(chat_id, context):
     
     botones_voto = []
     for jugador in sesión_zombie["jugadores"]:
-        botones_voto.append([InlineKeyboardButtonf"𝖤𝗑𝗉𝗎𝗅𝗌𝖺𝗋 𝖺 {jugador['name']}", callback_data=f"voto_z:{jugador['id']}"])
+        botones_voto.append([InlineKeyboardButton(f"𝖤𝗑𝗉𝗎𝗅𝗌𝖺𝗋 𝖺 {jugador['name']}", callback_data=f"voto_z:{jugador['id']})"])
     
     msg_voto = await context.bot.send_message(
         chat_id = chat_id,
