@@ -15,16 +15,6 @@ app_web = Flask('')
 def home():
     return "Juegos Activos"
 
-def run_web():
-    port = int(os.environ.get('PORT', 10000))
-    app_web.run(host='0.0.0.0', port=port)
-
-def keep_alive():
-    t = Thread(target=run_web)
-    t.daemon = True
-    t.start()
-
-
 # =====================================================================
 # 2. VARIABLES GLOBALES Y DICCIONARIOS
 # =====================================================================
@@ -281,7 +271,7 @@ async def iniciar_snowball(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_bomba["bomba_emoji"] = primer_jugador["emoji"]
     
     await update.message.reply_text(f"❄️ ’ ¡𝖫𝖠 𝖡𝖮𝖫𝖠 𝖧𝖠 𝖲𝖨𝖣𝖮 𝖥𝖮𝖱𝖬𝖠𝖣𝖠!. 𝖧𝖺 𝖼𝖺𝗂𝖽𝗈 𝖾𝗇 𝗆𝖺𝗇𝗈𝗌 𝖽𝖾 {primer_jugador['name']} ✶")    
-sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
+    sesión_bomba["tarea_bomba"] = asyncio.create_task(cuenta_regresiva_bomba(chat_id, context))
 
 
 # JUEGO 3: RATONES BATTLE ROYALE­
@@ -1089,44 +1079,32 @@ async def detener_juegos(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # 12. BLOQUE PRINCIPAL DE ARRANQUE
 # =====================================================================
 if __name__ == '__main__':
-    TOKEN = os.getenv("TOKEN_TELEGRAM")
-    if TOKEN:
-        keep_alive()
-        application = ApplicationBuilder().token(TOKEN).build()
-        
-        # MENÃš PRINCIPAL Y CONFIG
-        application.add_handler(CommandHandler("start", start_bienvenida))
-        application.add_handler(CommandHandler("info", info))
-        application.add_handler(CommandHandler("cmds", comandos))
-        application.add_handler(CommandHandler("off_van", detener_juegos))
+    import hypercorn.asyncio  # Si no lo tienes, puedes usar un truco nativo de asyncio
+    
+    # Construimos tu aplicación de Telegram normalmente
+    # (Asegúrate de cambiar 'TU_TOKEN_AQUÍ' por tu variable o token real)
+    token_bot = os.environ.get('TOKEN', 'TU_TOKEN_AQUÍ')
+    application = ApplicationBuilder().token(token_bot).build()
 
-        # Handlers JUEGO 1: Ahorcado
-        application.add_handler(CommandHandler("ahorcado", unirse_ahorcado))
-        application.add_handler(CommandHandler("start_ahorcado", iniciar_ahorcado))
-        
-        # Handlers JUEGO 2: La Bomba
-        application.add_handler(CommandHandler("snowball", unirse_snowball))
-        application.add_handler(CommandHandler("start_snowball", iniciar_snowball))
+    # Aquí agregas todos tus handlers normalmente si no los tenías ya:
+    application.add_handler(CommandHandler("start", start_bienvenida))
+    application.add_handler(CommandHandler("info", info))
+    application.add_handler(CommandHandler("comandos", comandos))
+    # ... (agrega aquí abajo los demás handlers que use tu bot) ...
 
-        # Handlers JUEGO 3: Ratones
-        application.add_handler(CommandHandler("ratones", unirse_ratones))
-        application.add_handler(CommandHandler("start_ratones", iniciar_ratones))
-
-        # Handlers JUEGO 4: Ritmo A Go-Go
-        application.add_handler(CommandHandler("ritmo", unirse_stop))
-        application.add_handler(CommandHandler("start_ritmo", iniciar_stop))
-
-        # Handlers JUEGO 5: Jack In The Box
-        application.add_handler(CommandHandler("box", unirse_box))
-        application.add_handler(CommandHandler("start_box", iniciar_jitbx))
-
-        # Handlers JUEGO 6: InfecciÃ³n Zombie
-        application.add_handler(CommandHandler("zombie", unirse_zombie))
-        application.add_handler(CommandHandler("start_zombie", iniciar_zombie))
-
-        # Handlers de Botones y Mensajes Generales
-        application.add_handler(CallbackQueryHandler(manejar_botones))
-        application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, manejar_mensajes))
-
-        # ¡Arrancamos!
-        application.run_polling()
+    # El truco maestro: Inicializamos el bot de Telegram de fondo
+    loop = asyncio.get_event_loop()
+    
+    print("🤖 Iniciando bot de Telegram...")
+    loop.run_until_complete(application.initialize())
+    loop.run_until_complete(application.start())
+    
+    # Creamos la tarea para que escuche los mensajes de Telegram en segundo plano
+    loop.create_task(application.updater.start_polling(drop_pending_updates=True))
+    
+    # Ahora encendemos Flask en el hilo principal para que Render vea el puerto 10000 y sea feliz
+    port = int(os.environ.get('PORT', 10000))
+    print(f"🌐 Servidor Flask escuchando en el puerto {port}...")
+    
+    # Ejecutamos Flask de forma tradicional para que no se duplique el proceso
+    app_web.run(host='0.0.0.0', port=port, use_reloader=False)
