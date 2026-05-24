@@ -172,6 +172,7 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         sesión[chat_id]["activa"] = False
         sesión[chat_id]["jugadores"] = []
+        sesión[chat_id]["ultimo_moderador_id"] = None
         
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_click")
     await update.message.reply_photo(
@@ -451,6 +452,7 @@ async def unirse_box(update: Update, context: ContextTypes.DEFAULT_TYPE):
         }
     else:
         sesión_jitb[chat_id]["activa"] = False
+        sesión_jitb[chat_id]["ultimo_encubridor_id"] = None
         sesión_jitb[chat_id]["jugadores"] = []
 
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_box_click")
@@ -517,6 +519,7 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["jugadores"] = []
     sesión_zombie["zombies"] = []
     sesión_zombie["vivos"] = []
+    sesión_zombie["ultimo_zombie_id"] = None
     sesión_zombie["votos"] = {}
     sesión_zombie["activa"] = False
     sesión_zombie["fase"] = None
