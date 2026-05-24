@@ -655,13 +655,14 @@ async def procesar_resultados_votacion(chat_id, context):
 
 
     if not sesión_zombie["zombies"]:
-        ganadores = = [j["name"] for j in sesión_zombie["jugadores"] if j["id"] in sesión_zombie["vivos"]]
+        ganadores = [j["name"] for j in sesión_zombie["jugadores"] if j["id"] in sesión_zombie["vivos"]]
         await context.bot.send_message(
             chat_id=chat_id, 
-            text="¡𝖲𝖮𝖡𝖱𝖤𝖵𝖨𝖵𝖨𝖤𝖱𝖮𝖭!. 𝖤𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖿𝗎𝖾 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 𝗉𝗎𝖾𝖽𝖾𝗇 𝗏𝗈𝗅𝗏𝖾𝗋 𝖺 𝖼𝖺𝗌𝖺")
+            text=f"¡𝖲𝖮𝖡𝖱𝖤𝖵𝖨𝖵𝖨𝖤𝖱𝖮𝖭!. 𝖤𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖿𝗎𝖾 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 𝗉𝗎𝖾𝖽𝖾𝗇 𝗏𝗈𝗅𝗏𝖾𝗋 𝖺 𝖼𝖺𝗌𝖺")
         sesión_zombie["activa"] = False
     elif not sesión_zombie["vivos"]:
-        await context.bot.send_message(chat_id=chat_id, text="¡𝖸𝖺 𝗇𝗈 𝗊𝗎𝖾𝖽𝖺𝗇 𝗁𝗎𝗆𝖺𝗇𝗈𝗌! 𝖤𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗌𝖾 𝖼𝗈𝗇𝗏𝗂𝗋𝗍𝗂𝗈 𝖾𝗇 𝗈𝗍𝗋𝗈 𝖿𝗈𝖼𝗈 𝖽𝖾 𝗂𝗇𝖿𝖾𝖼𝖼𝗂𝗈𝗇")
+        zombie_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == sesión_zombie["zombies"][0])
+        await context.bot.send_message(chat_id=chat_id, text=f"¡𝖸𝖺 𝗇𝗈 𝗊𝗎𝖾𝖽𝖺𝗇 𝗁𝗎𝗆𝖺𝗇𝗈𝗌!. {zombie_obj['name']} 𝗆𝗈𝗋𝖽𝗂𝗈 𝖺 𝗍𝗈𝖽𝗈𝗌 𝗒 𝖼𝗈𝗇𝗏𝗂𝗋𝗍𝗂𝗈 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝖾𝗇 𝗈𝗍𝗋𝗈 𝖿𝗈𝖼𝗈 𝖽𝖾 𝗂𝗇𝖿𝖾𝖼𝖼𝗂𝗈𝗇")
         sesión_zombie["activa"] = False
     else:
         await pasar_a_siguiente_ataque(chat_id, context)
@@ -829,7 +830,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if user.id in sesión_zombie.get("zombies", []):
                 if victima_id in sesión_zombie["vivos"]:
                     sesión_zombie["vivos"].remove(victima_id)
-                    sesión_zombie["zombies"].append(victima_id)
+                    sesión_zombie["jugadores"] = [j for j in sesión_zombie["jugadores"] if j["id"] != victima_id]
                 
                     victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
                     try: 
@@ -848,10 +849,11 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await asyncio.sleep(2)
                 
                     await abrir_votacion_zombie(grupo_chat_id, context)
-                try:
-                    await query.edit_message_caption(caption="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
-                except Exception:
-                    await context.bot.send_message(chat_id=user.id, text="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                else: 
+                    try:
+                        await query.edit_message_caption(caption="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
+                    except Exception:
+                        await context.bot.send_message(chat_id=user.id, text="𝖤𝗌𝗍𝖺 𝗏𝗂𝖼𝗍𝗂𝗆𝖺 𝗒𝖺 𝗇𝗈 𝖾𝗌𝗍𝖺 𝖽𝗂𝗌𝗉𝗈𝗇𝗂𝖻𝗅𝖾.")
 
     elif query.data.startswith("voto_z:"):
         await query.answer()
@@ -860,7 +862,11 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if sesión_zombie.get("activa", False) and sesión_zombie.get("fase") == "votacion":
             if any(j['id'] == user.id for j in sesión_zombie["jugadores"]):
                 sesión_zombie["votos"][user.id] = votado_id
-                await query.answer(f"{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈", show_alert=True)
+                await query.answer(f"𝖵𝗈𝗍𝗈 𝖾𝗆𝗂𝗍𝗂𝖽𝗈 ✓", show_alert=True)
+                await context.bot.send_message(
+                    chat_id=chat_id,
+                    text=f"{user.first_name} 𝖺𝖼𝖺𝖻𝖺 𝖽𝖾 𝖾𝗆𝗂𝗍𝗂𝗋 𝗌𝗎 𝗏𝗈𝗍𝗈 — {len(sesión_zombie['votos'])}/{len(sesión_zombie['jugadores'])} 𝗏𝗈𝗍𝗈𝗌 𝖾𝗆𝗂𝗍𝗂𝖽𝗈𝗌"
+                )
             else:
                 await query.answer("𝖴𝗉𝗌, 𝗍𝗎 𝗇𝗈 𝖾𝗌𝗍𝖺𝗌 𝗉𝖺𝗋𝗍𝗂𝖼𝗂𝗉𝖺𝗇𝖽𝗈 𝖾𝗇 𝖾𝗌𝗍𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺.", show_alert=True)
 
