@@ -73,7 +73,7 @@ sesión_zombie = {
     "vivos": [],            
     "fase": None,           
     "votos": {},            
-    "mensaje_voto_id": None 
+    "mensaje_voto_id": None,
     "ultimo_zombie_id": None
 }
 esperando_mordida = {}     
@@ -999,7 +999,7 @@ async def manejar_mensajes(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 
                 medallas = ["🥇", "🥈", "🥉"]
                 for index, (nombre, puntos) in enumerate(tabla_posiciones):
-                    decorador = medallas[index] if index < len(medallas) else "ðŸ”¹"
+                    decorador = medallas[index] if index < len(medallas) else "🔹"
                     mensaje_recuento += f"{decorador} {nombre}: {puntos} pt(s)\n"
                 
                 await context.bot.send_message(
@@ -1100,6 +1100,7 @@ async def detener_juegos(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["zombies"] = []
     sesión_zombie["vivos"] = []
     sesión_zombie["fase"] = None
+    sesión_zombie["ultimo_zombie_id"] = None
 
     await update.message.reply_photo(
         photo = GIF_OFFVAN,
