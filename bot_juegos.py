@@ -833,7 +833,6 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     sesión_zombie["vivos"].remove(victima_id)
                     sesión_zombie["jugadores"] = [j for j in sesión_zombie["jugadores"] if j["id"] != victima_id]
                 
-                    victima_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == victima_id)
                     try: 
                         await query.edit_message_caption(caption=f"𝖠𝗍𝖺𝗊𝗎𝖾 𝖾𝗑𝗂𝗍𝗈𝗌𝗈. 𝖧𝖺𝗌 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖺 {victima_obj['name']}.")
                     except Exception:
