@@ -849,7 +849,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await asyncio.sleep(2)
 
                     if not sesión_zombie["vivos"]:
-                        zombie_obj = next(j for j in sesión_zombie["jugadores"] if jj["id"] == sesión_zombie["zombies"][0])
+                        zombie_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == sesión_zombie["zombies"][0])
                         await context.bot.send_message(
                             chat_id=grupo_chat_id,
                             text=f"¡𝖸𝖺 𝗇𝗈 𝗊𝗎𝖾𝖽𝖺𝗇 𝗁𝗎𝗆𝖺𝗇𝗈𝗌!. {zombie_obj['name']} 𝗆𝗈𝗋𝖽𝗂𝗈 𝖺 𝗍𝗈𝖽𝗈𝗌 𝗒 𝗀𝖺𝗇𝗈 𝗅𝖺 𝗉𝖺𝗋𝗍𝗂𝖽𝖺 🧟"
