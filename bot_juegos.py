@@ -398,11 +398,12 @@ async def iniciar_stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_stop["sobrevivientes"] = [j["id"] for j in sesión_stop["jugadores"]]
     sesión_stop["palabras_dichas"] = []
     sesión_stop["turno_index"] = 0
-    sesión_stop["letra_actual"] = random.choice("𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗝𝗟𝗠𝗡𝗢𝗣𝗥𝗦𝗧𝗨")
+    sesión_stop["letra_actual"] = random.choice("ABCDEFGJLMNOPRSTV")
     sesión_stop["categoria_actual"] = random.choice(CATEGORIAS_STOP)
     
     await update.message.reply_text(
-       f"¡𝖱𝖨𝖳𝖬𝖮 𝖠𝖦𝖮 𝖦𝖮, 𝖣𝖨𝖦𝖠 𝖴𝖲𝖳𝖤𝖣 𝖭𝖮𝖬𝖡𝖱𝖤𝖲 𝖣𝖤 {sesión_stop['categoria_actual']} 𝖢𝖮𝖭 𝖫𝖠 𝖫𝖤𝖳𝖱𝖠 {sesión_stop['letra_actual']} 𝖯𝖮𝖱 𝖤𝖩𝖤𝖬𝖯𝖫𝖮...\n\n¡𝖠𝗍𝖾𝗇𝗍𝗈𝗌 𝖺 𝗌𝗎 𝗍𝗎𝗋𝗇𝗈, 𝗌𝗈𝗅𝗈 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝟣𝟧 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝖾𝗋!", 
+       f"¡𝖱𝖨𝖳𝖬𝖮 𝖠𝖦𝖮 𝖦𝖮, 𝖣𝖨𝖦𝖠 𝖴𝖲𝖳𝖤𝖣 𝖭𝖮𝖬𝖡𝖱𝖤𝖲 𝖣𝖤 <b>{sesión_stop['categoria_actual']}</b> 𝖢𝖮𝖭 𝖫𝖠 𝖫𝖤𝖳𝖱𝖠 <b>{sesión_stop['letra_actual']}</b>. 𝖯𝖮𝖱 𝖤𝖩𝖤𝖬𝖯𝖫𝖮...\n\n¡𝖠𝗍𝖾𝗇𝗍𝗈𝗌 𝖺 𝗌𝗎 𝗍𝗎𝗋𝗇𝗈, 𝗌𝗈𝗅𝗈 𝗍𝖾𝗇𝖽𝗋𝖺𝗇 𝟣𝟧 𝗌𝖾𝗀𝗎𝗇𝖽𝗈𝗌 𝗉𝖺𝗋𝖺 𝗋𝖾𝗌𝗉𝗈𝗇𝖽𝖾𝗋!",
+        parse_mode="HTML"
     )
 
     await asyncio.sleep(5)
@@ -660,7 +661,7 @@ async def procesar_resultados_votacion(chat_id, context):
             chat_id=chat_id, 
             text=f"¡𝖲𝖮𝖡𝖱𝖤𝖵𝖨𝖵𝖨𝖤𝖱𝖮𝖭!. 𝖤𝗅 𝗂𝗇𝖿𝖾𝖼𝗍𝖺𝖽𝗈 𝖿𝗎𝖾 𝖾𝗑𝗉𝗎𝗅𝗌𝖺𝖽𝗈 𝖽𝖾𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝗒 𝖺𝗁𝗈𝗋𝖺 {', '.join(ganadores)} 𝗉𝗎𝖾𝖽𝖾𝗇 𝗏𝗈𝗅𝗏𝖾𝗋 𝖺 𝖼𝖺𝗌𝖺")
         sesión_zombie["activa"] = False
-    elif not sesión_zombie["vivos"]:
+    elif len(sesión_zombie["vivos"]) <= 1:
         zombie_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == sesión_zombie["zombies"][0])
         await context.bot.send_message(chat_id=chat_id, text=f"¡𝖸𝖺 𝗇𝗈 𝗊𝗎𝖾𝖽𝖺𝗇 𝗁𝗎𝗆𝖺𝗇𝗈𝗌!. {zombie_obj['name']} 𝗆𝗈𝗋𝖽𝗂𝗈 𝖺 𝗍𝗈𝖽𝗈𝗌 𝗒 𝖼𝗈𝗇𝗏𝗂𝗋𝗍𝗂𝗈 𝖺𝗅 𝖺𝗎𝗍𝗈𝖻𝗎𝗌 𝖾𝗇 𝗈𝗍𝗋𝗈 𝖿𝗈𝖼𝗈 𝖽𝖾 𝗂𝗇𝖿𝖾𝖼𝖼𝗂𝗈𝗇")
         sesión_zombie["activa"] = False
@@ -848,7 +849,7 @@ async def manejar_botones(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     # Un pequeño delay de 2 segundos para el drama antes de la votación
                     await asyncio.sleep(2)
 
-                    if not sesión_zombie["vivos"]:
+                    if len(sesión_zombie["vivos"]) <= 1:
                         zombie_obj = next(j for j in sesión_zombie["jugadores"] if j["id"] == sesión_zombie["zombies"][0])
                         await context.bot.send_message(
                             chat_id=grupo_chat_id,
