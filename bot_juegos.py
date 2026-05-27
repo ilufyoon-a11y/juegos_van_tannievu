@@ -455,7 +455,6 @@ async def unirse_box(update: Update, context: ContextTypes.DEFAULT_TYPE):
         sesión_jitb[chat_id] = {
             "jugadores": [],             # Lista de participantes de este grupo
             "activa": False,             # Estado del juego en este grupo
-            "ultimo_encubridor_id": None # El Ãºltimo encubridor de este grupo
         }
     else:
         sesión_jitb[chat_id]["activa"] = False
@@ -526,7 +525,6 @@ async def unirse_zombie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     sesión_zombie["jugadores"] = []
     sesión_zombie["zombies"] = []
     sesión_zombie["vivos"] = []
-    sesión_zombie["ultimo_zombie_id"] = None
     sesión_zombie["votos"] = {}
     sesión_zombie["activa"] = False
     sesión_zombie["fase"] = None
