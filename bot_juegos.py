@@ -173,7 +173,6 @@ async def unirse_ahorcado(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         sesión[chat_id]["activa"] = False
         sesión[chat_id]["jugadores"] = []
-        sesión[chat_id]["ultimo_moderador_id"] = None
         
     boton = InlineKeyboardButton("੭੭ㅤㅤ𝐔𝐍𝐈𝐑𝐌𝐄ㅤㅤ!¡", callback_data="unirme_click")
     await update.message.reply_photo(
